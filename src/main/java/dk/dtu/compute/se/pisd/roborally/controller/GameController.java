@@ -205,19 +205,18 @@ public class GameController {
      *
      * @param option a {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
      */
-    public void executeCommandOptionAndContinue(@NotNull Command option) {
+    public void executeCommandOptionAndContinue(@NotNull Command option){
         Player currentPlayer = board.getCurrentPlayer();
-        if (currentPlayer != null &&
-                board.getPhase() == Phase.PLAYER_INTERACTION &&
-                option != null) {
+        if(currentPlayer != null && board.getPhase() == Phase.PLAYER_INTERACTION && option != null){
             board.setPhase(Phase.ACTIVATION);
             executeCommand(currentPlayer, option);
-
             int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
             if (nextPlayerNumber < board.getPlayersNumber()) {
                 board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+                continuePrograms();
             } else {
-                int step = board.getStep() +1;
+                int step = board.getStep() + 1;
+                continuePrograms();
                 if (step < Player.NO_REGISTERS) {
                     makeProgramFieldsVisible(step);
                     board.setStep(step);
