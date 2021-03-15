@@ -249,6 +249,8 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case SPRINT_FORWARD:
+                    this.sprintForward(player);
                 default:
                     // DO NOTHING (for now)
             }
@@ -282,6 +284,18 @@ public class GameController {
         Space currentSpace = player.getSpace();
         if (currentSpace != null && player.board == currentSpace.board) {
             Space targetSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, player.getHeading()), player.getHeading());
+            if (targetSpace != null && targetSpace.getPlayer() == null) {
+                player.setSpace(targetSpace);
+            }
+        }
+
+    }
+
+    public void sprintForward(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        if (currentSpace != null && player.board == currentSpace.board) {
+            Space tempSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, player.getHeading()), player.getHeading());
+            Space targetSpace = board.getNeighbour(tempSpace, player.getHeading());
             if (targetSpace != null && targetSpace.getPlayer() == null) {
                 player.setSpace(targetSpace);
             }
