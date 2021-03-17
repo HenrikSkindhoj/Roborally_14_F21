@@ -42,7 +42,9 @@ public enum Command {
 
     // XXX Assignment V3
     OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
-    SPRINT_FORWARD("Sprint Fwd");
+    SPRINT_FORWARD("Sprint Fwd"),
+    U_TURN("U Turn"),
+    BACK_UP("Back Up");
 
     final public String displayName;
 

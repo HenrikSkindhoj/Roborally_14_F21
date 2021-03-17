@@ -250,6 +250,12 @@ public class GameController {
                     break;
                 case SPRINT_FORWARD:
                     this.sprintForward(player);
+                case U_TURN:
+                    this.uTurn(player);
+                    break;
+                case BACK_UP:
+                    this.backUp(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -333,6 +339,31 @@ public class GameController {
 
                 }
             }
+        }
+    }
+
+    public void backUp(@NotNull Player player) {
+        if (player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading().next().next();
+            player.setHeading(heading);
+            Space targetSpace = board.getNeighbour(currentSpace, heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+        }
+    }
+
+    public void uTurn(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        Heading heading = player.getHeading().next().next();
+
+        if (currentSpace != null && player.board == currentSpace.board) {
+            player.setHeading(heading);
         }
     }
 
