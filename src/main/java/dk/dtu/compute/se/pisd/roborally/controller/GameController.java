@@ -251,10 +251,13 @@ public class GameController {
                     break;
                 case SPRINT_FORWARD:
                     this.sprintForward(player);
+                    break;
                 case U_TURN:
                     this.uTurn(player);
+                    break;
                 case BACK_UP:
                     this.backUp(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
