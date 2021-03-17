@@ -256,6 +256,25 @@ public class GameController {
         }
     }
 
+    private void moveToSpace (
+            @NotNull Player player,
+            @NotNull Space space,
+            @NotNull Heading heading) throws ImpossibleMoveException{
+
+        Player other = space.getPlayer();
+        if (other != null) {
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                moveToSpace(other, target, heading);
+            }else {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        player.setSpace(space);
+    }
+
+
+
     // TODO Assignment V2
     /**
      * <p>moveForward.</p>
@@ -263,14 +282,19 @@ public class GameController {
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void moveForward(@NotNull Player player) {
-        Space current = player.getSpace();
-        if (current != null && player.board == current.board) {
-            Space target = board.getNeighbour(current, player.getHeading());
-            if (target != null && target.getPlayer() == null) {
-                player.setSpace(target);
+        if (player.board == board) {
+            Space space = player.getSpace();
+            Heading heading = player.getHeading();
+
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                try {
+                    moveToSpace(player, target, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
             }
         }
-
     }
 
     // TODO Assignment V2
@@ -280,14 +304,19 @@ public class GameController {
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void fastForward(@NotNull Player player) {
-        Space currentSpace = player.getSpace();
-        if (currentSpace != null && player.board == currentSpace.board) {
-            Space targetSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, player.getHeading()), player.getHeading());
-            if (targetSpace != null && targetSpace.getPlayer() == null) {
-                player.setSpace(targetSpace);
+        if (player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading();
+
+            Space targetSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
             }
         }
-
     }
 
     public void sprintForward(@NotNull Player player) {
