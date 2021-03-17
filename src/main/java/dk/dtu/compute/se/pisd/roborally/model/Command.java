@@ -43,7 +43,9 @@ public enum Command {
     // XXX Assignment V3
     OPTION_LEFT_RIGHT("Left OR Right", LEFT, RIGHT),
     OPTION_FORWARD_FAST_FORWARD("Forward or Fast Fwd", FORWARD, FAST_FORWARD),
-    SPRINT_FORWARD("Sprint Fwd");
+    SPRINT_FORWARD("Sprint Fwd"),
+    BACK_UP("Back Up"),
+    U_TURN("U-Turn");
 
     final public String displayName;
 

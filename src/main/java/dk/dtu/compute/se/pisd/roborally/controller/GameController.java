@@ -251,6 +251,10 @@ public class GameController {
                     break;
                 case SPRINT_FORWARD:
                     this.sprintForward(player);
+                case U_TURN:
+                    this.uTurn(player);
+                case BACK_UP:
+                    this.backUp(player);
                 default:
                     // DO NOTHING (for now)
             }
@@ -271,7 +275,6 @@ public class GameController {
                 player.setSpace(target);
             }
         }
-
     }
 
     // TODO Assignment V2
@@ -288,7 +291,6 @@ public class GameController {
                 player.setSpace(targetSpace);
             }
         }
-
     }
 
     public void sprintForward(@NotNull Player player) {
@@ -300,7 +302,27 @@ public class GameController {
                 player.setSpace(targetSpace);
             }
         }
+    }
 
+    public void backUp(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        Heading heading = player.getHeading().next().next();
+
+        if (currentSpace != null && player.board == currentSpace.board) {
+            Space targetSpace = board.getNeighbour(currentSpace, heading);
+            if (targetSpace != null && targetSpace.getPlayer() == null) {
+                player.setSpace(targetSpace);
+            }
+        }
+    }
+
+    public void uTurn(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        Heading heading = player.getHeading().next().next();
+
+        if (currentSpace != null && player.board == currentSpace.board) {
+            player.setHeading(heading);
+        }
     }
 
     // TODO Assignment V2
