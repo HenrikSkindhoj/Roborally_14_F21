@@ -320,16 +320,22 @@ public class GameController {
     }
 
     public void sprintForward(@NotNull Player player) {
-        Space currentSpace = player.getSpace();
-        if (currentSpace != null && player.board == currentSpace.board) {
-            Space tempSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, player.getHeading()), player.getHeading());
-            Space targetSpace = board.getNeighbour(tempSpace, player.getHeading());
-            if (targetSpace != null && targetSpace.getPlayer() == null) {
-                player.setSpace(targetSpace);
+        if(player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading();
+
+            Space tempSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace = board.getNeighbour(tempSpace, heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
             }
         }
-
     }
+
 
     // TODO Assignment V2
     /**
