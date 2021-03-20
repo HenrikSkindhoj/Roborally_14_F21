@@ -46,6 +46,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public final Space space;
     public CheckpointsView checkpointsView;
+    public LaserView laserView;
 
 
 
@@ -54,7 +55,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, LaserView laserView) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -73,6 +74,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
+        this.laserView = laserView;
         this.checkpointsView = checkpointsView;
         // This space view should listen to changes of the space
         space.attach(this);
@@ -126,7 +128,20 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public void updateLasers(Laser laser)
     {
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
 
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(laser.getHeading() == Heading.NORTH || laser.getHeading() == Heading.SOUTH)
+        {
+            gc.strokeLine(0,75/2,75,75/2);
+        } else
+            {
+                gc.strokeLine(75/2,0,75/2,75);
+            }
     }
 
 }

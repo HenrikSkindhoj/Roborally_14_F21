@@ -1,10 +1,8 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
-import dk.dtu.compute.se.pisd.roborally.model.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Laser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -28,7 +26,7 @@ public class LaserView
 
         for(int i = 0; i < numberOfLasers; i++)
         {
-            lasers[i] = new Laser(arrX[i], arrY[i], random());
+            lasers[i] = new Laser(i, arrX[i], arrY[i], random());
         }
     }
 
@@ -47,4 +45,6 @@ public class LaserView
         else heading = Heading.WEST;
         return heading;
     }
+
+
 }

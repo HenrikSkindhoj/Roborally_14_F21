@@ -4,13 +4,15 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
 
 public class Laser
 {
+    private  int id;
     private int x;
     private int y;
     private Heading heading;
 
 
-    public Laser(int x, int y, Heading heading)
+    public Laser(int id, int x, int y, Heading heading)
     {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.heading = heading;
@@ -22,6 +24,9 @@ public class Laser
 
     }
 
+    public int getId() {
+        return id;
+    }
 
     public int getX1() {
         return x;
@@ -31,4 +36,7 @@ public class Laser
         return y;
     }
 
+    public Heading getHeading() {
+        return heading;
+    }
 }
