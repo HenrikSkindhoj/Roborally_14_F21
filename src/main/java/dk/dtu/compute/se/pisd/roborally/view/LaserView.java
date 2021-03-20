@@ -6,10 +6,9 @@ package dk.dtu.compute.se.pisd.roborally.view;
  * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
  * @version $Id: $Id
  */
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Laser;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -19,13 +18,14 @@ public class LaserView
     private Laser[] lasers;
     private Board board;
     private int amountLasers;
+    private Wall[] spacesWithWalls;
+    private boolean shuffled = false;
 
     public LaserView(int numberOfLasers, Board board)
     {
         amountLasers = numberOfLasers;
         this.board = board;
         lasers = new Laser[numberOfLasers];
-        spawnLasers();
     }
 
     public Laser[] getLasers() {
@@ -43,10 +43,22 @@ public class LaserView
         return heading;
     }
 
-    private void spawnLasers()
+    public void spawnLasers()
     {
-
+        if(!shuffled)
+        {
+            Collections.shuffle(Arrays.asList(spacesWithWalls));
+            shuffled = true;
+        }
+        for(int i = 0; i < amountLasers; i++)
+        {
+            lasers[i] = new Laser(i+1,spacesWithWalls[i].getX(),
+                    spacesWithWalls[i].getY(),spacesWithWalls[i].getHeading().next().next(),
+                    board.width,board.height);
+        }
     }
 
-
+    public void setSpacesWithWalls(Wall[] spacesWithWalls) {
+        this.spacesWithWalls = spacesWithWalls;
+    }
 }
