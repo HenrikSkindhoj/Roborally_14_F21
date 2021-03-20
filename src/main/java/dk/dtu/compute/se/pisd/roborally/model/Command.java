@@ -56,8 +56,17 @@ public enum Command {
     //
     // replaced by the code below:
 
+    /**
+     * The arraylist options, which contains multiple commands.
+     */
     final private List<Command> options;
 
+    /**
+     * <p>Constructor for Checkpoint.</p>
+     *
+     * @param displayName a {@link java.lang.String}.
+     * @param options a Command object.
+     */
     Command(String displayName, Command... options) {
         this.displayName = displayName;
         this.options = Collections.unmodifiableList(Arrays.asList(options));

@@ -33,7 +33,13 @@ public class Space extends Subject {
 
     public final Board board;
 
+    /**
+     * The location on the x-axis, of a space on the board
+     */
     public final int x;
+    /**
+     * The location on the y-axis, of a space on the board.
+     */
     public final int y;
 
     private Player player;

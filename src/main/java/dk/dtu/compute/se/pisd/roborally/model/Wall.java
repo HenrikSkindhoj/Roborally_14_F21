@@ -7,7 +7,13 @@ package dk.dtu.compute.se.pisd.roborally.model;
  * @version $Id: $Id
  */
 public class Wall {
+    /**
+     * The location of a wall on the x-axis
+     */
     int x;
+    /**
+     * The location of a wall on the y-axis
+     */
     int y;
     Heading heading;
 

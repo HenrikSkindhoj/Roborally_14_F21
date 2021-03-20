@@ -12,11 +12,29 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  */
 public class Laser
 {
+    /**
+     * The id of a specific laser
+     */
     private int id;
+    /**
+     * The location of the laser on the x-axis.
+     */
     private int x;
+    /**
+     * The location of the laser on the y-axis.
+     */
     private int y;
+    /**
+     * The max length the laser can shoot out of the x-axis.
+     */
     private int maxX;
+    /**
+     * The max length the laser can shoot out of the y-axis.
+     */
     private int maxY;
+    /**
+     * The way a laser points.
+     */
     private Heading heading;
 
     /**
