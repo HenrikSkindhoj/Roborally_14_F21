@@ -190,7 +190,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * <p>updateLasers</p>
      *
-     * @param Laser a {@link java.lang.String} object.
+     * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
      */
     public void updateLasers(Laser laser)
     {
