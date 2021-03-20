@@ -127,4 +127,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(can);
     }
 
+    public void updateLasers(String direction, int[] arrayOfPostions)
+    {
+
+    }
+
 }
