@@ -71,7 +71,7 @@ public class GameController {
     }
 
     /**
-     * XXX: V2
+     * <p>startProgrammingPhase.</p>
      *
      */
     public void startProgrammingPhase() {
@@ -96,16 +96,16 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
         return new CommandCard(commands[random]);
     }
 
-    // XXX: V2
     /**
      * <p>finishProgrammingPhase.</p>
+     *
      */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
@@ -115,7 +115,7 @@ public class GameController {
         board.setStep(0);
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -126,7 +126,7 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -137,32 +137,32 @@ public class GameController {
         }
     }
 
-    // XXX: V2
     /**
      * <p>executePrograms.</p>
+     *
      */
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
-    // XXX: V2
     /**
      * <p>executeStep.</p>
+     *
      */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    // XXX: V2
+
     private void continuePrograms() {
         do {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
-    // XXX: V2
+
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -228,7 +228,6 @@ public class GameController {
         }
     }
 
-    // XXX: V2
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
@@ -291,8 +290,6 @@ public class GameController {
     }
 
 
-
-    // TODO Assignment V2
     /**
      * <p>moveForward.</p>
      *
@@ -314,7 +311,6 @@ public class GameController {
         }
     }
 
-    // TODO Assignment V2
     /**
      * <p>fastForward.</p>
      *
@@ -414,7 +410,6 @@ public class GameController {
     }
 
 
-    // TODO Assignment V2
     /**
      * <p>turnRight.</p>
      *
@@ -426,7 +421,6 @@ public class GameController {
 
     }
 
-    // TODO Assignment V2
     /**
      * <p>turnLeft.</p>
      *

@@ -120,6 +120,7 @@ public class AppController implements Observer {
     }
 
     /**
+     * <p>stopGame.</p>
      * Stop playing the current game, giving the user the option to save
      * the game or to cancel stopping the game. The method returns true
      * if the game was successfully stopped (with or without saving the

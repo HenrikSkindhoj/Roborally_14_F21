@@ -89,7 +89,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>gameId</code>.</p>
+     * <p>Getter for the field. <code>gameId</code>.</p>
      *
      * @return a {@link java.lang.Integer} object.
      */
@@ -98,7 +98,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>gameId</code>.</p>
+     * <p>Setter for the field. <code>gameId</code>.</p>
      *
      * @param gameId a int.
      */
@@ -113,7 +113,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getSpace.</p>
+     * <p>Getter for all the spaces on the board.<code>getSpace</code></p>
      *
      * @param x a int.
      * @param y a int.
