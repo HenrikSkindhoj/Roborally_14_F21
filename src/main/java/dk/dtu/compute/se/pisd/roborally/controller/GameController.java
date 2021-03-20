@@ -269,6 +269,16 @@ public class GameController {
             @NotNull Heading heading) throws ImpossibleMoveException{
 
         Player other = space.getPlayer();
+        if(player.getSpace().getWall() != null) {
+            if (player.getSpace().getWall().getHeading() == heading){
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        if(space.getWall() != null) {
+            if (space.getWall().getHeading().next().next() == heading) {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
         if (other != null) {
             Space target = board.getNeighbour(space, heading);
             if (target != null) {
@@ -320,15 +330,14 @@ public class GameController {
                 try {
                     moveToSpace(player, targetSpace, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace = player.getSpace();
                 }
             }
-            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
             if (targetSpace2 != null) {
                 try {
                     moveToSpace(player, targetSpace2, heading);
                 } catch (ImpossibleMoveException e) {
-
                 }
             }
         }
@@ -343,18 +352,18 @@ public class GameController {
                 try {
                     moveToSpace(player, targetSpace, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace = player.getSpace();
                 }
             }
-            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
             if (targetSpace2 != null) {
                 try {
                     moveToSpace(player, targetSpace2, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace2 = player.getSpace();
                 }
             }
-            Space targetSpace3 = board.getNeighbour(board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading),heading);
+            Space targetSpace3 = board.getNeighbour(targetSpace2,heading);
             if (targetSpace3 != null) {
                 try {
                     moveToSpace(player, targetSpace3, heading);

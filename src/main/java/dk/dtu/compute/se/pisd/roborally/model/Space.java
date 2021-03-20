@@ -37,6 +37,7 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
+    private Wall wall;
 
     /**
      * <p>Constructor for Space.</p>
@@ -50,6 +51,7 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
+        wall = null;
     }
 
     /**
@@ -89,4 +91,11 @@ public class Space extends Subject {
         notifyChange();
     }
 
+    public void setWall(Wall wall){
+        this.wall = wall;
+    }
+
+    public Wall getWall() {
+        return wall;
+    }
 }
