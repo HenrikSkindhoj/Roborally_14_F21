@@ -369,7 +369,6 @@ public class GameController {
         if (player.board == board) {
             Space currentSpace = player.getSpace();
             Heading heading = player.getHeading().next().next();
-            player.setHeading(heading);
             Space targetSpace = board.getNeighbour(currentSpace, heading);
             if (targetSpace != null) {
                 try {
