@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.model.Checkpoint;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
@@ -47,6 +48,8 @@ public class SpaceView extends StackPane implements ViewObserver {
     final public static int SPACE_WIDTH = 75;  // 60; // 75;
 
     public final Space space;
+    public CheckpointsView checkpointsView;
+
 
 
     /**
@@ -54,7 +57,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -73,7 +76,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
-
+        this.checkpointsView = checkpointsView;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -103,7 +106,30 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             updatePlayer();
+
+            for(int i = 0; i < checkpointsView.getCheckpoints().length; i++)
+            {
+                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY())
+                    updateCheckpoint(checkpointsView.getCheckpoints()[i]);
+            }
         }
+    }
+
+    public void updateCheckpoint(Checkpoint checkpoint)
+    {
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.strokeText(Integer.toString(checkpoint.getId()),SPACE_HEIGHT/2,SPACE_WIDTH/2);
+        gc.rect(2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+
+        this.getChildren().add(can);
+    }
+
+    public void updateLasers(String direction, int[] arrayOfPostions)
+    {
+
     }
 
 }
