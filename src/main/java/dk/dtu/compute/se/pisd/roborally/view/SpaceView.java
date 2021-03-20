@@ -25,9 +25,12 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
@@ -135,6 +138,11 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    /**
+     * <p>updateCheckpoints.</p>
+     *
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     */
     public void updateCheckpoint(Checkpoint checkpoint)
     {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
@@ -147,6 +155,10 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(can);
     }
 
+    /**
+     * <p>updateWall.</p>
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
 
@@ -172,8 +184,14 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().add(canvas);
         }
 
+
     }
 
+    /**
+     * <p>updateLasers</p>
+     *
+     * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
+     */
     public void updateLasers(Laser laser)
     {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);

@@ -113,7 +113,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for all the spaces on the board.<code>getSpace</code></p>
+     * <p>Getter for all the spaces on the board. <code>getSpace</code>.</p>
      *
      * @param x a int.
      * @param y a int.
@@ -129,7 +129,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayersNumber.</p>
+     * <p>Getter for the amount of players. <code>getPlayersNumber</code>.</p>
      *
      * @return a int.
      */
@@ -150,7 +150,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayer.</p>
+     * <p>Getter for player.<code>getPlayer</code>.</p>
      *
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
@@ -248,7 +248,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>PlayerNumber.</p>
+     * <p>Getter for the number of a specific player<code>getPlayerNumber</code>.</p>
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      * @return a int.
@@ -262,6 +262,8 @@ public class Board extends Subject {
     }
 
     /**
+     * <p>Getter for a specific players neighbour<code>getNeighbour</code>.</p>
+     *
      * Returns the neighbour of the given space of the board in the given heading.
      * The neighbour is returned only, if it can be reached from the given space
      * (no walls or obstacles in either of the involved spaces); otherwise,
@@ -293,7 +295,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getStatusMessage.</p>
+     * <p>Getter for the status of the game <code>getStatusMessage</code> .</p>
      *
      * @return a {@link java.lang.String} object.
      */

@@ -104,10 +104,17 @@ public class BoardView extends VBox implements ViewObserver {
 
         final public GameController gameController;
 
+        /**
+         * <p>SpaceEventHandler</p>
+         *
+         * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object.
+         */
         public SpaceEventHandler(@NotNull GameController gameController) {
             this.gameController = gameController;
         }
 
+
+        /** {@inheritDoc} */
         @Override
         public void handle(MouseEvent event) {
             Object source = event.getSource();

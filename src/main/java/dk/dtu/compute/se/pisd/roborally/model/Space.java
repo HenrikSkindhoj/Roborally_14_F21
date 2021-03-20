@@ -101,10 +101,19 @@ public class Space extends Subject {
         notifyChange();
     }
 
+    /**
+     * <p>Setter for wall<code>setWall</code>.</p>
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
     public void setWall(Wall wall){
         this.wall = wall;
     }
 
+    /**
+     * <p>Getter for wall<code>getWall</code>.</p>
+     *
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
     public Wall getWall() {
         return wall;
     }
