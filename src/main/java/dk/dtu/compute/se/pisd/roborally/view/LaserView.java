@@ -6,6 +6,7 @@ package dk.dtu.compute.se.pisd.roborally.view;
  * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
  * @version $Id: $Id
  */
+import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Laser;
 
@@ -15,25 +16,16 @@ import java.util.Random;
 
 public class LaserView
 {
-    Laser[] lasers;
+    private Laser[] lasers;
+    private Board board;
+    private int amountLasers;
 
-    public LaserView(int numberOfLasers, int boardSizeX, int boardSizeY)
+    public LaserView(int numberOfLasers, Board board)
     {
-        Integer[] arrX = new Integer[boardSizeX-1];
-        Integer[] arrY = new Integer[boardSizeY-1];
-
-        for(int by = 0; by < arrY.length; by++) arrY[by] = by;
-        for(int bx = 0; bx < arrX.length; bx++) arrX[bx] = bx;
-
-        Collections.shuffle(Arrays.asList(arrX));
-        Collections.shuffle(Arrays.asList(arrY));
-
+        amountLasers = numberOfLasers;
+        this.board = board;
         lasers = new Laser[numberOfLasers];
-
-        for(int i = 0; i < numberOfLasers; i++)
-        {
-            lasers[i] = new Laser(i, arrX[i], arrY[i], random(), boardSizeX, boardSizeY);
-        }
+        spawnLasers();
     }
 
     public Laser[] getLasers() {
@@ -53,7 +45,7 @@ public class LaserView
 
     private void spawnLasers()
     {
-        
+
     }
 
 

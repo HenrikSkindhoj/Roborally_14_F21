@@ -63,9 +63,9 @@ public class BoardView extends VBox implements ViewObserver {
         mainBoardPane = new GridPane();
         playersView = new PlayersView(gameController);
         statusLabel = new Label("<no status>");
-        checkpointsView = new CheckpointsView(4,board.width,board.height);
+        checkpointsView = new CheckpointsView(4,board);
         wallView = new WallView(16, board.width, board.height);
-        laserView = new LaserView(2,board.width,board.height);
+        laserView = new LaserView(2,board);
 
         this.getChildren().add(mainBoardPane);
         this.getChildren().add(playersView);
