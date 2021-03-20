@@ -115,8 +115,9 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             for(int i = 0; i < checkpointsView.getCheckpoints().length; i++)
             {
-                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY())
+                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
                     updateCheckpoint(checkpointsView.getCheckpoints()[i]);
+                }
             }
 
             for(int i = 0; i < wallView.getWalls().length; i++){
@@ -126,8 +127,9 @@ public class SpaceView extends StackPane implements ViewObserver {
 
             for(int i = 0; i < laserView.getLasers().length; i++)
             {
-                if(this.space.x == laserView.getLasers()[i].getX() && this.space.y == laserView.getLasers()[i].getY())
+                if(laserView.getLasers()[i].hit(this.space.x, this.space.y))
                     updateLasers(laserView.getLasers()[i]);
+
             }
         }
     }
@@ -169,7 +171,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.getChildren().add(canvas);
         }
 
-
     }
 
     public void updateLasers(Laser laser)
@@ -183,10 +184,10 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         if(laser.getHeading() == Heading.NORTH || laser.getHeading() == Heading.SOUTH)
         {
-            gc.strokeLine(0,35,75,35);
+            gc.strokeLine(35,0,35,75);
         } else
             {
-                gc.strokeLine(35,0,35,75);
+                gc.strokeLine(0,35,75,35);
             }
         this.getChildren().add(can);
     }

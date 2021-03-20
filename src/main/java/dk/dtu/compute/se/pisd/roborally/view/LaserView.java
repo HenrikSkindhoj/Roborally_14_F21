@@ -26,7 +26,7 @@ public class LaserView
 
         for(int i = 0; i < numberOfLasers; i++)
         {
-            lasers[i] = new Laser(i, arrX[i], arrY[i], random());
+            lasers[i] = new Laser(i, arrX[i], arrY[i], random(), boardSizeX, boardSizeY);
         }
     }
 
