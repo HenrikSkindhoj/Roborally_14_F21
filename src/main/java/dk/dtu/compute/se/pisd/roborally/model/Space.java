@@ -37,6 +37,7 @@ public class Space extends Subject {
     public final int y;
 
     private Player player;
+    private Laser laser;
     private Wall wall;
 
     /**
@@ -52,6 +53,7 @@ public class Space extends Subject {
         this.y = y;
         player = null;
         wall = null;
+        laser = null;
     }
 
     /**
@@ -82,6 +84,14 @@ public class Space extends Subject {
             }
             notifyChange();
         }
+    }
+
+    public void setLaser(Laser laser) {
+        this.laser = laser;
+    }
+
+    public Laser getLaser() {
+        return laser;
     }
 
     void playerChanged() {

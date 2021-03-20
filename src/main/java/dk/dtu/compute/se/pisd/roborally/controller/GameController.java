@@ -215,12 +215,12 @@ public class GameController {
                 board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 continuePrograms();
             } else {
-                int step = board.getStep() + 1;
-                continuePrograms();
+                int step = board.getStep() +1;
                 if (step < Player.NO_REGISTERS) {
                     makeProgramFieldsVisible(step);
                     board.setStep(step);
                     board.setCurrentPlayer(board.getPlayer(0));
+                    continuePrograms();
                 } else {
                     startProgrammingPhase();
                 }
@@ -287,6 +287,10 @@ public class GameController {
             }
         }
         player.setSpace(space);
+        if(space.getLaser() != null)
+        {
+            System.out.println("hit!");
+        }
     }
 
 
@@ -344,7 +348,7 @@ public class GameController {
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
-    public void sprintForward(@NotNull Player player) {
+    public void sprintForward(@NotNull Player player){
         if(player.board == board) {
             Space currentSpace = player.getSpace();
             Heading heading = player.getHeading();
