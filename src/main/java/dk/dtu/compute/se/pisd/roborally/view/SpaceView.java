@@ -118,8 +118,10 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
 
             for(int i = 0; i < wallView.getWalls().length; i++){
-                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY())
-                updateWall(wallView.getWalls()[i]);
+                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY()) {
+                    updateWall(wallView.getWalls()[i]);
+                    this.space.setWall(wallView.getWalls()[i]);
+                }
             }
 
             for(int i = 0; i < laserView.getLasers().length; i++)

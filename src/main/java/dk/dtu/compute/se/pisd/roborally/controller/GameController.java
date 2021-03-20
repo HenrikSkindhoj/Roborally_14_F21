@@ -71,8 +71,8 @@ public class GameController {
     }
 
     /**
-     * XXX: V2
-     * test
+     * <p>startProgrammingPhase.</p>
+     *
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -96,16 +96,16 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
         return new CommandCard(commands[random]);
     }
 
-    // XXX: V2
     /**
      * <p>finishProgrammingPhase.</p>
+     *
      */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
@@ -115,7 +115,7 @@ public class GameController {
         board.setStep(0);
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -126,7 +126,7 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -137,32 +137,32 @@ public class GameController {
         }
     }
 
-    // XXX: V2
     /**
      * <p>executePrograms.</p>
+     *
      */
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
-    // XXX: V2
     /**
      * <p>executeStep.</p>
+     *
      */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    // XXX: V2
+
     private void continuePrograms() {
         do {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
-    // XXX: V2
+
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -228,7 +228,6 @@ public class GameController {
         }
     }
 
-    // XXX: V2
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
@@ -269,6 +268,16 @@ public class GameController {
             @NotNull Heading heading) throws ImpossibleMoveException{
 
         Player other = space.getPlayer();
+        if(player.getSpace().getWall() != null) {
+            if (player.getSpace().getWall().getHeading() == heading){
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        if(space.getWall() != null) {
+            if (space.getWall().getHeading().next().next() == heading) {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
         if (other != null) {
             Space target = board.getNeighbour(space, heading);
             if (target != null) {
@@ -285,8 +294,6 @@ public class GameController {
     }
 
 
-
-    // TODO Assignment V2
     /**
      * <p>moveForward.</p>
      *
@@ -308,7 +315,6 @@ public class GameController {
         }
     }
 
-    // TODO Assignment V2
     /**
      * <p>fastForward.</p>
      *
@@ -324,20 +330,24 @@ public class GameController {
                 try {
                     moveToSpace(player, targetSpace, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace = player.getSpace();
                 }
             }
-            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
             if (targetSpace2 != null) {
                 try {
                     moveToSpace(player, targetSpace2, heading);
                 } catch (ImpossibleMoveException e) {
-
                 }
             }
         }
     }
 
+    /**
+     * <p>sprintForward.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void sprintForward(@NotNull Player player) {
         if(player.board == board) {
             Space currentSpace = player.getSpace();
@@ -347,18 +357,18 @@ public class GameController {
                 try {
                     moveToSpace(player, targetSpace, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace = player.getSpace();
                 }
             }
-            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
             if (targetSpace2 != null) {
                 try {
                     moveToSpace(player, targetSpace2, heading);
                 } catch (ImpossibleMoveException e) {
-
+                    targetSpace2 = player.getSpace();
                 }
             }
-            Space targetSpace3 = board.getNeighbour(board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading),heading);
+            Space targetSpace3 = board.getNeighbour(targetSpace2,heading);
             if (targetSpace3 != null) {
                 try {
                     moveToSpace(player, targetSpace3, heading);
@@ -369,6 +379,11 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>backUp.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void backUp(@NotNull Player player) {
         if (player.board == board) {
             Space currentSpace = player.getSpace();
@@ -384,6 +399,11 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>uTurn.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void uTurn(@NotNull Player player) {
         Space currentSpace = player.getSpace();
         Heading heading = player.getHeading().next().next();
@@ -394,7 +414,6 @@ public class GameController {
     }
 
 
-    // TODO Assignment V2
     /**
      * <p>turnRight.</p>
      *
@@ -406,7 +425,6 @@ public class GameController {
 
     }
 
-    // TODO Assignment V2
     /**
      * <p>turnLeft.</p>
      *

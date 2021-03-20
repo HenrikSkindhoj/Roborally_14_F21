@@ -1,5 +1,11 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
+/**
+ * ...
+ *
+ * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
+ * @version $Id: $Id
+ */
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Laser;
 
@@ -44,6 +50,15 @@ public class LaserView
         else if(randomInt == 2) heading = Heading.SOUTH;
         else heading = Heading.WEST;
         return heading;
+    /**
+     * <p>Constructor for LaserView.</p>
+     *
+     * @param boardSizeX a int.
+     * @param boardSizeY a int.
+     */
+    public LaserView(int boardSizeX, int boardSizeY)
+    {
+
     }
 
 
