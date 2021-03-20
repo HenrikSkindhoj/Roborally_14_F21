@@ -16,8 +16,14 @@ import java.util.Random;
 
 public class LaserView
 {
+    /**
+     * A array of the lasers on the board.
+     */
     private Laser[] lasers;
     private Board board;
+    /**
+     * A int, for the amount of lasers on the board.
+     */
     private int amountLasers;
 
     public LaserView(int numberOfLasers, Board board)

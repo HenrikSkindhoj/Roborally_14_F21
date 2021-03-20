@@ -35,6 +35,9 @@ public class CommandCardField extends Subject {
 
     private CommandCard card;
 
+    /**
+     * The boolean visible determines which of the cards in a players register is visible.
+     */
     private boolean visible;
 
     /**

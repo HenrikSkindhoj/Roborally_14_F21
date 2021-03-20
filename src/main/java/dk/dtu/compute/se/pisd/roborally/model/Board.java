@@ -37,24 +37,54 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
  */
 public class Board extends Subject {
 
+    /**
+     * The width of the board
+     */
     public final int width;
 
+    /**
+     * The height og the board
+     */
     public final int height;
 
+    /**
+     * Currently not used
+     */
     public final String boardName;
 
+    /**
+     * Currently not used
+     */
     private Integer gameId;
 
+    /**
+     * A 2D array of all the spaces on the current board
+     */
     private final Space[][] spaces;
 
+    /**
+     * A arraylist of all the players
+     */
     private final List<Player> players = new ArrayList<>();
 
+    /**
+     * The player who has to make the next move, for the game to continue
+     */
     private Player current;
 
+    /**
+     * The current phase of the game, which at the start is initialisation.
+     */
     private Phase phase = INITIALISATION;
 
+    /**
+     * A counter which show the amount of moves that has been made in total.
+     */
     private int step = 0;
 
+    /**
+     * A boolean which determines whether or not, the step counter, should count
+     */
     private boolean stepMode;
 
     /**
@@ -236,7 +266,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>stepMode</code>.</p>
+     * <p>Setter for the boolean to count steps <code>setStepMode</code>.</p>
      *
      * @param stepMode a boolean.
      */

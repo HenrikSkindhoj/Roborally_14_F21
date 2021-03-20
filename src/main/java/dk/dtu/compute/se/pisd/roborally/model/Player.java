@@ -41,13 +41,25 @@ public class Player extends Subject {
 
     final public Board board;
 
+    /**
+     * Currently not used
+     */
     private String name;
+    /**
+     * The color of a robot
+     */
     private String color;
 
     private Space space;
     private Heading heading = SOUTH;
 
+    /**
+     * Array of the players registers
+     */
     private CommandCardField[] program;
+    /**
+     * Array of the players cards
+     */
     private CommandCardField[] cards;
 
     /**

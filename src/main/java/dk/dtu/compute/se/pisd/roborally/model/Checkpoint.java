@@ -8,8 +8,17 @@ package dk.dtu.compute.se.pisd.roborally.model;
  */
 public class Checkpoint {
 
+    /**
+     * The id of the checkpoint is a int from 1 to 4, which determines the order the player should land on the checkpoints in.
+     */
     private int id;
+    /**
+     * The int x is the checkpoints location on the x-axis on the board.
+     */
     private int x;
+    /**
+     * the int y is the checkpoints location on the y-axis on the board.
+     */
     private int y;
 
     /**

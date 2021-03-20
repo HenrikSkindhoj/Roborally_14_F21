@@ -12,6 +12,9 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  */
 public class WallView {
 
+    /**
+     * Array of walls
+     */
     private Wall[] walls;
 
     /**

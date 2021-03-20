@@ -14,6 +14,9 @@ import java.util.Collections;
  */
 public class CheckpointsView {
 
+    /**
+     * A array of all the checkpoints on a board.
+     */
     private Checkpoint[] checkpoints;
     private Board board;
 
