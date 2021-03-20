@@ -188,6 +188,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             {
                 gc.strokeLine(35,0,35,75);
             }
+        this.getChildren().add(can);
     }
 
 }
