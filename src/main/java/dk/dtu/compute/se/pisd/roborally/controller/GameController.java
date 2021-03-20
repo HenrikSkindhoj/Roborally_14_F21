@@ -278,6 +278,10 @@ public class GameController {
             }
         }
         player.setSpace(space);
+        if(space.getLaser() != null)
+        {
+            System.out.println("hit!");
+        }
     }
 
 
