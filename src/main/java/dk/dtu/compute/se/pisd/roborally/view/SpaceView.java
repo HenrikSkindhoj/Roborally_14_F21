@@ -22,17 +22,19 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.Checkpoint;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
+
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
 
 /**
  * ...
@@ -49,6 +51,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public final Space space;
     public CheckpointsView checkpointsView;
+    public WallView wallView;
 
 
 
@@ -57,7 +60,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, WallView wallView) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -77,6 +80,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         // updatePlayer();
         this.checkpointsView = checkpointsView;
+        this.wallView = wallView;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -112,6 +116,11 @@ public class SpaceView extends StackPane implements ViewObserver {
                 if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY())
                     updateCheckpoint(checkpointsView.getCheckpoints()[i]);
             }
+
+            for(int i = 0; i < wallView.getWalls().length; i++){
+                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY())
+                updateWall(wallView.getWalls()[i]);
+            }
         }
     }
 
@@ -125,6 +134,34 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.rect(2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
 
         this.getChildren().add(can);
+    }
+
+    public void updateWall(Wall wall){
+        Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(wall.getHeading() == NORTH){
+           gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+           this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == SOUTH){
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+            this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == EAST){
+            gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+            this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == WEST){
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
+            this.getChildren().add(canvas);
+        }
+
+
     }
 
     public void updateLasers(String direction, int[] arrayOfPostions)
