@@ -72,7 +72,7 @@ public class GameController {
 
     /**
      * XXX: V2
-     * test
+     *
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -343,6 +343,11 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>sprintForward.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void sprintForward(@NotNull Player player) {
         if(player.board == board) {
             Space currentSpace = player.getSpace();
@@ -374,6 +379,11 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>backUp.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void backUp(@NotNull Player player) {
         if (player.board == board) {
             Space currentSpace = player.getSpace();
@@ -389,6 +399,11 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>uTurn.</p>
+     *
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
     public void uTurn(@NotNull Player player) {
         Space currentSpace = player.getSpace();
         Heading heading = player.getHeading().next().next();

@@ -4,10 +4,23 @@ import dk.dtu.compute.se.pisd.roborally.model.Wall;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
 
+/**
+ * ...
+ *
+ * @author Kasper Falch Skov, s205429@student.dtu.dk
+ * @version $Id: $Id
+ */
 public class WallView {
 
     private Wall[] walls;
 
+    /**
+     * <p>Constructor for CheckpointsView.</p>
+     *
+     * @param numberOfWalls a int.
+     * @param boardSizeX a int.
+     * @param boardSizeY a int.
+     */
     public WallView(int numberOfWalls, int boardSizeX, int boardSizeY){
         walls = new Wall[numberOfWalls];
         walls[0] = new Wall(0,0, WEST);
@@ -28,6 +41,11 @@ public class WallView {
         walls[15] = new Wall(6,7, WEST);
     }
 
+    /**
+     * <p>Getter for the walls.<code>getWalls</code>.</p>
+     *
+     * @return all of the walls in the Wall array.
+     */
     public Wall[] getWalls() {
         return walls;
     }

@@ -248,7 +248,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayerNumber.</p>
+     * <p>PlayerNumber.</p>
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      * @return a int.
