@@ -126,6 +126,11 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
     }
 
+    /**
+     * <p>updateCheckpoints.</p>
+     *
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     */
     public void updateCheckpoint(Checkpoint checkpoint)
     {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
@@ -138,6 +143,10 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(can);
     }
 
+    /**
+     * <p>updateWall.</p>
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
 
@@ -166,6 +175,12 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     }
 
+    /**
+     * <p>updateLasers</p>
+     *
+     * @param direction a {@link java.lang.String} object.
+     * @param arrayOfPostions a int object
+     */
     public void updateLasers(String direction, int[] arrayOfPostions)
     {
 
