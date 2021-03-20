@@ -40,25 +40,20 @@ public class LaserView
         return lasers;
     }
 
-    public Heading random()
-    {
+    public Heading random() {
         Heading heading;
         Random random = new Random();
         int randomInt = random.nextInt(4);
-        if(randomInt == 0) heading = Heading.NORTH;
-        else if(randomInt == 1) heading = Heading.EAST;
-        else if(randomInt == 2) heading = Heading.SOUTH;
+        if (randomInt == 0) heading = Heading.NORTH;
+        else if (randomInt == 1) heading = Heading.EAST;
+        else if (randomInt == 2) heading = Heading.SOUTH;
         else heading = Heading.WEST;
         return heading;
-    /**
-     * <p>Constructor for LaserView.</p>
-     *
-     * @param boardSizeX a int.
-     * @param boardSizeY a int.
-     */
-    public LaserView(int boardSizeX, int boardSizeY)
-    {
+    }
 
+    private void spawnLasers()
+    {
+        
     }
 
 
