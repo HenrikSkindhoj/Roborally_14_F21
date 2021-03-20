@@ -28,11 +28,11 @@ public class Laser
         return id;
     }
 
-    public int getX1() {
+    public int getX() {
         return x;
     }
 
-    public int getY1() {
+    public int getY() {
         return y;
     }
 

@@ -123,6 +123,12 @@ public class SpaceView extends StackPane implements ViewObserver {
                 if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY())
                 updateWall(wallView.getWalls()[i]);
             }
+
+            for(int i = 0; i < laserView.getLasers().length; i++)
+            {
+                if(this.space.x == laserView.getLasers()[i].getX() && this.space.y == laserView.getLasers()[i].getY())
+                    updateLasers(laserView.getLasers()[i]);
+            }
         }
     }
 
@@ -166,7 +172,6 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     }
 
-    public void updateLasers(String direction, int[] arrayOfPostions)
     public void updateLasers(Laser laser)
     {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
@@ -178,10 +183,10 @@ public class SpaceView extends StackPane implements ViewObserver {
 
         if(laser.getHeading() == Heading.NORTH || laser.getHeading() == Heading.SOUTH)
         {
-            gc.strokeLine(0,75/2,75,75/2);
+            gc.strokeLine(0,35,75,35);
         } else
             {
-                gc.strokeLine(75/2,0,75/2,75);
+                gc.strokeLine(35,0,35,75);
             }
     }
 
