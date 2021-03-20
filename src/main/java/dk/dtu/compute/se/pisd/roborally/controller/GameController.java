@@ -250,6 +250,13 @@ public class GameController {
                     break;
                 case SPRINT_FORWARD:
                     this.sprintForward(player);
+                    break;
+                case U_TURN:
+                    this.uTurn(player);
+                    break;
+                case BACK_UP:
+                    this.backUp(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -308,10 +315,18 @@ public class GameController {
             Space currentSpace = player.getSpace();
             Heading heading = player.getHeading();
 
-            Space targetSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            Space targetSpace = board.getNeighbour(currentSpace,heading);
             if (targetSpace != null) {
                 try {
                     moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            if (targetSpace2 != null) {
+                try {
+                    moveToSpace(player, targetSpace2, heading);
                 } catch (ImpossibleMoveException e) {
 
                 }
@@ -323,9 +338,7 @@ public class GameController {
         if(player.board == board) {
             Space currentSpace = player.getSpace();
             Heading heading = player.getHeading();
-
-            Space tempSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
-            Space targetSpace = board.getNeighbour(tempSpace, heading);
+            Space targetSpace = board.getNeighbour(currentSpace,heading);
             if (targetSpace != null) {
                 try {
                     moveToSpace(player, targetSpace, heading);
@@ -333,6 +346,46 @@ public class GameController {
 
                 }
             }
+            Space targetSpace2 = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading);
+            if (targetSpace2 != null) {
+                try {
+                    moveToSpace(player, targetSpace2, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+            Space targetSpace3 = board.getNeighbour(board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, heading), heading),heading);
+            if (targetSpace3 != null) {
+                try {
+                    moveToSpace(player, targetSpace3, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+        }
+    }
+
+    public void backUp(@NotNull Player player) {
+        if (player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading().next().next();
+            Space targetSpace = board.getNeighbour(currentSpace, heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+        }
+    }
+
+    public void uTurn(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        Heading heading = player.getHeading().next().next();
+
+        if (currentSpace != null && player.board == currentSpace.board) {
+            player.setHeading(heading);
         }
     }
 
