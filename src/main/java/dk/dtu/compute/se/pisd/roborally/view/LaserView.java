@@ -83,9 +83,9 @@ public class LaserView
         }
         for(int i = 0; i < amountLasers; i++)
         {
-            lasers[i] = new Laser(i+1,spacesWithWalls[i].getX(),
-                    spacesWithWalls[i].getY(),spacesWithWalls[i].getHeading().next().next(),
-                    board.width,board.height);
+            lasers[i] = new Laser(i+1,board.getSpace(spacesWithWalls[i].getX(),spacesWithWalls[i].getY()),
+                    spacesWithWalls[i].getHeading().next().next(),board);
+            lasers[i].setEndSpace();
         }
     }
 

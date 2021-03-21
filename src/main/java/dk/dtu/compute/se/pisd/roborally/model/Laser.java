@@ -16,106 +16,146 @@ public class Laser
      * The id of a specific laser
      */
     private int id;
-    /**
-     * The location of the laser on the x-axis.
-     */
-    private int x;
-    /**
-     * The location of the laser on the y-axis.
-     */
-    private int y;
-    /**
-     * The max length the laser can shoot out of the x-axis.
-     */
-    private int maxX;
-    /**
-     * The max length the laser can shoot out of the y-axis.
-     */
-    private int maxY;
+
     /**
      * The way a laser points.
      */
     private Heading heading;
 
+    private Space startSpace;
+
+    private Space endSpace;
+
+    private ArrayList<Space> occupiedSpaces;
+
+    private Board board;
+
+
     /**
      * <p>Constructor for Laser.</p>
+     *
      * @param x a int.
      * @param y a int.
      * @param id a int.
      */
 
-    public Laser(int id, int x, int y, Heading heading, int maxX, int maxY)
+    public Laser(int id, Space startSpace, Heading heading, Board board)
     {
         this.id = id;
-        this.x = x;
-        this.y = y;
-        this.maxX = maxX;
-        this.maxY = maxY;
+        this.startSpace = startSpace;
         this.heading = heading;
-
+        this.board = board;
     }
 
-    /**
-     * <p>hit.</p>
-     * The method determines where the laser is, and if there are any walls or robots, in the way.
-     * @param givenX a int
-     * @param givenY a int
-     * @return a boolean
-     */
-    public boolean hit(int givenX, int givenY)
+    private void occupiedSpaces()
     {
-        boolean isHit = false;
+        ArrayList<Space> newOccupiedSpaces = new ArrayList<>();
+
+        newOccupiedSpaces.add(board.getSpace(startSpace.x,startSpace.y));
 
         if(heading == NORTH)
         {
-            if(givenX == x && givenY <= y)
+            for (int y = startSpace.y+1; y > 0; y--)
             {
-                isHit = true;
+                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    break;
+                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                }
             }
         } else if(heading == EAST)
         {
-            if(givenX >= x && givenY == y)
+            for (int x = startSpace.x+1; x < board.width; x++)
             {
-                isHit = true;
+                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST) {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    break;
+                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                }
             }
         } else if(heading == SOUTH)
         {
-            if(givenX == x && givenY >= y)
+            for (int y = startSpace.y+1; y < board.height; y++)
             {
-                isHit = true;
+                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH) {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    break;
+                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() ==  NORTH)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                }
             }
         } else if(heading == WEST)
         {
-            if(givenX <= x && givenY == y)
+            for (int x = startSpace.x+1; x > 0; x--)
             {
-                isHit = true;
+                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    break;
+                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                }
             }
         }
-        return isHit;
+
+        endSpace = newOccupiedSpaces.get(newOccupiedSpaces.size()-1);
+        occupiedSpaces = newOccupiedSpaces;
+    }
+
+    public boolean checkIfOccupied(Space space)
+    {
+        boolean occupied = false;
+        for (int i = 0; i < occupiedSpaces.size(); i++) {
+
+            if(occupiedSpaces.get(i) == space)
+            {
+                occupied = true;
+                break;
+            }
+        }
+        return occupied;
     }
 
     /**
      * <p>Getter for the Id <code>getId</code>.</p>
+     *
      * @return the id of the laser.
      */
     public int getId() {
         return id;
     }
 
-    /**
-     * <p>Getter for the x value of a laser <code>getX</code>.</p>
-     * @return the x coordinate of a laser.
-     */
-    public int getX() {
-        return x;
+    public void setStartSpace(Space space) {
+        this.startSpace = space;
     }
 
-    /**
-     * <p>Getter for the y value of a laser <code>getY</code>.</p>
-     * @return the y coordinate of a laser.
-     */
-    public int getY() {
-        return y;
+    public Space getStartSpace() {
+        return startSpace;
+    }
+
+    public void setEndSpace() {
+        occupiedSpaces();
+    }
+
+    public Space getEndSpace() {
+        return endSpace;
+    }
+
+    public ArrayList<Space> getOccupiedSpaces() {
+        return occupiedSpaces;
     }
 
     /**
