@@ -301,8 +301,8 @@ public class GameController {
      * <p>moveForward.</p>
      * A method which contains the function of the forward command card,
      * which makes the robot go forward one space.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void moveForward(@NotNull Player player) {
         if (player.board == board) {
@@ -324,8 +324,8 @@ public class GameController {
      * <p>fastForward.</p>
      * A method which contains the function of the fast forward command card,
      * which makes the robot go forward two spaces.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void fastForward(@NotNull Player player) {
         if (player.board == board) {
@@ -354,7 +354,7 @@ public class GameController {
      * <p>sprintForward.</p>
      * A method which contains the function of the sprint forward command card,
      * which makes the robot go forward three spaces.
-     *
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void sprintForward(@NotNull Player player){
@@ -392,8 +392,8 @@ public class GameController {
      * <p>backUp.</p>
      * A method which contains the function of the back up command card,
      * which makes the robot go backwards one space, while not changing heading.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void backUp(@NotNull Player player) {
         if (player.board == board) {
@@ -414,8 +414,8 @@ public class GameController {
      * <p>uTurn.</p>
      * A method which contains the function of the u turn command card,
      * which makes the robot turn around, without moving.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void uTurn(@NotNull Player player) {
         Space currentSpace = player.getSpace();
@@ -431,8 +431,8 @@ public class GameController {
      * <p>turnRight.</p>
      * A method which contains the function of the turn right command card,
      * which makes the robot turn right.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void turnRight(@NotNull Player player) {
         Heading current = player.getHeading();
@@ -444,8 +444,8 @@ public class GameController {
      * <p>turnLeft.</p>
      * A method which contains the function of the turn left command card,
      * which makes the robot turn left.
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void turnLeft(@NotNull Player player) {
         Heading current = player.getHeading();

@@ -115,6 +115,7 @@ public class Space extends Subject {
     /**
      * <p>Setter for wall<code>setWall</code>.</p>
      * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void setWall(Wall wall){
         this.wall = wall;
@@ -123,6 +124,7 @@ public class Space extends Subject {
     /**
      * <p>Getter for wall<code>getWall</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public Wall getWall() {
         return wall;
