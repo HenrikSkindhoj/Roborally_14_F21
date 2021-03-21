@@ -61,6 +61,16 @@ public class LaserTest {
     {
         Board board = gameController.board;
         boolean stops = false;
+        ArrayList<Space> space = laserView.getLasers()[0].getOccupiedSpaces();
+
+        for(int i = 0; i < space.size(); i++){
+            if(board.getSpace(2,2) == space.get(i)){
+                stops = true;
+            }
+            if(board.getSpace(2,1) == space.get(i)){
+
+            }
+        }
 
 
         Assertions.assertEquals(true,stops,"Should be true");
