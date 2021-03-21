@@ -55,7 +55,7 @@ public class Laser
 
         if(heading == NORTH)
         {
-            for (int y = startSpace.y+1; y > 0; y--)
+            for (int y = startSpace.y-1; y > 0; y--)
             {
                 if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
                     newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
@@ -97,7 +97,7 @@ public class Laser
             }
         } else if(heading == WEST)
         {
-            for (int x = startSpace.x+1; x > 0; x--)
+            for (int x = startSpace.x-1; x > 0; x--)
             {
                 if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
                     newOccupiedSpaces.add(board.getSpace(x, startSpace.y));

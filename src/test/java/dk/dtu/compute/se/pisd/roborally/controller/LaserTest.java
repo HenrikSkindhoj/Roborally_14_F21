@@ -61,17 +61,17 @@ public class LaserTest {
     {
         Board board = gameController.board;
         boolean stops = false;
-        ArrayList<Space> space = laserView.getLasers()[0].getOccupiedSpaces();
+        ArrayList<Space> arrayList = laserView.getLasers()[0].getOccupiedSpaces();
 
-        for(int i = 0; i < space.size(); i++){
-            if(board.getSpace(2,2) == space.get(i)){
+        for(int i = 0; i < arrayList.size(); i++)
+        {
+            if(arrayList.get(i) == board.getSpace(2,2)
+                    || arrayList.get(i) == board.getSpace(2,3)
+                    || arrayList.get(i) == board.getSpace(2,4))
+            {
                 stops = true;
             }
-            if(board.getSpace(2,1) == space.get(i)){
-
-            }
         }
-
 
         Assertions.assertEquals(true,stops,"Should be true");
     }
