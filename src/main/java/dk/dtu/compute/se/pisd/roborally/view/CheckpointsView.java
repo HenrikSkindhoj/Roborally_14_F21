@@ -18,7 +18,6 @@ public class CheckpointsView {
      * A array of all the checkpoints on a board.
      */
     private Checkpoint[] checkpoints;
-    private Board board;
 
     /**
      * <p>Constructor for CheckpointsView.</p>
