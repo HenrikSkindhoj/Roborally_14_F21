@@ -62,8 +62,7 @@ public enum Command {
     final private List<Command> options;
 
     /**
-     * <p>Constructor for Checkpoint.</p>
-     *
+     * <p>Constructor for Command.</p>
      * @param displayName a {@link java.lang.String}.
      * @param options a Command object.
      */
@@ -74,7 +73,8 @@ public enum Command {
 
     /**
      * <p>isInteractive.</p>
-     *
+     * Is true when a player has played a command card which has multiple options,
+     * and remains true while the player has to chose.
      * @return a boolean.
      */
     public boolean isInteractive() {
@@ -83,7 +83,6 @@ public enum Command {
 
     /**
      * <p>Getter for the field <code>options</code>.</p>
-     *
      * @return a {@link java.util.List} object.
      */
     public List<Command> getOptions() {

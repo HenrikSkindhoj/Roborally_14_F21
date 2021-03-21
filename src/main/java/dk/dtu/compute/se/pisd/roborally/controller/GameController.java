@@ -36,7 +36,6 @@ public class GameController {
 
     /**
      * <p>Constructor for GameController.</p>
-     *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      */
     public GameController(@NotNull Board board) {
@@ -44,6 +43,7 @@ public class GameController {
     }
 
     /**
+     * <p>MoveCurrentPlayerToSpace</p>
      * This is just some dummy controller operation to make a simple move to see something
      * happening on the board. This method should eventually be deleted!
      *
@@ -72,7 +72,8 @@ public class GameController {
 
     /**
      * <p>startProgrammingPhase.</p>
-     *
+     * Starts the programming phase, determines the player who should start, and sets the counter step, to 0.
+     * The method then gives each player a register, and some command cards.
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -105,7 +106,8 @@ public class GameController {
 
     /**
      * <p>finishProgrammingPhase.</p>
-     *
+     * Finishes the programming phase, and sets the phase to activation phase,
+     * the player who goes first, and sets the counter to 0
      */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
@@ -139,7 +141,7 @@ public class GameController {
 
     /**
      * <p>executePrograms.</p>
-     *
+     * A method which can be used, when the program shouldn't count steps.
      */
     public void executePrograms() {
         board.setStepMode(false);
@@ -148,7 +150,7 @@ public class GameController {
 
     /**
      * <p>executeStep.</p>
-     *
+     * A method which can be used, when the program should count steps.
      */
     public void executeStep() {
         board.setStepMode(true);
@@ -161,7 +163,6 @@ public class GameController {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
-
 
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
@@ -202,6 +203,8 @@ public class GameController {
 
     /**
      * <p>executeCommandOptionAndContinue.</p>
+     * The method checks if the current phase is Player_interaction,
+     * and if the Player_interaction phase is done, then it gives the turn, to the next player.
      *
      * @param option a {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
      */
@@ -296,6 +299,8 @@ public class GameController {
 
     /**
      * <p>moveForward.</p>
+     * A method which contains the function of the forward command card,
+     * which makes the robot go forward one space.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -317,6 +322,8 @@ public class GameController {
 
     /**
      * <p>fastForward.</p>
+     * A method which contains the function of the fast forward command card,
+     * which makes the robot go forward two spaces.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -345,6 +352,8 @@ public class GameController {
 
     /**
      * <p>sprintForward.</p>
+     * A method which contains the function of the sprint forward command card,
+     * which makes the robot go forward three spaces.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -381,6 +390,8 @@ public class GameController {
 
     /**
      * <p>backUp.</p>
+     * A method which contains the function of the back up command card,
+     * which makes the robot go backwards one space, while not changing heading.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -401,6 +412,8 @@ public class GameController {
 
     /**
      * <p>uTurn.</p>
+     * A method which contains the function of the u turn command card,
+     * which makes the robot turn around, without moving.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -416,6 +429,8 @@ public class GameController {
 
     /**
      * <p>turnRight.</p>
+     * A method which contains the function of the turn right command card,
+     * which makes the robot turn right.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -427,6 +442,8 @@ public class GameController {
 
     /**
      * <p>turnLeft.</p>
+     * A method which contains the function of the turn left command card,
+     * which makes the robot turn left.
      *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -438,7 +455,6 @@ public class GameController {
 
     /**
      * <p>moveCards.</p>
-     *
      * @param source a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      * @param target a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      * @return a boolean.

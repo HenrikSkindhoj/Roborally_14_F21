@@ -39,7 +39,6 @@ public class Laser
 
     /**
      * <p>Constructor for Laser.</p>
-     *
      * @param x a int.
      * @param y a int.
      * @param id a int.
@@ -56,6 +55,13 @@ public class Laser
 
     }
 
+    /**
+     * <p>hit.</p>
+     * The method determines where the laser is, and if there are any walls or robots, in the way.
+     * @param givenX a int
+     * @param givenY a int
+     * @return a boolean
+     */
     public boolean hit(int givenX, int givenY)
     {
         boolean isHit = false;
@@ -90,21 +96,32 @@ public class Laser
 
     /**
      * <p>Getter for the Id <code>getId</code>.</p>
-     *
      * @return the id of the laser.
      */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Getter for the x value of a laser <code>getX</code>.</p>
+     * @return the x coordinate of a laser.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * <p>Getter for the y value of a laser <code>getY</code>.</p>
+     * @return the y coordinate of a laser.
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * <p>Getter for the way the laser is shooting <code>getHeading</code>.</p>
+     * @return the heading of a laser.
+     */
     public Heading getHeading() {
         return heading;
     }

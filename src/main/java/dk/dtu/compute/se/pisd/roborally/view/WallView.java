@@ -19,7 +19,6 @@ public class WallView {
 
     /**
      * <p>Constructor for CheckpointsView.</p>
-     *
      * @param numberOfWalls a int.
      * @param boardSizeX a int.
      * @param boardSizeY a int.
@@ -46,7 +45,6 @@ public class WallView {
 
     /**
      * <p>Getter for the walls.<code>getWalls</code>.</p>
-     *
      * @return all of the walls in the Wall array.
      */
     public Wall[] getWalls() {

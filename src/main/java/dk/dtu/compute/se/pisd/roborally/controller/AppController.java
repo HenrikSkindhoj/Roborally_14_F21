@@ -59,7 +59,6 @@ public class AppController implements Observer {
 
     /**
      * <p>Constructor for AppController.</p>
-     *
      * @param roboRally a {@link dk.dtu.compute.se.pisd.roborally.RoboRally} object.
      */
     public AppController(@NotNull RoboRally roboRally) {
@@ -68,6 +67,9 @@ public class AppController implements Observer {
 
     /**
      * <p>newGame.</p>
+     * The method which gives the user det option to select the number of players,
+     * who are playing, when the user starts a new game.
+     * Then the method creates a board, and gives the players a color each.
      */
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
@@ -105,6 +107,7 @@ public class AppController implements Observer {
 
     /**
      * <p>saveGame.</p>
+     * Currently not implemented
      */
     public void saveGame() {
         // XXX needs to be implemented eventually
@@ -146,6 +149,8 @@ public class AppController implements Observer {
 
     /**
      * <p>exit.</p>
+     * When the user exits the game, they will get the a pop-up confirming if they want to close the game.
+     * if the user doesn't press ok, then the game will continue.
      */
     public void exit() {
         if (gameController != null) {
@@ -168,7 +173,7 @@ public class AppController implements Observer {
 
     /**
      * <p>isGameRunning.</p>
-     *
+     * A boolean, which when true, means that a game is currently being played
      * @return a boolean.
      */
     public boolean isGameRunning() {

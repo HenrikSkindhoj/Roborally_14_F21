@@ -64,7 +64,6 @@ public class Player extends Subject {
 
     /**
      * <p>Constructor for Player.</p>
-     *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      * @param color a {@link java.lang.String} object.
      * @param name a {@link java.lang.String} object.
@@ -88,8 +87,8 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>name</code>.</p>
-     *
+     * <p>Getter for the name of a player <code>getName</code>.</p>
+     * Currently not used
      * @return a {@link java.lang.String} object.
      */
     public String getName() {
@@ -97,8 +96,8 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>name</code>.</p>
-     *
+     * <p>Setter for the name of a player <code>setName</code>.</p>
+     * Currently not used
      * @param name a {@link java.lang.String} object.
      */
     public void setName(String name) {
@@ -112,8 +111,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>color</code>.</p>
-     *
+     * <p>Getter for the color of a player <code>getColor</code>.</p>
      * @return a {@link java.lang.String} object.
      */
     public String getColor() {
@@ -121,8 +119,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>color</code>.</p>
-     *
+     * <p>Setter for the color of a player <code>color</code>.</p>
      * @param color a {@link java.lang.String} object.
      */
     public void setColor(String color) {
@@ -134,8 +131,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>space</code>.</p>
-     *
+     * <p>Getter for the spaces on the board <code>getSpace</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
     public Space getSpace() {
@@ -143,8 +139,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>space</code>.</p>
-     *
+     * <p>Setter for the spaces on the board <code>setSpace</code>.</p>
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
     public void setSpace(Space space) {
@@ -163,8 +158,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>heading</code>.</p>
-     *
+     * <p>Getter for the way the player is heading <code>getHeading</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public Heading getHeading() {
@@ -172,8 +166,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>heading</code>.</p>
-     *
+     * <p>Setter for the way the player is heading <code>setHeading</code>.</p>
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public void setHeading(@NotNull Heading heading) {
@@ -188,7 +181,6 @@ public class Player extends Subject {
 
     /**
      * <p>getProgramField.</p>
-     *
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      */
@@ -198,7 +190,6 @@ public class Player extends Subject {
 
     /**
      * <p>getCardField.</p>
-     *
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      */

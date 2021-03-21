@@ -48,7 +48,6 @@ public class Space extends Subject {
 
     /**
      * <p>Constructor for Space.</p>
-     *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      * @param x a int.
      * @param y a int.
@@ -63,8 +62,7 @@ public class Space extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>player</code>.</p>
-     *
+     * <p>Getter for player<code>getPlayer</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public Player getPlayer() {
@@ -72,8 +70,7 @@ public class Space extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>player</code>.</p>
-     *
+     * <p>Setter for player<code>setPlayer</code>.</p>
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void setPlayer(Player player) {
@@ -92,10 +89,18 @@ public class Space extends Subject {
         }
     }
 
+    /**
+     * <p>Setter for laser<code>setLaser</code>.</p>
+     * @param laser a object
+     */
     public void setLaser(Laser laser) {
         this.laser = laser;
     }
 
+    /**
+     * <p>Getter for laser<code>getLaser</code>.</p>
+     * @return a laser object
+     */
     public Laser getLaser() {
         return laser;
     }
@@ -117,7 +122,6 @@ public class Space extends Subject {
 
     /**
      * <p>Getter for wall<code>getWall</code>.</p>
-     *
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
      */
     public Wall getWall() {

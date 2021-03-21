@@ -19,7 +19,6 @@ public class Wall {
 
     /**
      * <p>Constructor for Wall.</p>
-     *
      * @param x a int.
      * @param y a int.
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
@@ -31,8 +30,7 @@ public class Wall {
     }
 
     /**
-     * <p>Getter for the x value.<code>getX</code>.</p>
-     *
+     * <p>Getter for the x value<code>getX</code>.</p>
      * @return the location of the wall on the x-axis.
      */
     public int getX() {
@@ -40,8 +38,7 @@ public class Wall {
     }
 
     /**
-     * <p>Getter for the y value.<code>getY</code>.</p>
-     *
+     * <p>Getter for the y value<code>getY</code>.</p>
      * @return the location of the wall on the y-axis.
      */
     public int getY() {
@@ -49,9 +46,8 @@ public class Wall {
     }
 
     /**
-     * <p>Getter for heading of the wall.<code>getHeading</code>.</p>
-     *
-     * @return the way the wall is pointing..
+     * <p>Getter for which side of a space the wall is on<code>getHeading</code>.</p>
+     * @return the way the wall is pointing.
      */
     public Heading getHeading() {
         return heading;

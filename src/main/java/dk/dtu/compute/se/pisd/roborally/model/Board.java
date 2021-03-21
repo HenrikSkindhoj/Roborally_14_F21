@@ -89,7 +89,6 @@ public class Board extends Subject {
 
     /**
      * <p>Constructor for Board.</p>
-     *
      * @param width a int.
      * @param height a int.
      * @param boardName a {@link java.lang.String} object.
@@ -110,7 +109,6 @@ public class Board extends Subject {
 
     /**
      * <p>Constructor for Board.</p>
-     *
      * @param width a int.
      * @param height a int.
      */
@@ -120,7 +118,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for the field. <code>gameId</code>.</p>
-     *
      * @return a {@link java.lang.Integer} object.
      */
     public Integer getGameId() {
@@ -129,7 +126,6 @@ public class Board extends Subject {
 
     /**
      * <p>Setter for the field. <code>gameId</code>.</p>
-     *
      * @param gameId a int.
      */
     public void setGameId(int gameId) {
@@ -144,7 +140,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for all the spaces on the board. <code>getSpace</code>.</p>
-     *
      * @param x a int.
      * @param y a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
@@ -160,7 +155,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for the amount of players. <code>getPlayersNumber</code>.</p>
-     *
      * @return a int.
      */
     public int getPlayersNumber() {
@@ -181,7 +175,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for player.<code>getPlayer</code>.</p>
-     *
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -194,8 +187,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getCurrentPlayer.</p>
-     *
+     * <p>Getter for the players whose turn it currently is <code>getCurrentPlayer.</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public Player getCurrentPlayer() {
@@ -203,8 +195,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>setCurrentPlayer.</p>
-     *
+     * <p>Setter for the players whose turn it currently is <code>setCurrentPlayer</code>.</p>
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void setCurrentPlayer(Player player) {
@@ -215,8 +206,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>phase</code>.</p>
-     *
+     * <p>Getter for the current phase of the game <code>getPhase</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Phase} object.
      */
     public Phase getPhase() {
@@ -224,8 +214,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>phase</code>.</p>
-     *
+     * <p>Setter for the current phase of the game <code>setPhase</code>.</p>
      * @param phase a {@link dk.dtu.compute.se.pisd.roborally.model.Phase} object.
      */
     public void setPhase(Phase phase) {
@@ -236,8 +225,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>step</code>.</p>
-     *
+     * <p>Getter for the counter step <code>GetStep</code>.</p>
      * @return a int.
      */
     public int getStep() {
@@ -245,8 +233,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>step</code>.</p>
-     *
+     * <p>Setter for the counter step <code>setStep</code>.</p>
      * @param step a int.
      */
     public void setStep(int step) {
@@ -258,7 +245,8 @@ public class Board extends Subject {
 
     /**
      * <p>isStepMode.</p>
-     *
+     * The boolean, determines when the counter step, should be active. When the booelan is true,
+     * the counter should count after every move a player makes.
      * @return a boolean.
      */
     public boolean isStepMode() {
@@ -267,7 +255,6 @@ public class Board extends Subject {
 
     /**
      * <p>Setter for the boolean to count steps <code>setStepMode</code>.</p>
-     *
      * @param stepMode a boolean.
      */
     public void setStepMode(boolean stepMode) {
@@ -279,7 +266,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for the number of a specific player<code>getPlayerNumber</code>.</p>
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      * @return a int.
      */
@@ -326,7 +312,6 @@ public class Board extends Subject {
 
     /**
      * <p>Getter for the status of the game <code>getStatusMessage</code> .</p>
-     *
      * @return a {@link java.lang.String} object.
      */
     public String getStatusMessage() {

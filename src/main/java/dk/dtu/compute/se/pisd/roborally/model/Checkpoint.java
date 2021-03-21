@@ -23,7 +23,6 @@ public class Checkpoint {
 
     /**
      * <p>Constructor for Checkpoint.</p>
-     *
      * @param x a int.
      * @param y a int.
      * @param id a int.
@@ -37,7 +36,6 @@ public class Checkpoint {
 
     /**
      * <p>Getter for the Id <code>getId</code>.</p>
-     *
      * @return a int from 1 to 4.
      */
     public int getId() {
@@ -46,7 +44,6 @@ public class Checkpoint {
 
     /**
      * <p>Getter for the X.<code>getX</code>.</p>
-     *
      * @return a int x, which is a spot on the x-axis of the board.
      */
     public int getX() {
@@ -55,7 +52,6 @@ public class Checkpoint {
 
     /**
      * <p>Getter for the Y.<code>getY</code>.</p>
-     *
      * @return a int y, which is a spot on the y-axis of the board.
      */
     public int getY() {
