@@ -142,7 +142,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     /**
      * <p>updateCheckpoints.</p>
-     *
+     * Draws the checkpoints, and decides how they should look.
      * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
      */
     public void updateCheckpoint(Checkpoint checkpoint)
@@ -159,6 +159,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     /**
      * <p>updateWall.</p>
+     * Draws the walls, and decides how they should look.
      * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
      */
     public void updateWall(Wall wall){
@@ -191,7 +192,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     /**
      * <p>updateLasers</p>
-     *
+     * Draws the laser, and decides how they should look.
      * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
      */
     public void updateLasers(Laser laser)

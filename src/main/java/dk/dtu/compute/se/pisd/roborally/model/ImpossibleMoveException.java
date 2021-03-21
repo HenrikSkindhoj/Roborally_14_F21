@@ -14,7 +14,6 @@ public class ImpossibleMoveException extends Exception {
 
     /**
      * <p>Constructor for ImpossibleMoveException.</p>
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.

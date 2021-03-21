@@ -54,7 +54,7 @@ public class BoardView extends VBox implements ViewObserver {
 
     /**
      * <p>Constructor for BoardView.</p>
-     *
+     * Creates the board, its spaces, the status of the game, the checkpoints, the walls, and the lasers.
      * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object.
      */
     public BoardView(@NotNull GameController gameController) {
@@ -106,7 +106,6 @@ public class BoardView extends VBox implements ViewObserver {
 
         /**
          * <p>SpaceEventHandler</p>
-         *
          * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object.
          */
         public SpaceEventHandler(@NotNull GameController gameController) {
