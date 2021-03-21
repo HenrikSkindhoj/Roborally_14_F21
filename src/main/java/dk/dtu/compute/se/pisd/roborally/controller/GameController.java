@@ -188,6 +188,9 @@ public class GameController {
                         board.setStep(step);
                         board.setCurrentPlayer(board.getPlayer(0));
                     } else {
+                        for(int i = 0; i<board.getPlayersNumber(); i++){
+                            board.getPlayer(i).controlForCheckpoints();
+                        }
                         startProgrammingPhase();
                     }
                 }
@@ -225,6 +228,9 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(0));
                     continuePrograms();
                 } else {
+                    for(int i = 0; i<board.getPlayersNumber(); i++){
+                        board.getPlayer(i).controlForCheckpoints();
+                    }
                     startProgrammingPhase();
                 }
             }

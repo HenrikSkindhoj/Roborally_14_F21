@@ -45,6 +45,7 @@ public class Space extends Subject {
     private Player player;
     private Laser laser;
     private Wall wall;
+    private Checkpoint checkpoint;
 
     /**
      * <p>Constructor for Space.</p>
@@ -59,6 +60,7 @@ public class Space extends Subject {
         player = null;
         wall = null;
         laser = null;
+        checkpoint = null;
     }
 
     /**
@@ -128,5 +130,13 @@ public class Space extends Subject {
      */
     public Wall getWall() {
         return wall;
+    }
+
+    public Checkpoint getCheckpoint() {
+        return checkpoint;
+    }
+
+    public void setCheckpoint(Checkpoint checkpoint) {
+        this.checkpoint = checkpoint;
     }
 }

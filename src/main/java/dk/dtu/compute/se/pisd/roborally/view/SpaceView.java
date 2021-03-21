@@ -117,6 +117,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             {
                 if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
                     updateCheckpoint(checkpointsView.getCheckpoints()[i]);
+                    this.space.setCheckpoint(checkpointsView.getCheckpoints()[i]);
                 }
             }
 
