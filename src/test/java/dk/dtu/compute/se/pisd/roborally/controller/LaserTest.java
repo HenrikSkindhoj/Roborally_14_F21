@@ -70,7 +70,11 @@ public class LaserTest {
                     || arrayList.get(i) == board.getSpace(2,4))
             {
                 stops = true;
-            }
+            } else
+                {
+                    stops = false;
+                    break;
+                }
         }
 
         Assertions.assertEquals(true,stops,"Should be true");
