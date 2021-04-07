@@ -36,7 +36,6 @@ public class CommandCard extends Subject {
 
     /**
      * <p>Constructor for CommandCard.</p>
-     *
      * @param command a {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
      */
     public CommandCard(@NotNull Command command) {
@@ -44,8 +43,7 @@ public class CommandCard extends Subject {
     }
 
     /**
-     * <p>getName.</p>
-     *
+     * <p>Getter for the name of a command card<code>getName</code>.</p>
      * @return a {@link java.lang.String} object.
      */
     public String getName() {

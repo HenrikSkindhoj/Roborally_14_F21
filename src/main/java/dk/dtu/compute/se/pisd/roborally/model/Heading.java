@@ -21,6 +21,8 @@
  */
 package dk.dtu.compute.se.pisd.roborally.model;
 
+import java.util.Random;
+
 /**
  * ...
  *
@@ -33,7 +35,7 @@ public enum Heading {
 
     /**
      * <p>next.</p>
-     *
+     * The method makes the current heading, the next heading, in the order south, west, north, east.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public Heading next() {
@@ -42,7 +44,7 @@ public enum Heading {
 
     /**
      * <p>prev.</p>
-     *
+     *The method makes the current heading, the next heading, in the order south, east, north, west.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public Heading prev() {

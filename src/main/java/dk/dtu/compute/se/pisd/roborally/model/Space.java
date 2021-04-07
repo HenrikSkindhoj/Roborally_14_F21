@@ -33,14 +33,22 @@ public class Space extends Subject {
 
     public final Board board;
 
+    /**
+     * The location on the x-axis, of a space on the board
+     */
     public final int x;
+    /**
+     * The location on the y-axis, of a space on the board.
+     */
     public final int y;
 
     private Player player;
+    private Laser laser;
+    private Wall wall;
+    private Checkpoint checkpoint;
 
     /**
      * <p>Constructor for Space.</p>
-     *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      * @param x a int.
      * @param y a int.
@@ -50,11 +58,13 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
+        wall = null;
+        laser = null;
+        checkpoint = null;
     }
 
     /**
-     * <p>Getter for the field <code>player</code>.</p>
-     *
+     * <p>Getter for player<code>getPlayer</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public Player getPlayer() {
@@ -62,8 +72,7 @@ public class Space extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>player</code>.</p>
-     *
+     * <p>Setter for player<code>setPlayer</code>.</p>
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void setPlayer(Player player) {
@@ -82,6 +91,22 @@ public class Space extends Subject {
         }
     }
 
+    /**
+     * <p>Setter for laser<code>setLaser</code>.</p>
+     * @param laser a object
+     */
+    public void setLaser(Laser laser) {
+        this.laser = laser;
+    }
+
+    /**
+     * <p>Getter for laser<code>getLaser</code>.</p>
+     * @return a laser object
+     */
+    public Laser getLaser() {
+        return laser;
+    }
+
     void playerChanged() {
         // This is a minor hack; since some views that are registered with the space
         // also need to update when some player attributes change, the player can
@@ -89,4 +114,29 @@ public class Space extends Subject {
         notifyChange();
     }
 
+    /**
+     * <p>Setter for wall<code>setWall</code>.</p>
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
+    public void setWall(Wall wall){
+        this.wall = wall;
+    }
+
+    /**
+     * <p>Getter for wall<code>getWall</code>.</p>
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
+    public Wall getWall() {
+        return wall;
+    }
+
+    public Checkpoint getCheckpoint() {
+        return checkpoint;
+    }
+
+    public void setCheckpoint(Checkpoint checkpoint) {
+        this.checkpoint = checkpoint;
+    }
 }

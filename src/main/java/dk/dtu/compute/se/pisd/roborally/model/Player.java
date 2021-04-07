@@ -34,20 +34,39 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.SOUTH;
  */
 public class Player extends Subject {
 
-    /** Constant <code>NO_REGISTERS=5</code> */
+    /**
+     * Constant <code>NO_REGISTERS=5</code>
+     */
     final public static int NO_REGISTERS = 5;
-    /** Constant <code>NO_CARDS=8</code> */
+    /**
+     * Constant <code>NO_CARDS=8</code>
+     */
     final public static int NO_CARDS = 8;
 
     final public Board board;
 
+    /**
+     * Currently not used
+     */
     private String name;
+    /**
+     * The color of a robot
+     */
     private String color;
 
     private Space space;
     private Heading heading = SOUTH;
+    private boolean[] checkpoints = new boolean[4];
+    private int nextChecpoint = 1;
+    private boolean winner;
 
+    /**
+     * Array of the players registers
+     */
     private CommandCardField[] program;
+    /**
+     * Array of the players cards
+     */
     private CommandCardField[] cards;
 
     /**
@@ -55,7 +74,7 @@ public class Player extends Subject {
      *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      * @param color a {@link java.lang.String} object.
-     * @param name a {@link java.lang.String} object.
+     * @param name  a {@link java.lang.String} object.
      */
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
@@ -76,7 +95,8 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>name</code>.</p>
+     * <p>Getter for the name of a player <code>getName</code>.</p>
+     * Currently not used
      *
      * @return a {@link java.lang.String} object.
      */
@@ -85,7 +105,8 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>name</code>.</p>
+     * <p>Setter for the name of a player <code>setName</code>.</p>
+     * Currently not used
      *
      * @param name a {@link java.lang.String} object.
      */
@@ -100,7 +121,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>color</code>.</p>
+     * <p>Getter for the color of a player <code>getColor</code>.</p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -109,7 +130,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>color</code>.</p>
+     * <p>Setter for the color of a player <code>color</code>.</p>
      *
      * @param color a {@link java.lang.String} object.
      */
@@ -122,7 +143,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>space</code>.</p>
+     * <p>Getter for the spaces on the board <code>getSpace</code>.</p>
      *
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
@@ -131,7 +152,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>space</code>.</p>
+     * <p>Setter for the spaces on the board <code>setSpace</code>.</p>
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
@@ -151,7 +172,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>heading</code>.</p>
+     * <p>Getter for the way the player is heading <code>getHeading</code>.</p>
      *
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
@@ -160,7 +181,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>heading</code>.</p>
+     * <p>Setter for the way the player is heading <code>setHeading</code>.</p>
      *
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
@@ -194,4 +215,43 @@ public class Player extends Subject {
         return cards[i];
     }
 
+    public boolean[] getCheckpoints() {
+        return checkpoints;
+    }
+
+    public void controlForCheckpoints() {
+        if (space.getCheckpoint() != null) {
+            if (!checkpoints[0]) {
+                if (space.getCheckpoint().getId() == 1) {
+                    checkpoints[0] = true;
+                    nextChecpoint = 2;
+                }
+            } else if (!checkpoints[1]) {
+                if (space.getCheckpoint().getId() == 2) {
+                    checkpoints[1] = true;
+                    nextChecpoint = 3;
+                }
+            } else if (!checkpoints[2]) {
+                if (space.getCheckpoint().getId() == 3) {
+                    checkpoints[2] = true;
+                    nextChecpoint = 4;
+                }
+
+            } else if (!checkpoints[3]) {
+                if (space.getCheckpoint().getId() == 4) {
+                    checkpoints[3] = true;
+                    winner = true;
+                }
+            }
+        }
+    }
+
+    public int getNextChecpoint() {
+        return nextChecpoint;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
 }
+

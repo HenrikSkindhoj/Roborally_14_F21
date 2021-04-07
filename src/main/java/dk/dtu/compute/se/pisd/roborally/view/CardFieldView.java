@@ -170,6 +170,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragDetectedHandler implements EventHandler<MouseEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(MouseEvent event) {
             Object t = event.getTarget();
@@ -199,6 +200,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragOverHandler implements EventHandler<DragEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(DragEvent event) {
             Object t = event.getTarget();
@@ -221,6 +223,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragEnteredHandler implements EventHandler<DragEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(DragEvent event) {
             Object t = event.getTarget();
@@ -244,6 +247,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragExitedHandler implements EventHandler<DragEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(DragEvent event) {
             Object t = event.getTarget();
@@ -267,6 +271,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragDroppedHandler implements EventHandler<DragEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(DragEvent event) {
             Object t = event.getTarget();
@@ -306,6 +311,7 @@ public class CardFieldView extends GridPane implements ViewObserver {
 
     private class OnDragDoneHandler implements EventHandler<DragEvent> {
 
+        /** {@inheritDoc} */
         @Override
         public void handle(DragEvent event) {
             Object t = event.getTarget();

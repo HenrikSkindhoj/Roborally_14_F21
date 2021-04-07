@@ -23,10 +23,7 @@ package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Phase;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -50,12 +47,14 @@ public class BoardView extends VBox implements ViewObserver {
     private PlayersView playersView;
 
     private Label statusLabel;
-
+    private CheckpointsView checkpointsView;
+    private WallView wallView;
+    private LaserView laserView;
     private SpaceEventHandler spaceEventHandler;
 
     /**
      * <p>Constructor for BoardView.</p>
-     *
+     * Creates the board, its spaces, the status of the game, the checkpoints, the walls, and the lasers.
      * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object.
      */
     public BoardView(@NotNull GameController gameController) {
@@ -64,6 +63,9 @@ public class BoardView extends VBox implements ViewObserver {
         mainBoardPane = new GridPane();
         playersView = new PlayersView(gameController);
         statusLabel = new Label("<no status>");
+        checkpointsView = new CheckpointsView(4,board);
+        wallView = new WallView(16, board.width, board.height);
+        laserView = new LaserView(2,board);
 
         this.getChildren().add(mainBoardPane);
         this.getChildren().add(playersView);
@@ -76,7 +78,7 @@ public class BoardView extends VBox implements ViewObserver {
         for (int x = 0; x < board.width; x++) {
             for (int y = 0; y < board.height; y++) {
                 Space space = board.getSpace(x, y);
-                SpaceView spaceView = new SpaceView(space);
+                SpaceView spaceView = new SpaceView(space, checkpointsView, wallView, laserView);
                 spaces[x][y] = spaceView;
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);
@@ -102,10 +104,16 @@ public class BoardView extends VBox implements ViewObserver {
 
         final public GameController gameController;
 
+        /**
+         * <p>SpaceEventHandler</p>
+         * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object.
+         */
         public SpaceEventHandler(@NotNull GameController gameController) {
             this.gameController = gameController;
         }
 
+
+        /** {@inheritDoc} */
         @Override
         public void handle(MouseEvent event) {
             Object source = event.getSource();

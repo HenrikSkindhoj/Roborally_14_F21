@@ -22,16 +22,19 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
+
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
 
 /**
  * ...
@@ -47,6 +50,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     final public static int SPACE_WIDTH = 75;  // 60; // 75;
 
     public final Space space;
+    public CheckpointsView checkpointsView;
+    public WallView wallView;
+    public LaserView laserView;
+
 
 
     /**
@@ -54,7 +61,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, WallView wallView, LaserView laserView) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -73,7 +80,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
-
+        this.laserView = laserView;
+        this.checkpointsView = checkpointsView;
+        this.wallView = wallView;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -103,7 +112,107 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateView(Subject subject) {
         if (subject == this.space) {
             updatePlayer();
+
+            for(int i = 0; i < checkpointsView.getCheckpoints().length; i++)
+            {
+                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
+                    updateCheckpoint(checkpointsView.getCheckpoints()[i]);
+                    this.space.setCheckpoint(checkpointsView.getCheckpoints()[i]);
+                }
+            }
+
+            for(int i = 0; i < wallView.getWalls().length; i++){
+                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY()) {
+                    updateWall(wallView.getWalls()[i]);
+                    this.space.setWall(wallView.getWalls()[i]);
+                }
+            }
+
+            laserView.setSpacesWithWalls(wallView.getWalls());
+            laserView.spawnLasers();
+            for(int i = 0; i < laserView.getLasers().length; i++)
+            {
+                if(laserView.getLasers()[i].checkIfOccupied(this.space)) {
+                    updateLasers(laserView.getLasers()[i]);
+                    this.space.setLaser(laserView.getLasers()[i]);
+                }
+
+            }
         }
+    }
+
+    /**
+     * <p>updateCheckpoints.</p>
+     * Draws the checkpoints, and decides how they should look.
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     */
+    public void updateCheckpoint(Checkpoint checkpoint)
+    {
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.strokeText(Integer.toString(checkpoint.getId()),SPACE_HEIGHT/2,SPACE_WIDTH/2);
+        gc.rect(2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+
+        this.getChildren().add(can);
+    }
+
+    /**
+     * <p>updateWall.</p>
+     * Draws the walls, and decides how they should look.
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
+    public void updateWall(Wall wall){
+        Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.ROYALBLUE);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(wall.getHeading() == NORTH){
+           gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+           this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == SOUTH){
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+            this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == EAST){
+            gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+            this.getChildren().add(canvas);
+        }
+        else if(wall.getHeading() == WEST){
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
+            this.getChildren().add(canvas);
+        }
+
+
+    }
+
+    /**
+     * <p>updateLasers</p>
+     * Draws the laser, and decides how they should look.
+     * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
+     */
+    public void updateLasers(Laser laser)
+    {
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(laser.getHeading() == Heading.NORTH || laser.getHeading() == Heading.SOUTH)
+        {
+            gc.strokeLine(35,0,35,75);
+        } else
+            {
+                gc.strokeLine(0,35,75,35);
+            }
+        this.getChildren().add(can);
     }
 
 }

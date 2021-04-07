@@ -36,7 +36,6 @@ public class GameController {
 
     /**
      * <p>Constructor for GameController.</p>
-     *
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      */
     public GameController(@NotNull Board board) {
@@ -44,6 +43,7 @@ public class GameController {
     }
 
     /**
+     * <p>MoveCurrentPlayerToSpace</p>
      * This is just some dummy controller operation to make a simple move to see something
      * happening on the board. This method should eventually be deleted!
      *
@@ -71,8 +71,9 @@ public class GameController {
     }
 
     /**
-     * XXX: V2
-     * test
+     * <p>startProgrammingPhase.</p>
+     * Starts the programming phase, determines the player who should start, and sets the counter step, to 0.
+     * The method then gives each player a register, and some command cards.
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -96,16 +97,17 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
         return new CommandCard(commands[random]);
     }
 
-    // XXX: V2
     /**
      * <p>finishProgrammingPhase.</p>
+     * Finishes the programming phase, and sets the phase to activation phase,
+     * the player who goes first, and sets the counter to 0
      */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
@@ -115,7 +117,7 @@ public class GameController {
         board.setStep(0);
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -126,7 +128,7 @@ public class GameController {
         }
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -137,32 +139,31 @@ public class GameController {
         }
     }
 
-    // XXX: V2
     /**
      * <p>executePrograms.</p>
+     * A method which can be used, when the program shouldn't count steps.
      */
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
-    // XXX: V2
     /**
      * <p>executeStep.</p>
+     * A method which can be used, when the program should count steps.
      */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    // XXX: V2
+
     private void continuePrograms() {
         do {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
-    // XXX: V2
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -187,6 +188,9 @@ public class GameController {
                         board.setStep(step);
                         board.setCurrentPlayer(board.getPlayer(0));
                     } else {
+                        for(int i = 0; i<board.getPlayersNumber(); i++){
+                            board.getPlayer(i).controlForCheckpoints();
+                        }
                         startProgrammingPhase();
                     }
                 }
@@ -202,34 +206,37 @@ public class GameController {
 
     /**
      * <p>executeCommandOptionAndContinue.</p>
+     * The method checks if the current phase is Player_interaction,
+     * and if the Player_interaction phase is done, then it gives the turn, to the next player.
      *
      * @param option a {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
      */
-    public void executeCommandOptionAndContinue(@NotNull Command option) {
+    public void executeCommandOptionAndContinue(@NotNull Command option){
         Player currentPlayer = board.getCurrentPlayer();
-        if (currentPlayer != null &&
-                board.getPhase() == Phase.PLAYER_INTERACTION &&
-                option != null) {
+        if(currentPlayer != null && board.getPhase() == Phase.PLAYER_INTERACTION && option != null){
             board.setPhase(Phase.ACTIVATION);
             executeCommand(currentPlayer, option);
-
             int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
             if (nextPlayerNumber < board.getPlayersNumber()) {
                 board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
+                continuePrograms();
             } else {
                 int step = board.getStep() +1;
                 if (step < Player.NO_REGISTERS) {
                     makeProgramFieldsVisible(step);
                     board.setStep(step);
                     board.setCurrentPlayer(board.getPlayer(0));
+                    continuePrograms();
                 } else {
+                    for(int i = 0; i<board.getPlayersNumber(); i++){
+                        board.getPlayer(i).controlForCheckpoints();
+                    }
                     startProgrammingPhase();
                 }
             }
         }
     }
 
-    // XXX: V2
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
@@ -249,51 +256,189 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case SPRINT_FORWARD:
+                    this.sprintForward(player);
+                    break;
+                case U_TURN:
+                    this.uTurn(player);
+                    break;
+                case BACK_UP:
+                    this.backUp(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
         }
     }
 
-    // TODO Assignment V2
+    private void moveToSpace (
+            @NotNull Player player,
+            @NotNull Space space,
+            @NotNull Heading heading) throws ImpossibleMoveException{
+
+        Player other = space.getPlayer();
+        if(player.getSpace().getWall() != null) {
+            if (player.getSpace().getWall().getHeading() == heading){
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        if(space.getWall() != null) {
+            if (space.getWall().getHeading().next().next() == heading) {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        if (other != null) {
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                moveToSpace(other, target, heading);
+            }else {
+                throw new ImpossibleMoveException(player, space, heading);
+            }
+        }
+        player.setSpace(space);
+        if(space.getLaser() != null)
+        {
+            System.out.println("hit!");
+        }
+    }
+
+
     /**
      * <p>moveForward.</p>
-     *
+     * A method which contains the function of the forward command card,
+     * which makes the robot go forward one space.
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void moveForward(@NotNull Player player) {
-        Space current = player.getSpace();
-        if (current != null && player.board == current.board) {
-            Space target = board.getNeighbour(current, player.getHeading());
-            if (target != null && target.getPlayer() == null) {
-                player.setSpace(target);
+        if (player.board == board) {
+            Space space = player.getSpace();
+            Heading heading = player.getHeading();
+
+            Space target = board.getNeighbour(space, heading);
+            if (target != null) {
+                try {
+                    moveToSpace(player, target, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
             }
         }
-
     }
 
-    // TODO Assignment V2
     /**
      * <p>fastForward.</p>
-     *
+     * A method which contains the function of the fast forward command card,
+     * which makes the robot go forward two spaces.
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void fastForward(@NotNull Player player) {
-        Space currentSpace = player.getSpace();
-        if (currentSpace != null && player.board == currentSpace.board) {
-            Space targetSpace = board.getNeighbour(currentSpace.board.getNeighbour(currentSpace, player.getHeading()), player.getHeading());
-            if (targetSpace != null && targetSpace.getPlayer() == null) {
-                player.setSpace(targetSpace);
+        if (player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading();
+
+            Space targetSpace = board.getNeighbour(currentSpace,heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+                    targetSpace = player.getSpace();
+                }
+            }
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
+            if (targetSpace2 != null) {
+                try {
+                    moveToSpace(player, targetSpace2, heading);
+                } catch (ImpossibleMoveException e) {
+                }
             }
         }
-
     }
 
-    // TODO Assignment V2
+    /**
+     * <p>sprintForward.</p>
+     * A method which contains the function of the sprint forward command card,
+     * which makes the robot go forward three spaces.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     */
+    public void sprintForward(@NotNull Player player){
+        if(player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading();
+            Space targetSpace = board.getNeighbour(currentSpace,heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+                    targetSpace = player.getSpace();
+                }
+            }
+            Space targetSpace2 = board.getNeighbour(targetSpace, heading);
+            if (targetSpace2 != null) {
+                try {
+                    moveToSpace(player, targetSpace2, heading);
+                } catch (ImpossibleMoveException e) {
+                    targetSpace2 = player.getSpace();
+                }
+            }
+            Space targetSpace3 = board.getNeighbour(targetSpace2,heading);
+            if (targetSpace3 != null) {
+                try {
+                    moveToSpace(player, targetSpace3, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+        }
+    }
+
+    /**
+     * <p>backUp.</p>
+     * A method which contains the function of the back up command card,
+     * which makes the robot go backwards one space, while not changing heading.
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
+    public void backUp(@NotNull Player player) {
+        if (player.board == board) {
+            Space currentSpace = player.getSpace();
+            Heading heading = player.getHeading().next().next();
+            Space targetSpace = board.getNeighbour(currentSpace, heading);
+            if (targetSpace != null) {
+                try {
+                    moveToSpace(player, targetSpace, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+        }
+    }
+
+    /**
+     * <p>uTurn.</p>
+     * A method which contains the function of the u turn command card,
+     * which makes the robot turn around, without moving.
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
+    public void uTurn(@NotNull Player player) {
+        Space currentSpace = player.getSpace();
+        Heading heading = player.getHeading().next().next();
+
+        if (currentSpace != null && player.board == currentSpace.board) {
+            player.setHeading(heading);
+        }
+    }
+
+
     /**
      * <p>turnRight.</p>
-     *
+     * A method which contains the function of the turn right command card,
+     * which makes the robot turn right.
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void turnRight(@NotNull Player player) {
         Heading current = player.getHeading();
@@ -301,11 +446,12 @@ public class GameController {
 
     }
 
-    // TODO Assignment V2
     /**
      * <p>turnLeft.</p>
-     *
+     * A method which contains the function of the turn left command card,
+     * which makes the robot turn left.
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
      */
     public void turnLeft(@NotNull Player player) {
         Heading current = player.getHeading();
@@ -315,7 +461,6 @@ public class GameController {
 
     /**
      * <p>moveCards.</p>
-     *
      * @param source a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      * @param target a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      * @return a boolean.

@@ -111,7 +111,6 @@ public class RoboRally extends Application {
 
     /**
      * <p>main.</p>
-     *
      * @param args an array of {@link java.lang.String} objects.
      */
     public static void main(String[] args) {

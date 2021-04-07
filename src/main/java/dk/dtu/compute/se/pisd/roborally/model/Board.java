@@ -37,29 +37,58 @@ import static dk.dtu.compute.se.pisd.roborally.model.Phase.INITIALISATION;
  */
 public class Board extends Subject {
 
+    /**
+     * The width of the board
+     */
     public final int width;
 
+    /**
+     * The height og the board
+     */
     public final int height;
 
+    /**
+     * Currently not used
+     */
     public final String boardName;
 
+    /**
+     * Currently not used
+     */
     private Integer gameId;
 
+    /**
+     * A 2D array of all the spaces on the current board
+     */
     private final Space[][] spaces;
 
+    /**
+     * A arraylist of all the players
+     */
     private final List<Player> players = new ArrayList<>();
 
+    /**
+     * The player who has to make the next move, for the game to continue
+     */
     private Player current;
 
+    /**
+     * The current phase of the game, which at the start is initialisation.
+     */
     private Phase phase = INITIALISATION;
 
+    /**
+     * A counter which show the amount of moves that has been made in total.
+     */
     private int step = 0;
 
+    /**
+     * A boolean which determines whether or not, the step counter, should count
+     */
     private boolean stepMode;
 
     /**
      * <p>Constructor for Board.</p>
-     *
      * @param width a int.
      * @param height a int.
      * @param boardName a {@link java.lang.String} object.
@@ -80,7 +109,6 @@ public class Board extends Subject {
 
     /**
      * <p>Constructor for Board.</p>
-     *
      * @param width a int.
      * @param height a int.
      */
@@ -89,8 +117,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>gameId</code>.</p>
-     *
+     * <p>Getter for the field. <code>gameId</code>.</p>
      * @return a {@link java.lang.Integer} object.
      */
     public Integer getGameId() {
@@ -98,8 +125,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>gameId</code>.</p>
-     *
+     * <p>Setter for the field. <code>gameId</code>.</p>
      * @param gameId a int.
      */
     public void setGameId(int gameId) {
@@ -113,8 +139,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getSpace.</p>
-     *
+     * <p>Getter for all the spaces on the board. <code>getSpace</code>.</p>
      * @param x a int.
      * @param y a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
@@ -129,8 +154,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayersNumber.</p>
-     *
+     * <p>Getter for the amount of players. <code>getPlayersNumber</code>.</p>
      * @return a int.
      */
     public int getPlayersNumber() {
@@ -150,8 +174,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayer.</p>
-     *
+     * <p>Getter for player.<code>getPlayer</code>.</p>
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
@@ -164,8 +187,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getCurrentPlayer.</p>
-     *
+     * <p>Getter for the players whose turn it currently is <code>getCurrentPlayer.</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public Player getCurrentPlayer() {
@@ -173,8 +195,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>setCurrentPlayer.</p>
-     *
+     * <p>Setter for the players whose turn it currently is <code>setCurrentPlayer</code>.</p>
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void setCurrentPlayer(Player player) {
@@ -185,8 +206,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>phase</code>.</p>
-     *
+     * <p>Getter for the current phase of the game <code>getPhase</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Phase} object.
      */
     public Phase getPhase() {
@@ -194,8 +214,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>phase</code>.</p>
-     *
+     * <p>Setter for the current phase of the game <code>setPhase</code>.</p>
      * @param phase a {@link dk.dtu.compute.se.pisd.roborally.model.Phase} object.
      */
     public void setPhase(Phase phase) {
@@ -206,8 +225,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>step</code>.</p>
-     *
+     * <p>Getter for the counter step <code>GetStep</code>.</p>
      * @return a int.
      */
     public int getStep() {
@@ -215,8 +233,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>step</code>.</p>
-     *
+     * <p>Setter for the counter step <code>setStep</code>.</p>
      * @param step a int.
      */
     public void setStep(int step) {
@@ -228,7 +245,8 @@ public class Board extends Subject {
 
     /**
      * <p>isStepMode.</p>
-     *
+     * The boolean, determines when the counter step, should be active. When the booelan is true,
+     * the counter should count after every move a player makes.
      * @return a boolean.
      */
     public boolean isStepMode() {
@@ -236,8 +254,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>stepMode</code>.</p>
-     *
+     * <p>Setter for the boolean to count steps <code>setStepMode</code>.</p>
      * @param stepMode a boolean.
      */
     public void setStepMode(boolean stepMode) {
@@ -248,8 +265,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getPlayerNumber.</p>
-     *
+     * <p>Getter for the number of a specific player<code>getPlayerNumber</code>.</p>
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      * @return a int.
      */
@@ -262,6 +278,8 @@ public class Board extends Subject {
     }
 
     /**
+     * <p>Getter for a specific players neighbour<code>getNeighbour</code>.</p>
+     *
      * Returns the neighbour of the given space of the board in the given heading.
      * The neighbour is returned only, if it can be reached from the given space
      * (no walls or obstacles in either of the involved spaces); otherwise,
@@ -293,8 +311,7 @@ public class Board extends Subject {
     }
 
     /**
-     * <p>getStatusMessage.</p>
-     *
+     * <p>Getter for the status of the game <code>getStatusMessage</code> .</p>
      * @return a {@link java.lang.String} object.
      */
     public String getStatusMessage() {
@@ -303,9 +320,10 @@ public class Board extends Subject {
         // status of the game
 
         // XXX: V2 changed the status so that it shows the phase, the player and the step
+
         return "Phase: " + getPhase().name() +
                 ", Player = " + getCurrentPlayer().getName() +
-                ", Step: " + getStep();
+                ", Step: " + getStep() + ", Next Checkpoint: " + getCurrentPlayer().getNextChecpoint();
     }
 
 

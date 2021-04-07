@@ -35,11 +35,13 @@ public class CommandCardField extends Subject {
 
     private CommandCard card;
 
+    /**
+     * The boolean visible determines which of the cards in a players register is visible.
+     */
     private boolean visible;
 
     /**
      * <p>Constructor for CommandCardField.</p>
-     *
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public CommandCardField(Player player) {
@@ -49,8 +51,7 @@ public class CommandCardField extends Subject {
     }
 
     /**
-     * <p>Getter for the field <code>card</code>.</p>
-     *
+     * <p>Getter for the field <code>getCard</code>.</p>
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCard} object.
      */
     public CommandCard getCard() {
@@ -58,7 +59,7 @@ public class CommandCardField extends Subject {
     }
 
     /**
-     * <p>Setter for the field <code>card</code>.</p>
+     * <p>Setter for the field <code>setCard</code>.</p>
      *
      * @param card a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCard} object.
      */
@@ -71,7 +72,9 @@ public class CommandCardField extends Subject {
 
     /**
      * <p>isVisible.</p>
-     *
+     * A boolean which returns the attribute visible,
+     * and is true when a command card should be shown to other players,
+     * and is false while a command card is not initialised.
      * @return a boolean.
      */
     public boolean isVisible() {
@@ -80,7 +83,6 @@ public class CommandCardField extends Subject {
 
     /**
      * <p>Setter for the field <code>visible</code>.</p>
-     *
      * @param visible a boolean.
      */
     public void setVisible(boolean visible) {
