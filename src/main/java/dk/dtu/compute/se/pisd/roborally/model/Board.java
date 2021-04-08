@@ -112,6 +112,8 @@ public class Board extends Subject {
         checkpoints = new Checkpoints(4,this);
         walls = new Walls(16, width, height);
         lasers = new Lasers(2,this);
+        lasers.setSpacesWithWalls(walls.getWalls());
+        lasers.spawnLasers();
 
         this.stepMode = false;
     }
