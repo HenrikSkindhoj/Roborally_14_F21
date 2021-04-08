@@ -27,7 +27,7 @@ public class LaserView
     /**
      * A array of all the spaces who also have walls.
      */
-    private ArrayList<Space> spacesWithWalls;
+    private ArrayList<Space> spacesWithWalls = new ArrayList<>();
     /**
      * A boolean which makes sure, that the placement of the lasers is random.
      */

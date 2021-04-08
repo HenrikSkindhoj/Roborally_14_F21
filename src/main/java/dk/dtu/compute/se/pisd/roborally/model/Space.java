@@ -24,6 +24,7 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ...
@@ -46,7 +47,7 @@ public class Space extends Subject {
 
     private Player player;
     private Laser laser;
-    private ArrayList<Heading> walls;
+    private ArrayList<Heading> walls = new ArrayList<>();
     private Checkpoint checkpoint;
 
     /**
@@ -60,7 +61,6 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
-        walls = null;
         laser = null;
         checkpoint = null;
     }
@@ -132,6 +132,10 @@ public class Space extends Subject {
      */
     public ArrayList<Heading> getWalls() {
         return walls;
+    }
+
+    public void setWalls(List<Heading> walls){
+        this.walls.addAll(walls);
     }
 
     public Checkpoint getCheckpoint() {
