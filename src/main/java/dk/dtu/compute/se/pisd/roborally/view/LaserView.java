@@ -89,6 +89,10 @@ public class LaserView
         }
     }
 
+    public ArrayList<Space> getSpacesWithWalls() {
+        return spacesWithWalls;
+    }
+
     /**
      * <p>Setter for the spaces who also have walls<code>setSpacesWithWalls</code>.</p>
      * @param spacesWithWalls
@@ -98,5 +102,7 @@ public class LaserView
             spacesWithWalls.add(space);
 
         }
+
+
     }
 }
