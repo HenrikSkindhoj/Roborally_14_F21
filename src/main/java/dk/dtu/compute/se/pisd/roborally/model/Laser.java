@@ -165,4 +165,21 @@ public class Laser
     public Heading getHeading() {
         return heading;
     }
+
+    public int getOrdinal()
+    {
+        if(heading == SOUTH)
+        {
+            return 0;
+        } else if(heading == WEST)
+        {
+            return 1;
+        } else if(heading == NORTH)
+        {
+            return 2;
+        } else
+            {
+                return 3;
+            }
+    }
 }
