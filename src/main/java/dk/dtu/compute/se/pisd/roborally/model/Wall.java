@@ -23,7 +23,7 @@ public class Wall {
      * @param y a int.
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
-    public Wall(int x, int y, Heading heading){
+    public Wall(int id, int x, int y, Heading heading){
         this.x = x;
         this.y = y;
         this.heading = heading;
