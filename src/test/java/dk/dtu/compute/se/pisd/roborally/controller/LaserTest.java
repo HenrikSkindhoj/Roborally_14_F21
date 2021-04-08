@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class LaserTest {
-
+/*
     private final int TEST_WIDTH = 8;
     private final int TEST_HEIGHT = 8;
     private Wall[] walls = new Wall[2];
@@ -80,6 +80,6 @@ public class LaserTest {
         Assertions.assertEquals(true,stops,"Should be true");
     }
 
-
+*/
 
 }

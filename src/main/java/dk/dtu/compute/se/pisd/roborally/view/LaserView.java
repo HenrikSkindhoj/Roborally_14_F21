@@ -27,7 +27,7 @@ public class LaserView
     /**
      * A array of all the spaces who also have walls.
      */
-    private Wall[] spacesWithWalls;
+    private ArrayList<Space> spacesWithWalls;
     /**
      * A boolean which makes sure, that the placement of the lasers is random.
      */
@@ -83,8 +83,8 @@ public class LaserView
         }
         for(int i = 0; i < amountLasers; i++)
         {
-            lasers[i] = new Laser(i+1,board.getSpace(spacesWithWalls[i].getX(),spacesWithWalls[i].getY()),
-                    spacesWithWalls[i].getHeading().next().next(),board);
+            lasers[i] = new Laser(i+1, spacesWithWalls.get(i),
+                    spacesWithWalls.get(i).getWalls().get((int)Math.random()*spacesWithWalls.get(i).getWalls().size()).next().next(),board);
             lasers[i].setEndSpace();
         }
     }
@@ -93,7 +93,10 @@ public class LaserView
      * <p>Setter for the spaces who also have walls<code>setSpacesWithWalls</code>.</p>
      * @param spacesWithWalls
      */
-    public void setSpacesWithWalls(Wall[] spacesWithWalls) {
-        this.spacesWithWalls = spacesWithWalls;
+    public void setSpacesWithWalls(Space space) {
+        if(!space.getWalls().isEmpty()){
+            spacesWithWalls.add(space);
+
+        }
     }
 }

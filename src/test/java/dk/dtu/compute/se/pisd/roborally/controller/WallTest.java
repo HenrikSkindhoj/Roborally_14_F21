@@ -1,16 +1,13 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
-import dk.dtu.compute.se.pisd.roborally.view.CheckpointsView;
-import dk.dtu.compute.se.pisd.roborally.view.LaserView;
-import dk.dtu.compute.se.pisd.roborally.view.SpaceView;
-import dk.dtu.compute.se.pisd.roborally.view.WallView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WallTest {
+    /*
     private final int TEST_WIDTH = 8;
     private final int TEST_HEIGHT = 8;
 
@@ -47,5 +44,7 @@ public class WallTest {
             Assertions.assertEquals(current, board.getSpace(0, 0).getPlayer(), "Player " + current.getName() + " should beSpace (0,0)!");
             Assertions.assertEquals(Heading.SOUTH, current.getHeading(), "Player 0 should be heading SOUTH!");
         }
+
+     */
 
 }

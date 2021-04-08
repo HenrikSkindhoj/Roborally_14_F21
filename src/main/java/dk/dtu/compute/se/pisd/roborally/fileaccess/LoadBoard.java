@@ -51,9 +51,12 @@ public class LoadBoard {
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
+        System.out.println(inputStream);
         if (inputStream == null) {
+            System.out.println("yikes");
             // TODO these constants should be defined somewhere
             return new Board(8,8);
+
         }
 
         // In simple cases, we can create a Gson object with new Gson():
@@ -68,13 +71,16 @@ public class LoadBoard {
             // fileReader = new FileReader(filename);
             reader = gson.newJsonReader(new InputStreamReader(inputStream));
             BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
+            System.out.println(template.height);
 
             result = new Board(template.width, template.height);
             for (SpaceTemplate spaceTemplate: template.spaces) {
                 Space space = result.getSpace(spaceTemplate.x, spaceTemplate.y);
                 if (space != null) {
-                    space.getActions().addAll(spaceTemplate.actions);
-                    space.getWalls().addAll(spaceTemplate.walls);
+                    //space.getActions().addAll(spaceTemplate.actions);
+                    if(space.getWalls() != null) {
+                        space.getWalls().addAll(spaceTemplate.walls);
+                    }
                 }
             }
             reader.close();
@@ -95,7 +101,7 @@ public class LoadBoard {
         return null;
     }
 
-    public static void saveBoard(Board board, String name) {
+    /*public static void saveBoard(Board board, String name) {
         BoardTemplate template = new BoardTemplate();
         template.width = board.width;
         template.height = board.height;
@@ -113,6 +119,8 @@ public class LoadBoard {
                 }
             }
         }
+
+
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         // TODO: this is not very defensive, and will result in a NullPointerException
@@ -154,5 +162,7 @@ public class LoadBoard {
             }
         }
     }
+
+     */
 
 }

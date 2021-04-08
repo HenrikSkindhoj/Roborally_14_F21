@@ -51,7 +51,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public final Space space;
     public CheckpointsView checkpointsView;
-    public WallView wallView;
+
     public LaserView laserView;
 
 
@@ -61,7 +61,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, WallView wallView, LaserView laserView) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, LaserView laserView) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -82,7 +82,6 @@ public class SpaceView extends StackPane implements ViewObserver {
         // updatePlayer();
         this.laserView = laserView;
         this.checkpointsView = checkpointsView;
-        this.wallView = wallView;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -113,30 +112,29 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for(int i = 0; i < checkpointsView.getCheckpoints().length; i++)
-            {
-                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
+            for (int i = 0; i < checkpointsView.getCheckpoints().length; i++) {
+                if (this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
                     updateCheckpoint(checkpointsView.getCheckpoints()[i]);
                     this.space.setCheckpoint(checkpointsView.getCheckpoints()[i]);
                 }
             }
 
-            for(int i = 0; i < wallView.getWalls().length; i++){
-                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY()) {
-                    updateWall(wallView.getWalls()[i]);
-                    this.space.setWall(wallView.getWalls()[i]);
-                }
-            }
-
-            laserView.setSpacesWithWalls(wallView.getWalls());
-            laserView.spawnLasers();
-            for(int i = 0; i < laserView.getLasers().length; i++)
-            {
-                if(laserView.getLasers()[i].checkIfOccupied(this.space)) {
-                    updateLasers(laserView.getLasers()[i]);
-                    this.space.setLaser(laserView.getLasers()[i]);
+            if (space.getWalls() != null) {
+                for (int i = 0; i < space.getWalls().size(); i++) {
+                    if (!this.space.getWalls().isEmpty()) {
+                        updateWall(space.getWalls().get(i));
+                    }
                 }
 
+                laserView.setSpacesWithWalls(this.space);
+                laserView.spawnLasers();
+                for (int i = 0; i < laserView.getLasers().length; i++) {
+                    if (laserView.getLasers()[i].checkIfOccupied(this.space)) {
+                        updateLasers(laserView.getLasers()[i]);
+                        this.space.setLaser(laserView.getLasers()[i]);
+                    }
+
+                }
             }
         }
     }
@@ -161,9 +159,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * <p>updateWall.</p>
      * Draws the walls, and decides how they should look.
-     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
-    public void updateWall(Wall wall){
+    public void updateWall(Heading heading){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -171,19 +169,19 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.setLineWidth(5);
         gc.setLineCap(StrokeLineCap.ROUND);
 
-        if(wall.getHeading() == NORTH){
+        if(heading == NORTH){
            gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
            this.getChildren().add(canvas);
         }
-        else if(wall.getHeading() == SOUTH){
+        else if(heading == SOUTH){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
             this.getChildren().add(canvas);
         }
-        else if(wall.getHeading() == EAST){
+        else if(heading == EAST){
             gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);
             this.getChildren().add(canvas);
         }
-        else if(wall.getHeading() == WEST){
+        else if(heading == WEST){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
             this.getChildren().add(canvas);
         }
