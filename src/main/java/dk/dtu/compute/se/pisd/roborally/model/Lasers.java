@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.roborally.view;
+package dk.dtu.compute.se.pisd.roborally.model;
 
 /**
  * ...
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class LaserView
+public class Lasers
 {
     /**
      * A array of the lasers on the board.
@@ -38,7 +38,7 @@ public class LaserView
      * @param numberOfLasers a int
      * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      */
-    public LaserView(int numberOfLasers, Board board)
+    public Lasers(int numberOfLasers, Board board)
     {
         amountLasers = numberOfLasers;
         this.board = board;

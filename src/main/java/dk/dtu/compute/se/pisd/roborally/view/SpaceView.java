@@ -25,12 +25,9 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,8 +48,8 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public final Space space;
     public CheckpointsView checkpointsView;
-    public WallView wallView;
-    public LaserView laserView;
+    public Walls walls;
+    public Lasers lasers;
 
 
 
@@ -61,7 +58,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, WallView wallView, LaserView laserView) {
+    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, Walls walls, Lasers lasers) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -80,9 +77,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
-        this.laserView = laserView;
+        this.lasers = lasers;
         this.checkpointsView = checkpointsView;
-        this.wallView = wallView;
+        this.walls = walls;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -121,20 +118,20 @@ public class SpaceView extends StackPane implements ViewObserver {
                 }
             }
 
-            for(int i = 0; i < wallView.getWalls().length; i++){
-                if(this.space.x == wallView.getWalls()[i].getX() && this.space.y == wallView.getWalls()[i].getY()) {
-                    updateWall(wallView.getWalls()[i]);
-                    this.space.setWall(wallView.getWalls()[i]);
+            for(int i = 0; i < walls.getWalls().length; i++){
+                if(this.space.x == walls.getWalls()[i].getX() && this.space.y == walls.getWalls()[i].getY()) {
+                    updateWall(walls.getWalls()[i]);
+                    this.space.setWall(walls.getWalls()[i]);
                 }
             }
 
-            laserView.setSpacesWithWalls(wallView.getWalls());
-            laserView.spawnLasers();
-            for(int i = 0; i < laserView.getLasers().length; i++)
+            lasers.setSpacesWithWalls(walls.getWalls());
+            lasers.spawnLasers();
+            for(int i = 0; i < lasers.getLasers().length; i++)
             {
-                if(laserView.getLasers()[i].checkIfOccupied(this.space)) {
-                    updateLasers(laserView.getLasers()[i]);
-                    this.space.setLaser(laserView.getLasers()[i]);
+                if(lasers.getLasers()[i].checkIfOccupied(this.space)) {
+                    updateLasers(lasers.getLasers()[i]);
+                    this.space.setLaser(lasers.getLasers()[i]);
                 }
 
             }

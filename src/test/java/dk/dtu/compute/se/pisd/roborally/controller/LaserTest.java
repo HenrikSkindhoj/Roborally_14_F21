@@ -1,7 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
-import dk.dtu.compute.se.pisd.roborally.view.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -16,13 +15,13 @@ public class LaserTest {
     private Wall[] walls = new Wall[2];
 
     private GameController gameController;
-    private LaserView laserView;
+    private Lasers lasers;
 
     @BeforeEach
     void setUp() {
         Board board = new Board(TEST_WIDTH, TEST_HEIGHT);
 
-        laserView = new LaserView(1,board);
+        lasers = new Lasers(1,board);
 
         gameController = new GameController(board);
         for (int i = 0; i < 6; i++) {
@@ -38,9 +37,9 @@ public class LaserTest {
         walls[0] = board.getSpace(2,2).getWall();
         walls[1] = board.getSpace(2,4).getWall();
 
-        laserView.setSpacesWithWalls(walls);
+        lasers.setSpacesWithWalls(walls);
 
-        laserView.spawnLasers();
+        lasers.spawnLasers();
         board.setCurrentPlayer(board.getPlayer(0));
     }
 
@@ -50,8 +49,8 @@ public class LaserTest {
         Board board = gameController.board;
         boolean laserSetOnWall = false;
 
-        if(board.getSpace(2,2) == laserView.getLasers()[0].getStartSpace()) laserSetOnWall = true;
-        else if(board.getSpace(2,4) == laserView.getLasers()[0].getStartSpace()) laserSetOnWall = true;
+        if(board.getSpace(2,2) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
+        else if(board.getSpace(2,4) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
 
         Assertions.assertEquals(true,laserSetOnWall,"Should be true");
     }
@@ -61,7 +60,7 @@ public class LaserTest {
     {
         Board board = gameController.board;
         boolean stops = false;
-        ArrayList<Space> arrayList = laserView.getLasers()[0].getOccupiedSpaces();
+        ArrayList<Space> arrayList = lasers.getLasers()[0].getOccupiedSpaces();
 
         for(int i = 0; i < arrayList.size(); i++)
         {

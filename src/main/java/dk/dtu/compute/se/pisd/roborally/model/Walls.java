@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.roborally.view;
+package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.roborally.model.Wall;
 
@@ -10,7 +10,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  * @author Kasper Falch Skov, s205429@student.dtu.dk
  * @version $Id: $Id
  */
-public class WallView {
+public class Walls {
 
     /**
      * Array of walls
@@ -23,7 +23,7 @@ public class WallView {
      * @param boardSizeX a int.
      * @param boardSizeY a int.
      */
-    public WallView(int numberOfWalls, int boardSizeX, int boardSizeY){
+    public Walls(int numberOfWalls, int boardSizeX, int boardSizeY){
         walls = new Wall[numberOfWalls];
         walls[0] = new Wall(0,0, WEST);
         walls[1] = new Wall(0,1, WEST);

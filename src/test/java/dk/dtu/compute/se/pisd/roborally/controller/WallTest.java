@@ -1,10 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
-import dk.dtu.compute.se.pisd.roborally.view.CheckpointsView;
-import dk.dtu.compute.se.pisd.roborally.view.LaserView;
-import dk.dtu.compute.se.pisd.roborally.view.SpaceView;
-import dk.dtu.compute.se.pisd.roborally.view.WallView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
