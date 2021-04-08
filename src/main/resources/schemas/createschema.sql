@@ -29,8 +29,6 @@ CREATE TABLE IF NOT EXISTS Player (
   FOREIGN KEY (gameID) REFERENCES Game(gameID)
 );;
 
-SET FOREIGN_KEY_CHECKS = 1;;
-
 CREATE TABLE IF NOT EXISTS Laser(
   id int,
 
@@ -52,3 +50,15 @@ CREATE TABLE IF NOT EXISTS Wall(
   PRIMARY KEY (gameID),
   FOREIGN KEY (gameID) REFERENCES Game(gameID)
 );;
+
+CREATE TABLE IF NOT EXISTS Checkpoint(
+  id int,
+
+  positionX int,
+  positionY int,
+
+  PRIMARY KEY (gameID),
+  FOREIGN KEY (gameID) REFERENCES Game(gameID)
+);;
+
+SET FOREIGN_KEY_CHECKS = 1;;
