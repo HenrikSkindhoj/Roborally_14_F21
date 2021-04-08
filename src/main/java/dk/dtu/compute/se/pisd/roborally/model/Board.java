@@ -113,6 +113,9 @@ public class Board extends Subject {
         walls = new Walls(16, width, height);
         lasers = new Lasers(2,this);
 
+        lasers.setSpacesWithWalls(walls.getWalls());
+        lasers.spawnLasers();
+
         this.stepMode = false;
     }
 
