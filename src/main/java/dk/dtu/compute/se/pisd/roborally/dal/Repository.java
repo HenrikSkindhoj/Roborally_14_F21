@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.dal;
 
+import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
@@ -102,7 +103,7 @@ class Repository implements IRepository {
                 // statement.close();
 
                 createPlayersInDB(game);
-				/* TOODO this method needs to be implemented first
+				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
 				 */
 
@@ -167,7 +168,7 @@ class Repository implements IRepository {
             rs.close();
 
             updatePlayersInDB(game);
-			/* TOODO this method needs to be implemented first
+			/* TODO this method needs to be implemented first
 			updateCardFieldsInDB(game);
 			*/
 
@@ -234,7 +235,7 @@ class Repository implements IRepository {
                 return null;
             }
 
-			/* TOODO this method needs to be implemented first
+			/* TODO this method needs to be implemented first
 			loadCardFieldsFromDB(game);
 			*/
 
