@@ -1,4 +1,4 @@
-package dk.dtu.compute.se.pisd.roborally.view;
+package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Checkpoint;
@@ -12,7 +12,7 @@ import java.util.Collections;
  * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
  * @version $Id: $Id
  */
-public class CheckpointsView {
+public class Checkpoints {
 
     /**
      * A array of all the checkpoints on a board.
@@ -29,7 +29,7 @@ public class CheckpointsView {
      * @param numberOfCheckpoints a int.
      * @param board object to receive board length and height
      */
-    public CheckpointsView(int numberOfCheckpoints, Board board)
+    public Checkpoints(int numberOfCheckpoints, Board board)
     {
         Integer[] arrX = new Integer[board.width-1];
         Integer[] arrY = new Integer[board.height-1];

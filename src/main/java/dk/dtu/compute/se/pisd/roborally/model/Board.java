@@ -87,6 +87,11 @@ public class Board extends Subject {
      */
     private boolean stepMode;
 
+    private Lasers lasers;
+
+    private Walls walls;
+
+    private Checkpoints checkpoints;
     /**
      * <p>Constructor for Board.</p>
      * @param width a int.
@@ -104,6 +109,10 @@ public class Board extends Subject {
                 spaces[x][y] = space;
             }
         }
+        checkpoints = new Checkpoints(4,this);
+        walls = new Walls(16, width, height);
+        lasers = new Lasers(2,this);
+
         this.stepMode = false;
     }
 
@@ -326,5 +335,15 @@ public class Board extends Subject {
                 ", Step: " + getStep() + ", Next Checkpoint: " + getCurrentPlayer().getNextChecpoint();
     }
 
+    public Checkpoints getCheckpoints() {
+        return checkpoints;
+    }
 
+    public Lasers getLasers() {
+        return lasers;
+    }
+
+    public Walls getWalls() {
+        return walls;
+    }
 }
