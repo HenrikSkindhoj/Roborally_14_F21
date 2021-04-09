@@ -89,6 +89,7 @@ public class LaserView
         }
     }
 
+
     public ArrayList<Space> getSpacesWithWalls() {
         return spacesWithWalls;
     }
