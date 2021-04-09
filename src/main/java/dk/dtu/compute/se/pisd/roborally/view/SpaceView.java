@@ -121,7 +121,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             {
                 if(space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
                     updateLasers(space.board.getLasers().getLasers()[i]);
-                    this.space.setLaser(space.board.getLasers().getLasers()[i]);
                 }
 
             }
