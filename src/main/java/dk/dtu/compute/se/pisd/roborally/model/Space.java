@@ -47,7 +47,7 @@ public class Space extends Subject {
 
     private Player player;
     private Laser laser;
-    private ArrayList<Heading> walls = new ArrayList<>();
+    private ArrayList<Wall> walls = new ArrayList<>();
     private Checkpoint checkpoint;
 
     /**
@@ -121,8 +121,8 @@ public class Space extends Subject {
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
-    public void setWall(Heading heading){
-        this.walls.add(heading);
+    public void setWall(Wall wall){
+        this.walls.add(wall);
     }
 
     /**
@@ -130,11 +130,11 @@ public class Space extends Subject {
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
-    public ArrayList<Heading> getWalls() {
+    public ArrayList<Wall> getWalls() {
         return walls;
     }
 
-    public void setWalls(List<Heading> walls){
+    public void setWalls(List<Wall> walls){
         this.walls.addAll(walls);
     }
 

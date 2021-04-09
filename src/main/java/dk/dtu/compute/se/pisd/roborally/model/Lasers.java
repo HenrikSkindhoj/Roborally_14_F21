@@ -84,7 +84,7 @@ public class Lasers
         if(spacesWithWalls.size() > 10) {
             for (int i = 0; i < amountLasers; i++) {
                 lasers[i] = new Laser(i + 1, spacesWithWalls.get(i),
-                        spacesWithWalls.get(i).getWalls().get((int) Math.random() * spacesWithWalls.get(i).getWalls().size()).next().next(), board);
+                        spacesWithWalls.get(i).getWalls().get(0).getHeading().next().next(), board);
                 lasers[i].setEndSpace();
             }
         }
@@ -97,7 +97,7 @@ public class Lasers
 
     /**
      * <p>Setter for the spaces who also have walls<code>setSpacesWithWalls</code>.</p>
-     * @param spacesWithWalls
+     * @param
      */
     public void setSpacesWithWalls(Space space) {
         if(!space.getWalls().isEmpty()){

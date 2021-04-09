@@ -95,8 +95,8 @@ public class LoadBoard {
         }
         return null;
     }
-
-    /*public static void saveBoard(Board board, String name) {
+/*
+    public static void saveBoard(Board board, String name) {
         BoardTemplate template = new BoardTemplate();
         template.width = board.width;
         template.height = board.height;
@@ -113,9 +113,10 @@ public class LoadBoard {
                     template.spaces.add(spaceTemplate);
                 }
 
-                 */
+
             }
-        }
+}
+
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         // TODO: this is not very defensive, and will result in a NullPointerException
@@ -157,5 +158,7 @@ public class LoadBoard {
             }
         }
     }
+
+ */
 
 }

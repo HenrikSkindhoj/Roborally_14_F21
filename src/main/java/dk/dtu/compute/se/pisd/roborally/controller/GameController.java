@@ -278,18 +278,14 @@ public class GameController {
 
         Player other = space.getPlayer();
         if(player.getSpace().getWalls() != null) {
-            for (Heading hd: player.getSpace().getWalls()) {
-                if (hd == heading){
+                if (player.getSpace().getWalls().get(0).getHeading() == heading){
                     throw new ImpossibleMoveException(player, space, heading);
                 }
-            }
         }
         if(space.getWalls() != null) {
-            for (Heading hd: space.getWalls()) {
-                if (hd.next().next() == heading) {
+                if (space.getWalls().get(0).getHeading().next().next() == heading) {
                     throw new ImpossibleMoveException(player, space, heading);
                 }
-            }
         }
         if (other != null) {
             Space target = board.getNeighbour(space, heading);

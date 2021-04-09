@@ -47,8 +47,8 @@ public class BoardView extends VBox implements ViewObserver {
     private PlayersView playersView;
 
     private Label statusLabel;
-    private CheckpointsView checkpointsView;
-    private LaserView laserView;
+    private Checkpoints checkpointsView;
+    private Lasers laserView;
     private SpaceEventHandler spaceEventHandler;
 
     /**
@@ -62,8 +62,8 @@ public class BoardView extends VBox implements ViewObserver {
         mainBoardPane = new GridPane();
         playersView = new PlayersView(gameController);
         statusLabel = new Label("<no status>");
-        checkpointsView = new CheckpointsView(4,board);
-        laserView = new LaserView(2,board);
+        checkpointsView = new Checkpoints(4,board);
+        laserView = new Lasers(2,board);
 
         this.getChildren().add(mainBoardPane);
         this.getChildren().add(playersView);
@@ -76,7 +76,7 @@ public class BoardView extends VBox implements ViewObserver {
         for (int x = 0; x < board.width; x++) {
             for (int y = 0; y < board.height; y++) {
                 Space space = board.getSpace(x, y);
-                SpaceView spaceView = new SpaceView(space, checkpointsView, laserView);
+                SpaceView spaceView = new SpaceView(space);
                 spaces[x][y] = spaceView;
                 mainBoardPane.add(spaceView, x, y);
                 spaceView.setOnMouseClicked(spaceEventHandler);

@@ -47,9 +47,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     final public static int SPACE_WIDTH = 75;  // 60; // 75;
 
     public final Space space;
-    public CheckpointsView checkpointsView;
+    public Checkpoints checkpointsView;
 
-    public LaserView laserView;
+    public Lasers laserView;
 
 
 
@@ -107,9 +107,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++)
-            {
-                if(this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
+            for (int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++) {
+                if (this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
                     updateCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
                     this.space.setCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
                 }
@@ -122,12 +121,14 @@ public class SpaceView extends StackPane implements ViewObserver {
                     }
                 }
 
-            for(int i = 0; i < space.board.getLasers().getLasers().length; i++)
-            {
-                if(space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
-                    updateLasers(space.board.getLasers().getLasers()[i]);
-                }
+                for (int i = 0; i < space.board.getLasers().getLasers().length; i++) {
+                    if (this.space.getWalls() != null) {
+                        //if (space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
+                            updateLasers(space.board.getLasers().getLasers()[i]);
+                       // }
+                    }
 
+                }
             }
         }
     }
@@ -154,7 +155,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * Draws the walls, and decides how they should look.
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
-    public void updateWall(Heading heading){
+    public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -162,19 +163,19 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.setLineWidth(5);
         gc.setLineCap(StrokeLineCap.ROUND);
 
-        if(heading == NORTH){
+        if(wall.getHeading() == NORTH){
            gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
            this.getChildren().add(canvas);
         }
-        else if(heading == SOUTH){
+        else if(wall.getHeading() == SOUTH){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
             this.getChildren().add(canvas);
         }
-        else if(heading == EAST){
+        else if(wall.getHeading() == EAST){
             gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);
             this.getChildren().add(canvas);
         }
-        else if(heading == WEST){
+        else if(wall.getHeading() == WEST){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
             this.getChildren().add(canvas);
         }
@@ -189,7 +190,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     public void updateLasers(Laser laser)
     {
-        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+       /* Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
 
         GraphicsContext gc = can.getGraphicsContext2D();
         gc.setStroke(Color.RED);
@@ -204,6 +205,10 @@ public class SpaceView extends StackPane implements ViewObserver {
                 gc.strokeLine(0,35,75,35);
             }
         this.getChildren().add(can);
+
+    */
     }
+
+
 
 }

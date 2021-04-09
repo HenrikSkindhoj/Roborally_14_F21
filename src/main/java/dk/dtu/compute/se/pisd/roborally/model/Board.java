@@ -89,7 +89,6 @@ public class Board extends Subject {
 
     private Lasers lasers;
 
-    private Walls walls;
 
     private Checkpoints checkpoints;
     /**
@@ -110,10 +109,8 @@ public class Board extends Subject {
             }
         }
         checkpoints = new Checkpoints(4,this);
-        walls = new Walls(16, width, height);
         lasers = new Lasers(2,this);
 
-        lasers.setSpacesWithWalls(walls.getWalls());
         lasers.spawnLasers();
 
         this.stepMode = false;
@@ -346,7 +343,4 @@ public class Board extends Subject {
         return lasers;
     }
 
-    public Walls getWalls() {
-        return walls;
-    }
 }
