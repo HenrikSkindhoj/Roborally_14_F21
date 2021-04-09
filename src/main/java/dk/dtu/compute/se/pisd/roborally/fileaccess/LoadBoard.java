@@ -112,10 +112,10 @@ public class LoadBoard {
                     spaceTemplate.walls.addAll(space.getWalls());
                     template.spaces.add(spaceTemplate);
                 }
+
+                 */
             }
         }
-
-
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         // TODO: this is not very defensive, and will result in a NullPointerException
@@ -157,7 +157,5 @@ public class LoadBoard {
             }
         }
     }
-
-     */
 
 }

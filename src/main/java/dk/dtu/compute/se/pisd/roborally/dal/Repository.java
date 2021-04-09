@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.dal;
 
+import dk.dtu.compute.se.pisd.roborally.controller.AppController;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 
@@ -102,7 +103,8 @@ class Repository implements IRepository {
                 // statement.close();
 
                 createPlayersInDB(game);
-				/* TOODO this method needs to be implemented first
+                createLasersInDB(game);
+				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
 				 */
 
@@ -167,7 +169,7 @@ class Repository implements IRepository {
             rs.close();
 
             updatePlayersInDB(game);
-			/* TOODO this method needs to be implemented first
+			/* TODO this method needs to be implemented first
 			updateCardFieldsInDB(game);
 			*/
 
@@ -234,7 +236,7 @@ class Repository implements IRepository {
                 return null;
             }
 
-			/* TOODO this method needs to be implemented first
+			/* TODO this method needs to be implemented first
 			loadCardFieldsFromDB(game);
 			*/
 
@@ -289,6 +291,26 @@ class Repository implements IRepository {
             rs.insertRow();
         }
 
+        rs.close();
+    }
+
+    private void createLasersInDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectLaserStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        for( int i = 0; i < game.getLasers().getLasers().length; i++)
+        {
+            Laser laser = game.getLasers().getLasers()[i];
+            rs.moveToInsertRow();
+            rs.updateInt(GAME_GAMEID,game.getGameId());
+            rs.updateInt("laserID",laser.getId());
+            rs.updateInt(PLAYER_POSITION_X, laser.getStartSpace().x);
+            rs.updateInt(PLAYER_POSITION_Y, laser.getStartSpace().y);
+            rs.updateInt(PLAYER_HEADING, laser.getOrdinal());
+            rs.insertRow();
+        }
         rs.close();
     }
 
@@ -404,6 +426,27 @@ class Repository implements IRepository {
             }
         }
         return select_players_stmt;
+    }
+
+    private static final String SQL_SELECT_LASERS =
+            "SELECT * FROM Laser WHERE gameID = ?";
+
+    private PreparedStatement select_lasers_stmt = null;
+
+    private PreparedStatement getSelectLaserStatement()
+    {
+        Connection connection = connector.getConnection();
+        try
+        {
+            select_lasers_stmt = connection.prepareStatement(
+                    SQL_SELECT_LASERS,
+                    ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_UPDATABLE);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return  select_lasers_stmt;
     }
 
     private static final String SQL_SELECT_PLAYERS_ASC =

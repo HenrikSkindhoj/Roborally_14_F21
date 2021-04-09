@@ -53,7 +53,6 @@ public class Player extends Subject {
      * The color of a robot
      */
     private String color;
-
     private Space space;
     private Heading heading = SOUTH;
     private boolean[] checkpoints = new boolean[4];

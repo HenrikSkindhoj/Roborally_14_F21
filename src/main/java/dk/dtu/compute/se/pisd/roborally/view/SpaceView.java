@@ -25,12 +25,9 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
@@ -61,7 +58,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, LaserView laserView) {
+    public SpaceView(@NotNull Space space) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -80,8 +77,6 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
-        this.laserView = laserView;
-        this.checkpointsView = checkpointsView;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -112,10 +107,11 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for (int i = 0; i < checkpointsView.getCheckpoints().length; i++) {
-                if (this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
-                    updateCheckpoint(checkpointsView.getCheckpoints()[i]);
-                    this.space.setCheckpoint(checkpointsView.getCheckpoints()[i]);
+            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++)
+            {
+                if(this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
+                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
+                    this.space.setCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
                 }
             }
 
@@ -126,16 +122,12 @@ public class SpaceView extends StackPane implements ViewObserver {
                     }
                 }
 
-                laserView.setSpacesWithWalls(this.space);
-                if(laserView.getSpacesWithWalls().size() > 10) {
-                    laserView.spawnLasers();
-                    for (int i = 0; i < laserView.getLasers().length; i++) {
-                        if (laserView.getLasers()[i].checkIfOccupied(this.space)) {
-                            updateLasers(laserView.getLasers()[i]);
-                            this.space.setLaser(laserView.getLasers()[i]);
-                        }
-                    }
+            for(int i = 0; i < space.board.getLasers().getLasers().length; i++)
+            {
+                if(space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
+                    updateLasers(space.board.getLasers().getLasers()[i]);
                 }
+
             }
         }
     }

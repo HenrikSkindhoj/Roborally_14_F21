@@ -34,8 +34,6 @@ public class Laser
     /**
      * <p>Constructor for Laser.</p>
      *
-     * @param x a int.
-     * @param y a int.
      * @param id a int.
      */
 
@@ -57,67 +55,64 @@ public class Laser
         {
             for (int y = startSpace.y-1; y > 0; y--)
             {
-                for (Heading hd : board.getSpace(startSpace.x, y).getWalls()) {
-                    if(hd == NORTH) {
-                        newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                        break;
-                    } else if(hd == SOUTH)
-                    {
-                        break;
-                    } else {
-                        newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    }
+                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    board.getSpace(startSpace.x, y).setLaser(this);
+                    break;
+                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    board.getSpace(startSpace.x, y).setLaser(this);
                 }
-
             }
         } else if(heading == EAST)
         {
             for (int x = startSpace.x+1; x < board.width; x++)
             {
-                for (Heading hd : board.getSpace(x, startSpace.y).getWalls()) {
-                    if(hd == EAST) {
-                        newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                        break;
-                    } else if(hd == WEST)
-                    {
-                        break;
-                    } else {
-                        newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    }
+                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST) {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    board.getSpace(x, startSpace.y).setLaser(this);
+                    break;
+                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    board.getSpace(x, startSpace.y).setLaser(this);
                 }
-
             }
         } else if(heading == SOUTH)
         {
             for (int y = startSpace.y+1; y < board.height; y++)
             {
-                for (Heading hd : board.getSpace(startSpace.x, y).getWalls()) {
-                    if(hd == SOUTH) {
-                        newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                        break;
-                    } else if(hd ==  NORTH)
-                    {
-                        break;
-                    } else {
-                        newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    }
+                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH) {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    board.getSpace(startSpace.x, y).setLaser(this);
+                    break;
+                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() ==  NORTH)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
+                    board.getSpace(startSpace.x, y).setLaser(this);
                 }
-
             }
         } else if(heading == WEST)
         {
             for (int x = startSpace.x-1; x > 0; x--)
             {
-                for (Heading hd : board.getSpace(x, startSpace.y).getWalls()) {
-                    if(hd == WEST) {
-                        newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                        break;
-                    } else if(hd == EAST)
-                    {
-                        break;
-                    } else {
-                        newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    }
+                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    board.getSpace(x, startSpace.y).setLaser(this);
+                    break;
+                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST)
+                {
+                    break;
+                } else {
+                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
+                    board.getSpace(x, startSpace.y).setLaser(this);
                 }
             }
         }
@@ -175,5 +170,22 @@ public class Laser
      */
     public Heading getHeading() {
         return heading;
+    }
+
+    public int getOrdinal()
+    {
+        if(heading == SOUTH)
+        {
+            return 0;
+        } else if(heading == WEST)
+        {
+            return 1;
+        } else if(heading == NORTH)
+        {
+            return 2;
+        } else
+            {
+                return 3;
+            }
     }
 }
