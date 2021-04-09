@@ -7,6 +7,8 @@ package dk.dtu.compute.se.pisd.roborally.model;
  * @version $Id: $Id
  */
 public class Wall {
+
+    int id;
     /**
      * The location of a wall on the x-axis
      */
@@ -23,7 +25,8 @@ public class Wall {
      * @param y a int.
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
-    public Wall(int x, int y, Heading heading){
+    public Wall(int id, int x, int y, Heading heading){
+        this.id = id;
         this.x = x;
         this.y = y;
         this.heading = heading;

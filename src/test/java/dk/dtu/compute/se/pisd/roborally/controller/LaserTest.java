@@ -31,8 +31,8 @@ public class LaserTest {
             player.setHeading(Heading.values()[i % Heading.values().length]);
         }
 
-        board.getSpace(2,2).setWall(new Wall(2,2,Heading.NORTH));
-        board.getSpace(2,4).setWall(new Wall(2,4,Heading.SOUTH));
+        board.getSpace(2,2).setWall(new Wall(1,2,2,Heading.NORTH));
+        board.getSpace(2,4).setWall(new Wall(1,2,4,Heading.SOUTH));
 
         walls[0] = board.getSpace(2,2).getWall();
         walls[1] = board.getSpace(2,4).getWall();

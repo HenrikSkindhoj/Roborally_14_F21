@@ -47,18 +47,13 @@ public class SpaceView extends StackPane implements ViewObserver {
     final public static int SPACE_WIDTH = 75;  // 60; // 75;
 
     public final Space space;
-    public CheckpointsView checkpointsView;
-    public Walls walls;
-    public Lasers lasers;
-
-
 
     /**
      * <p>Constructor for SpaceView.</p>
      *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
-    public SpaceView(@NotNull Space space, CheckpointsView checkpointsView, Walls walls, Lasers lasers) {
+    public SpaceView(@NotNull Space space) {
         this.space = space;
 
         // XXX the following styling should better be done with styles
@@ -77,9 +72,6 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         // updatePlayer();
-        this.lasers = lasers;
-        this.checkpointsView = checkpointsView;
-        this.walls = walls;
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
@@ -110,28 +102,26 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for(int i = 0; i < checkpointsView.getCheckpoints().length; i++)
+            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++)
             {
-                if(this.space.x == checkpointsView.getCheckpoints()[i].getX() && this.space.y == checkpointsView.getCheckpoints()[i].getY()) {
-                    updateCheckpoint(checkpointsView.getCheckpoints()[i]);
-                    this.space.setCheckpoint(checkpointsView.getCheckpoints()[i]);
+                if(this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
+                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
+                    this.space.setCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
                 }
             }
 
-            for(int i = 0; i < walls.getWalls().length; i++){
-                if(this.space.x == walls.getWalls()[i].getX() && this.space.y == walls.getWalls()[i].getY()) {
-                    updateWall(walls.getWalls()[i]);
-                    this.space.setWall(walls.getWalls()[i]);
+            for(int i = 0; i < space.board.getWalls().getWalls().length; i++){
+                if(this.space.x == space.board.getWalls().getWalls()[i].getX() && this.space.y == space.board.getWalls().getWalls()[i].getY()) {
+                    updateWall(space.board.getWalls().getWalls()[i]);
+                    this.space.setWall(space.board.getWalls().getWalls()[i]);
                 }
             }
 
-            lasers.setSpacesWithWalls(walls.getWalls());
-            lasers.spawnLasers();
-            for(int i = 0; i < lasers.getLasers().length; i++)
+            for(int i = 0; i < space.board.getLasers().getLasers().length; i++)
             {
-                if(lasers.getLasers()[i].checkIfOccupied(this.space)) {
-                    updateLasers(lasers.getLasers()[i]);
-                    this.space.setLaser(lasers.getLasers()[i]);
+                if(space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
+                    updateLasers(space.board.getLasers().getLasers()[i]);
+                    this.space.setLaser(space.board.getLasers().getLasers()[i]);
                 }
 
             }

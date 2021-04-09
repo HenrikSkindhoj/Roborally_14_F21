@@ -21,11 +21,15 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import com.sun.jdi.connect.Connector;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Observer;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.dal.GameInDB;
+import dk.dtu.compute.se.pisd.roborally.dal.IRepository;
+import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
@@ -36,6 +40,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -110,17 +115,43 @@ public class AppController implements Observer {
      * Currently not implemented
      */
     public void saveGame() {
-        // XXX needs to be implemented eventually
+        IRepository repo = RepositoryAccess.getRepository();
+        repo.createGameInDB(this.gameController.board);
     }
 
     /**
      * <p>loadGame.</p>
      */
     public void loadGame() {
-        // XXX needs to be implememted eventually
-        // for now, we just create a new game
         if (gameController == null) {
-            newGame();
+            List<GameInDB> games = RepositoryAccess.getRepository().getGames();
+            if(!games.isEmpty())
+            {
+                ChoiceDialog<GameInDB> dialog = new ChoiceDialog<>(games.get(games.size()-1), games);
+                dialog.setTitle("Select game");
+                dialog.setHeaderText("Select a game number");
+                Optional<GameInDB> result = dialog.showAndWait();
+
+                if(result.isPresent())
+                {
+                    Board board = RepositoryAccess.getRepository().loadGameFromDB(result.get().id);
+                    if(board != null)
+                    {
+                        gameController = new GameController(board);
+                        roboRally.createBoardView(gameController);
+                    } else {
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("Problems loading game");
+                        alert.setHeaderText("There was a problem loading the game!");
+                        alert.showAndWait();
+                    }
+                }
+            } else {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("No games");
+                alert.setHeaderText("There are no games in the database yet!");
+                alert.showAndWait();
+            }
         }
     }
 

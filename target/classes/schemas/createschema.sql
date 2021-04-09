@@ -1,5 +1,5 @@
 /* Need to switch of FK check for MySQL since there are crosswise FK references */
-SET FOREIGN_KEY_CHECKS = 0;;
+SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS Game (
   gameID int NOT NULL UNIQUE AUTO_INCREMENT,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Game (
   
   PRIMARY KEY (gameID),
   FOREIGN KEY (gameID, currentPlayer) REFERENCES Player(gameID, playerID)
-);;
+);
   
 CREATE TABLE IF NOT EXISTS Player (
   gameID int NOT NULL,
@@ -27,8 +27,41 @@ CREATE TABLE IF NOT EXISTS Player (
   
   PRIMARY KEY (gameID, playerID),
   FOREIGN KEY (gameID) REFERENCES Game(gameID)
-);;
+);
 
-SET FOREIGN_KEY_CHECKS = 1;;
+CREATE TABLE IF NOT EXISTS Laser(
+  gameID int NOT NULL,
+  laserID int,
 
-// TODO still some stuff missing here
+  positionX int,
+  positionY int,
+  heading tinyint,
+
+  PRIMARY KEY (gameID, laserID),
+  FOREIGN KEY (gameID) REFERENCES Game(gameID)
+);
+
+CREATE TABLE IF NOT EXISTS Wall(
+  gameID int NOT NULL,
+  wallID int,
+
+  positionX int,
+  positionY int,
+  heading tinyint,
+
+  PRIMARY KEY (gameID, wallID),
+  FOREIGN KEY (gameID) REFERENCES Game(gameID)
+);
+
+CREATE TABLE IF NOT EXISTS Checkpoint(
+  gameID int NOT NULL,
+  checkpointID int,
+
+  positionX int,
+  positionY int,
+
+  PRIMARY KEY (gameID, checkpointID),
+  FOREIGN KEY (gameID) REFERENCES Game(gameID)
+);
+
+SET FOREIGN_KEY_CHECKS = 1;
