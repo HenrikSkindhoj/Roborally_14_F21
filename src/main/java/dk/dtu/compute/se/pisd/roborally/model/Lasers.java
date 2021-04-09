@@ -18,7 +18,7 @@ public class Lasers
     /**
      * A array of the lasers on the board.
      */
-    private Laser[] lasers;
+    private ArrayList<Laser> lasers;
     private Board board;
     /**
      * A int, for the amount of lasers on the board.
@@ -42,12 +42,12 @@ public class Lasers
     {
         amountLasers = numberOfLasers;
         this.board = board;
-        lasers = new Laser[numberOfLasers];
+        lasers = new ArrayList<>();
     }
 
     public Lasers(Board board)
     {
-        lasers = new Laser[2];
+        lasers = new ArrayList<>();
         this.board = board;
     }
 
@@ -55,7 +55,7 @@ public class Lasers
      * <p>getter for a array of the lasers<code>getLasers</code>.</p>
      * @return the lasers on the board
      */
-    public Laser[] getLasers() {
+    public ArrayList<Laser> getLasers() {
         return lasers;
     }
 
@@ -89,9 +89,9 @@ public class Lasers
         }
         for(int i = 0; i < amountLasers; i++)
         {
-            lasers[i] = new Laser(i+1,board.getSpace(spacesWithWalls.get(i).getX(),spacesWithWalls.get(i).getY()),
-                    spacesWithWalls.get(i).getHeading().next().next());
-            lasers[i].setEndSpace();
+            lasers.add(new Laser(i+1,board.getSpace(spacesWithWalls.get(i).getX(),spacesWithWalls.get(i).getY()),
+                    spacesWithWalls.get(i).getHeading().next().next()));
+            lasers.get(i).setEndSpace();
         }
     }
 
@@ -105,12 +105,6 @@ public class Lasers
 
     public void add(Laser laser)
     {
-        for (int i = 0; i < lasers.length; i++)
-        {
-            if(lasers[i] == null)
-            {
-                lasers[i] = laser;
-            }
-        }
+        lasers.add(laser);
     }
 }

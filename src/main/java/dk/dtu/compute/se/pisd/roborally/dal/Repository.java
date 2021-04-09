@@ -230,9 +230,10 @@ class Repository implements IRepository {
 
 
             game.setGameId(id);
+            loadPlayersFromDB(game);
             game.setWalls(new Walls(game));
             game.setLasers(new Lasers(game));
-            loadPlayersFromDB(game);
+            game.setCheckpoints(new Checkpoints(game));
             loadWallsFromDB(game);
             game.getWalls().spawnWalls();
             loadLasersFromDB(game);
@@ -240,6 +241,7 @@ class Repository implements IRepository {
             {
                 laser.setEndSpace();
             }
+            loadCheckpointFromDB(game);
 
             if (playerNo >= 0 && playerNo < game.getPlayersNumber()) {
                 game.setCurrentPlayer(game.getPlayer(playerNo));
@@ -312,9 +314,9 @@ class Repository implements IRepository {
         ps.setInt(1, game.getGameId());
 
         ResultSet rs = ps.executeQuery();
-        for( int i = 0; i < game.getLasers().getLasers().length; i++)
+        for( int i = 0; i < game.getLasers().getLasers().size(); i++)
         {
-            Laser laser = game.getLasers().getLasers()[i];
+            Laser laser = game.getLasers().getLasers().get(i);
             rs.moveToInsertRow();
             rs.updateInt(GAME_GAMEID,game.getGameId());
             rs.updateInt("laserID",laser.getId());
@@ -352,9 +354,9 @@ class Repository implements IRepository {
         ps.setInt(1, game.getGameId());
 
         ResultSet rs = ps.executeQuery();
-        for( int i = 0; i < game.getCheckpoints().getCheckpoints().length; i++)
+        for( int i = 0; i < game.getCheckpoints().getCheckpoints().size(); i++)
         {
-            Checkpoint checkpoint = game.getCheckpoints().getCheckpoints()[i];
+            Checkpoint checkpoint = game.getCheckpoints().getCheckpoints().get(i);
             rs.moveToInsertRow();
             rs.updateInt(GAME_GAMEID,game.getGameId());
             rs.updateInt("checkpointID",checkpoint.getId());
@@ -402,7 +404,7 @@ class Repository implements IRepository {
         ps.setInt(1, game.getGameId());
 
         ResultSet rs = ps.executeQuery();
-        int i = 0;
+        int i = 1;
         while (rs.next()) {
             int laserId = rs.getInt("laserID");
             if (i++ == laserId) {
@@ -426,7 +428,7 @@ class Repository implements IRepository {
         ps.setInt(1, game.getGameId());
 
         ResultSet rs = ps.executeQuery();
-        int i = 0;
+        int i = 1;
         while (rs.next()) {
             int wallID = rs.getInt("wallID");
             if (i++ == wallID) {
@@ -439,6 +441,29 @@ class Repository implements IRepository {
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a wall with id " + i +"!");
+            }
+        }
+        rs.close();
+    }
+
+    private void loadCheckpointFromDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectCheckpointASCStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        int i = 1;
+        while (rs.next()) {
+            int checkpointID = rs.getInt("checkpointID");
+            if (i++ == checkpointID) {
+                // TODO this should be more defensive
+                int checkpointX = rs.getInt("positionX");
+                int checkpointY = rs.getInt("positionY");
+                Checkpoint checkpoint = new Checkpoint(checkpointX,checkpointY,checkpointID);
+                game.addCheckpoint(checkpoint);
+            } else {
+                // TODO error handling
+                System.err.println("Game in DB does not have a checkpoint with id " + i +"!");
             }
         }
         rs.close();
@@ -612,7 +637,7 @@ class Repository implements IRepository {
     }
 
     private static final String SQL_SELECT_LASERS_ASC =
-            "SELECT * FROM Laser WHERE gameID = ? ORDER BY laserID ASC";
+            "SELECT * FROM laser WHERE gameID = ? ORDER BY laserID ASC";
 
     private PreparedStatement select_lasers_asc_stmt = null;
 
@@ -633,7 +658,7 @@ class Repository implements IRepository {
     }
 
     private static final String SQL_SELECT_WALLS_ASC =
-            "SELECT * FROM Wall WHERE gameID = ? ORDER BY wallID ASC";
+            "SELECT * FROM wall WHERE gameID = ? ORDER BY wallID ASC";
 
     private PreparedStatement select_walls_asc_stmt = null;
 
@@ -651,6 +676,27 @@ class Repository implements IRepository {
             }
         }
         return select_walls_asc_stmt;
+    }
+
+    private static final String SQL_SELECT_CHECKPOINTS_ASC =
+            "SELECT * FROM checkpoint WHERE gameID = ? ORDER BY checkpointID ASC";
+
+    private PreparedStatement select_checkpoints_asc_stmt = null;
+
+    private PreparedStatement getSelectCheckpointASCStatement()
+    {
+        if (select_checkpoints_asc_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                // This statement does not need to be updatable
+                select_checkpoints_asc_stmt = connection.prepareStatement(
+                        SQL_SELECT_CHECKPOINTS_ASC);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return select_checkpoints_asc_stmt;
     }
 
     private static final String SQL_SELECT_GAMES =

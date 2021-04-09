@@ -63,13 +63,7 @@ public class Walls {
 
     public void add(Wall wall)
     {
-        for (int i = 0; i < walls.size(); i++)
-        {
-            if(walls.get(i) == null)
-            {
-                walls.add(wall);
-            }
-        }
+        walls.add(wall);
     }
 
     public void spawnWalls()

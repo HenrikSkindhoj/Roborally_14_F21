@@ -102,24 +102,23 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++)
+            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().size(); i++)
             {
-                if(this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
-                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
-                    this.space.setCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
+                if(this.space.x == space.board.getCheckpoints().getCheckpoints().get(i).getX() && this.space.y ==
+                        space.board.getCheckpoints().getCheckpoints().get(i).getY()) {
+                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints().get(i));
                 }
             }
 
             for(int i = 0; i < space.board.getWalls().getWalls().size(); i++){
                 if(this.space.x == space.board.getWalls().getWalls().get(i).getX() && this.space.y == space.board.getWalls().getWalls().get(i).getY()) {
                     updateWall(space.board.getWalls().getWalls().get(i));
-                    this.space.setWall(space.board.getWalls().getWalls().get(i));
                 }
             }
-            for(int i = 0; i < space.board.getLasers().getLasers().length; i++)
+            for(int i = 0; i < space.board.getLasers().getLasers().size(); i++)
             {
-                if(space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
-                    updateLasers(space.board.getLasers().getLasers()[i]);
+                if(space.board.getLasers().getLasers().get(i).checkIfOccupied(this.space)) {
+                    updateLasers(space.board.getLasers().getLasers().get(i));
                 }
 
             }

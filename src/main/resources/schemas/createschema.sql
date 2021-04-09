@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Player (
 
 CREATE TABLE IF NOT EXISTS Laser(
   gameID int NOT NULL,
-  laserID int,
+  laserID int NOT NULL,
 
   positionX int,
   positionY int,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Laser(
 
 CREATE TABLE IF NOT EXISTS Wall(
   gameID int NOT NULL,
-  wallID int,
+  wallID int NOT NULL,
 
   positionX int,
   positionY int,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Wall(
 
 CREATE TABLE IF NOT EXISTS Checkpoint(
   gameID int NOT NULL,
-  checkpointID int,
+  checkpointID int NOT NULL,
 
   positionX int,
   positionY int,

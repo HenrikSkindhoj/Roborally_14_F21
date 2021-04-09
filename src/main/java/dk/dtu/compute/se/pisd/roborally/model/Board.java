@@ -199,6 +199,12 @@ public class Board extends Subject {
         notifyChange();
     }
 
+    public void addCheckpoint(@NotNull Checkpoint checkpoint)
+    {
+        checkpoints.add(checkpoint);
+        notifyChange();
+    }
+
     /**
      * <p>Getter for player.<code>getPlayer</code>.</p>
      * @param i a int.
@@ -370,5 +376,9 @@ public class Board extends Subject {
 
     public void setLasers(Lasers lasers) {
         this.lasers = lasers;
+    }
+
+    public void setCheckpoints(Checkpoints checkpoints) {
+        this.checkpoints = checkpoints;
     }
 }

@@ -49,8 +49,8 @@ public class LaserTest {
         Board board = gameController.board;
         boolean laserSetOnWall = false;
 
-        if(board.getSpace(2,2) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
-        else if(board.getSpace(2,4) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
+        if(board.getSpace(2,2) == lasers.getLasers().get(0).getStartSpace()) laserSetOnWall = true;
+        else if(board.getSpace(2,4) == lasers.getLasers().get(0).getStartSpace()) laserSetOnWall = true;
 
         Assertions.assertEquals(true,laserSetOnWall,"Should be true");
     }
@@ -60,7 +60,7 @@ public class LaserTest {
     {
         Board board = gameController.board;
         boolean stops = false;
-        ArrayList<Space> arrayList = lasers.getLasers()[0].getOccupiedSpaces();
+        ArrayList<Space> arrayList = lasers.getLasers().get(0).getOccupiedSpaces();
 
         for(int i = 0; i < arrayList.size(); i++)
         {
