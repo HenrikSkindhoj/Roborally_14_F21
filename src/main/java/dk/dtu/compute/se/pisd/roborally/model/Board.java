@@ -109,9 +109,7 @@ public class Board extends Subject {
             }
         }
         checkpoints = new Checkpoints(4,this);
-        lasers = new Lasers(2,this);
-
-        lasers.spawnLasers();
+        lasers = new Lasers(2);
 
         this.stepMode = false;
     }
