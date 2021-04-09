@@ -27,7 +27,7 @@ public class Lasers
     /**
      * A array of all the spaces who also have walls.
      */
-    private Wall[] spacesWithWalls;
+    private ArrayList<Wall> spacesWithWalls;
     /**
      * A boolean which makes sure, that the placement of the lasers is random.
      */
@@ -43,6 +43,12 @@ public class Lasers
         amountLasers = numberOfLasers;
         this.board = board;
         lasers = new Laser[numberOfLasers];
+    }
+
+    public Lasers(Board board)
+    {
+        lasers = new Laser[2];
+        this.board = board;
     }
 
     /**
@@ -78,13 +84,13 @@ public class Lasers
     {
         if(!shuffled)
         {
-            Collections.shuffle(Arrays.asList(spacesWithWalls));
+            Collections.shuffle(spacesWithWalls);
             shuffled = true;
         }
         for(int i = 0; i < amountLasers; i++)
         {
-            lasers[i] = new Laser(i+1,board.getSpace(spacesWithWalls[i].getX(),spacesWithWalls[i].getY()),
-                    spacesWithWalls[i].getHeading().next().next(),board);
+            lasers[i] = new Laser(i+1,board.getSpace(spacesWithWalls.get(i).getX(),spacesWithWalls.get(i).getY()),
+                    spacesWithWalls.get(i).getHeading().next().next());
             lasers[i].setEndSpace();
         }
     }
@@ -93,7 +99,18 @@ public class Lasers
      * <p>Setter for the spaces who also have walls<code>setSpacesWithWalls</code>.</p>
      * @param spacesWithWalls
      */
-    public void setSpacesWithWalls(Wall[] spacesWithWalls) {
+    public void setSpacesWithWalls(ArrayList<Wall> spacesWithWalls) {
         this.spacesWithWalls = spacesWithWalls;
+    }
+
+    public void add(Laser laser)
+    {
+        for (int i = 0; i < lasers.length; i++)
+        {
+            if(lasers[i] == null)
+            {
+                lasers[i] = laser;
+            }
+        }
     }
 }

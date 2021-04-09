@@ -28,8 +28,6 @@ public class Laser
 
     private ArrayList<Space> occupiedSpaces;
 
-    private Board board;
-
 
     /**
      * <p>Constructor for Laser.</p>
@@ -37,82 +35,82 @@ public class Laser
      * @param id a int.
      */
 
-    public Laser(int id, Space startSpace, Heading heading, Board board)
+    public Laser(int id, Space startSpace, Heading heading)
     {
         this.id = id;
         this.startSpace = startSpace;
         this.heading = heading;
-        this.board = board;
+        //this.board = board;
     }
 
     private void occupiedSpaces()
     {
         ArrayList<Space> newOccupiedSpaces = new ArrayList<>();
 
-        newOccupiedSpaces.add(board.getSpace(startSpace.x,startSpace.y));
+        newOccupiedSpaces.add(startSpace);
 
         if(heading == NORTH)
         {
             for (int y = startSpace.y-1; y > 0; y--)
             {
-                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
-                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    board.getSpace(startSpace.x, y).setLaser(this);
+                if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
+                    newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
+                    startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH)
+                } else if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH)
                 {
                     break;
                 } else {
-                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    board.getSpace(startSpace.x, y).setLaser(this);
+                    newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
+                    startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                 }
             }
         } else if(heading == EAST)
         {
-            for (int x = startSpace.x+1; x < board.width; x++)
+            for (int x = startSpace.x+1; x < startSpace.board.width; x++)
             {
-                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST) {
-                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    board.getSpace(x, startSpace.y).setLaser(this);
+                if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == EAST) {
+                    newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
+                    startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST)
+                } else if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == WEST)
                 {
                     break;
                 } else {
-                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    board.getSpace(x, startSpace.y).setLaser(this);
+                    newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
+                    startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                 }
             }
         } else if(heading == SOUTH)
         {
-            for (int y = startSpace.y+1; y < board.height; y++)
+            for (int y = startSpace.y+1; y < startSpace.board.height; y++)
             {
-                if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH) {
-                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    board.getSpace(startSpace.x, y).setLaser(this);
+                if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH) {
+                    newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
+                    startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(board.getSpace(startSpace.x, y).getWall() != null && board.getSpace(startSpace.x, y).getWall().getHeading() ==  NORTH)
+                } else if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() ==  NORTH)
                 {
                     break;
                 } else {
-                    newOccupiedSpaces.add(board.getSpace(startSpace.x, y));
-                    board.getSpace(startSpace.x, y).setLaser(this);
+                    newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
+                    startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                 }
             }
         } else if(heading == WEST)
         {
             for (int x = startSpace.x-1; x > 0; x--)
             {
-                if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
-                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    board.getSpace(x, startSpace.y).setLaser(this);
+                if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
+                    newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
+                    startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(board.getSpace(x, startSpace.y).getWall() != null && board.getSpace(x, startSpace.y).getWall().getHeading() == EAST)
+                } else if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == EAST)
                 {
                     break;
                 } else {
-                    newOccupiedSpaces.add(board.getSpace(x, startSpace.y));
-                    board.getSpace(x, startSpace.y).setLaser(this);
+                    newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
+                    startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                 }
             }
         }

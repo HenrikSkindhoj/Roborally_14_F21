@@ -110,9 +110,9 @@ public class Board extends Subject {
             }
         }
         checkpoints = new Checkpoints(4,this);
-        walls = new Walls(16, width, height);
+        walls = new Walls(16, width, height,this);
+        walls.spawnWalls();
         lasers = new Lasers(2,this);
-
         lasers.setSpacesWithWalls(walls.getWalls());
         lasers.spawnLasers();
 
@@ -183,6 +183,20 @@ public class Board extends Subject {
             players.add(player);
             notifyChange();
         }
+    }
+
+    public void addLaser(@NotNull Laser laser)
+    {
+        if (laser.getStartSpace().board == this) {
+            lasers.add(laser);
+            notifyChange();
+        }
+    }
+
+    public void addWall(@NotNull Wall wall)
+    {
+        walls.add(wall);
+        notifyChange();
     }
 
     /**
@@ -348,5 +362,13 @@ public class Board extends Subject {
 
     public Walls getWalls() {
         return walls;
+    }
+
+    public void setWalls(Walls walls) {
+        this.walls = walls;
+    }
+
+    public void setLasers(Lasers lasers) {
+        this.lasers = lasers;
     }
 }
