@@ -277,14 +277,18 @@ public class GameController {
             @NotNull Heading heading) throws ImpossibleMoveException{
 
         Player other = space.getPlayer();
-        if(player.getSpace().getWall() != null) {
-            if (player.getSpace().getWall().getHeading() == heading){
-                throw new ImpossibleMoveException(player, space, heading);
+        if(player.getSpace().getWalls() != null) {
+            for (Heading hd: player.getSpace().getWalls()) {
+                if (hd == heading){
+                    throw new ImpossibleMoveException(player, space, heading);
+                }
             }
         }
-        if(space.getWall() != null) {
-            if (space.getWall().getHeading().next().next() == heading) {
-                throw new ImpossibleMoveException(player, space, heading);
+        if(space.getWalls() != null) {
+            for (Heading hd: space.getWalls()) {
+                if (hd.next().next() == heading) {
+                    throw new ImpossibleMoveException(player, space, heading);
+                }
             }
         }
         if (other != null) {

@@ -23,6 +23,9 @@ package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ...
  *
@@ -44,7 +47,7 @@ public class Space extends Subject {
 
     private Player player;
     private Laser laser;
-    private Wall wall;
+    private ArrayList<Heading> walls = new ArrayList<>();
     private Checkpoint checkpoint;
 
     /**
@@ -58,7 +61,6 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
-        wall = null;
         laser = null;
         checkpoint = null;
     }
@@ -116,20 +118,24 @@ public class Space extends Subject {
 
     /**
      * <p>Setter for wall<code>setWall</code>.</p>
-     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
-    public void setWall(Wall wall){
-        this.wall = wall;
+    public void setWall(Heading heading){
+        this.walls.add(heading);
     }
 
     /**
      * <p>Getter for wall<code>getWall</code>.</p>
-     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
-    public Wall getWall() {
-        return wall;
+    public ArrayList<Heading> getWalls() {
+        return walls;
+    }
+
+    public void setWalls(List<Heading> walls){
+        this.walls.addAll(walls);
     }
 
     public Checkpoint getCheckpoint() {

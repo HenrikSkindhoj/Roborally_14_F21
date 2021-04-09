@@ -26,6 +26,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
@@ -53,6 +54,8 @@ public class AppController implements Observer {
     /** Constant <code>PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta")</code> */
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
+    final private List<String> MAP_OPTIONS = Arrays.asList("1", "2");
+
     final private RoboRally roboRally;
 
     private GameController gameController;
@@ -76,6 +79,7 @@ public class AppController implements Observer {
         dialog.setTitle("Player number");
         dialog.setHeaderText("Select number of players");
         Optional<Integer> result = dialog.showAndWait();
+        LoadBoard loadBoard = new LoadBoard();
 
         if (result.isPresent()) {
             if (gameController != null) {
@@ -86,9 +90,18 @@ public class AppController implements Observer {
                 }
             }
 
+
+
+            ChoiceDialog<String> dialog1 = new ChoiceDialog<>(MAP_OPTIONS.get(0), MAP_OPTIONS);
+            dialog1.setTitle("Map Selection");
+            dialog1.setHeaderText("Select a map");
+            Optional<String> result1 = dialog1.showAndWait();
+
+
+
             // XXX the board should eventually be created programmatically or loaded from a file
             //     here we just create an empty board with the required number of players.
-            Board board = new Board(8,8);
+            Board board =  loadBoard.loadBoard(result1.get());
             gameController = new GameController(board);
             int no = result.get();
             for (int i = 0; i < no; i++) {
