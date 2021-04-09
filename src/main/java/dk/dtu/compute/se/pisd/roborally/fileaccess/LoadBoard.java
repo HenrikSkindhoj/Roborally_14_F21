@@ -51,9 +51,7 @@ public class LoadBoard {
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
-        System.out.println(inputStream);
         if (inputStream == null) {
-            System.out.println("yikes");
             // TODO these constants should be defined somewhere
             return new Board(8,8);
 
@@ -71,7 +69,6 @@ public class LoadBoard {
             // fileReader = new FileReader(filename);
             reader = gson.newJsonReader(new InputStreamReader(inputStream));
             BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
-            System.out.println(template.height);
 
             result = new Board(template.width, template.height);
             for (SpaceTemplate spaceTemplate: template.spaces) {

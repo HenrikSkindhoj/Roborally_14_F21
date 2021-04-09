@@ -81,11 +81,12 @@ public class LaserView
             Collections.shuffle(Arrays.asList(spacesWithWalls));
             shuffled = true;
         }
-        for(int i = 0; i < amountLasers; i++)
-        {
-            lasers[i] = new Laser(i+1, spacesWithWalls.get(i),
-                    spacesWithWalls.get(i).getWalls().get((int)Math.random()*spacesWithWalls.get(i).getWalls().size()).next().next(),board);
-            lasers[i].setEndSpace();
+        if(spacesWithWalls.size() > 10) {
+            for (int i = 0; i < amountLasers; i++) {
+                lasers[i] = new Laser(i + 1, spacesWithWalls.get(i),
+                        spacesWithWalls.get(i).getWalls().get((int) Math.random() * spacesWithWalls.get(i).getWalls().size()).next().next(), board);
+                lasers[i].setEndSpace();
+            }
         }
     }
 
