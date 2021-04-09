@@ -121,14 +121,18 @@ public class SpaceView extends StackPane implements ViewObserver {
                     }
                 }
 
-                for (int i = 0; i < space.board.getLasers().getLasers().length; i++) {
-                    if (this.space.getWalls() != null) {
-                        //if (space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
-                            updateLasers(space.board.getLasers().getLasers()[i]);
-                       // }
-                    }
 
+                if(space.getLaser() != null){
+                    updateLasers(space.getLaser());
                 }
+                //for (int i = 0; i < space.board.getLasers().getLasers().length; i++) {
+                   // if (this.space.getWalls() != null) {
+                        //if (space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
+                        //    updateLasers(space.board.getLasers().getLasers()[i]);
+                       // }
+                   // }
+
+               // }
             }
         }
     }
@@ -190,7 +194,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     public void updateLasers(Laser laser)
     {
-       /* Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+       Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
 
         GraphicsContext gc = can.getGraphicsContext2D();
         gc.setStroke(Color.RED);
@@ -205,8 +209,6 @@ public class SpaceView extends StackPane implements ViewObserver {
                 gc.strokeLine(0,35,75,35);
             }
         this.getChildren().add(can);
-
-    */
     }
 
 

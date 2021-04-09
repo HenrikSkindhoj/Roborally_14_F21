@@ -61,7 +61,6 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
-        laser = null;
         checkpoint = null;
     }
 

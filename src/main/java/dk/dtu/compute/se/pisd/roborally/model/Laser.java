@@ -22,6 +22,10 @@ public class Laser
      */
     private Heading heading;
 
+    private int y;
+
+    private int x;
+
     private Space startSpace;
 
     private Space endSpace;
@@ -37,9 +41,11 @@ public class Laser
      * @param id a int.
      */
 
-    public Laser(int id, Space startSpace, Heading heading, Board board)
+    public Laser(int id, int x, int y, Heading heading)
     {
         this.id = id;
+        this.x = x;
+        this.y = y;
         this.startSpace = startSpace;
         this.heading = heading;
         this.board = board;

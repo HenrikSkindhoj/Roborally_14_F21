@@ -115,7 +115,6 @@ public class Board extends Subject {
 
         this.stepMode = false;
     }
-
     /**
      * <p>Constructor for Board.</p>
      * @param width a int.

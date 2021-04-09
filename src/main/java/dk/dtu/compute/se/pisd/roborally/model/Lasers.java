@@ -76,18 +76,25 @@ public class Lasers
      */
     public void spawnLasers()
     {
-        if(!shuffled)
+
+
+
+
+
+        /*if(!shuffled)
         {
             Collections.shuffle(Arrays.asList(spacesWithWalls));
             shuffled = true;
         }
         if(spacesWithWalls.size() > 10) {
             for (int i = 0; i < amountLasers; i++) {
-                lasers[i] = new Laser(i + 1, spacesWithWalls.get(i),
-                        spacesWithWalls.get(i).getWalls().get(0).getHeading().next().next(), board);
+                lasers[i] = new Laser(i + 1, spacesWithWalls.get(i).x, spacesWithWalls.get(i).y,
+                        spacesWithWalls.get(i).getWalls().get(0).getHeading().next().next());
                 lasers[i].setEndSpace();
             }
         }
+
+         */
     }
 
 
