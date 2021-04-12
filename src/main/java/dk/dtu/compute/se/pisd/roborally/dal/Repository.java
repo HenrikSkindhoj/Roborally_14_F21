@@ -103,7 +103,7 @@ class Repository implements IRepository {
                 // statement.close();
 
                 createPlayersInDB(game);
-                createLasersInDB(game);
+                //createLasersInDB(game);
 				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
 				 */
@@ -293,7 +293,7 @@ class Repository implements IRepository {
 
         rs.close();
     }
-
+/*
     private void createLasersInDB(Board game) throws SQLException
     {
         PreparedStatement ps = getSelectLaserStatement();
@@ -313,6 +313,8 @@ class Repository implements IRepository {
         }
         rs.close();
     }
+
+ */
 
     private void loadPlayersFromDB(Board game) throws SQLException {
         PreparedStatement ps = getSelectPlayersASCStatement();
