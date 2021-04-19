@@ -1,5 +1,8 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.GameController;
+
 import java.util.ArrayList;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
@@ -10,7 +13,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
  * @version $Id: $Id
  */
-public class Laser
+public class Laser extends FieldAction
 {
     /**
      * The id of a specific laser
@@ -40,7 +43,6 @@ public class Laser
         this.id = id;
         this.startSpace = startSpace;
         this.heading = heading;
-        //this.board = board;
     }
 
     private void occupiedSpaces()
@@ -185,5 +187,10 @@ public class Laser
             {
                 return 3;
             }
+    }
+
+    @Override
+    public boolean doAction(GameController gameController, Space space) {
+        return false;
     }
 }
