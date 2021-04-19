@@ -1,5 +1,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
+import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
+
 /**
  * ...
  *
@@ -54,5 +56,26 @@ public class Wall {
      */
     public Heading getHeading() {
         return heading;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getOrdinal()
+    {
+        if(heading == SOUTH)
+        {
+            return 0;
+        } else if(heading == WEST)
+        {
+            return 1;
+        } else if(heading == NORTH)
+        {
+            return 2;
+        } else
+        {
+            return 3;
+        }
     }
 }

@@ -19,23 +19,31 @@ public class Lasers
      * A array of the lasers on the board.
      */
     private Laser[] lasers;
+    private Board board;
 
 
     /**
      * <p>Constructor For LaserView</p>
      * @param numberOfLasers a int
+     * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
      */
-    public Lasers(int numberOfLasers)
+    public Lasers(int numberOfLasers, Board board)
     {
         lasers = new Laser[numberOfLasers];
+        this.board = board;
     }
 
     /**
      * <p>getter for a array of the lasers<code>getLasers</code>.</p>
      * @return the lasers on the board
      */
-    public Laser[] getLasers() {
+    public ArrayList<Laser> getLasers() {
         return lasers;
     }
+
+    public void add(Laser laser)
+    {
+        lasers.add(laser);
     }
+}
 

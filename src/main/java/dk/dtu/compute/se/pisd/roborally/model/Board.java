@@ -179,6 +179,26 @@ public class Board extends Subject {
         }
     }
 
+    public void addLaser(@NotNull Laser laser)
+    {
+        if (laser.getStartSpace().board == this) {
+            lasers.add(laser);
+            notifyChange();
+        }
+    }
+
+    public void addWall(@NotNull Wall wall)
+    {
+        walls.add(wall);
+        notifyChange();
+    }
+
+    public void addCheckpoint(@NotNull Checkpoint checkpoint)
+    {
+        checkpoints.add(checkpoint);
+        notifyChange();
+    }
+
     /**
      * <p>Getter for player.<code>getPlayer</code>.</p>
      * @param i a int.
@@ -340,4 +360,19 @@ public class Board extends Subject {
         return lasers;
     }
 
+    public Walls getWalls() {
+        return walls;
+    }
+
+    public void setWalls(Walls walls) {
+        this.walls = walls;
+    }
+
+    public void setLasers(Lasers lasers) {
+        this.lasers = lasers;
+    }
+
+    public void setCheckpoints(Checkpoints checkpoints) {
+        this.checkpoints = checkpoints;
+    }
 }
