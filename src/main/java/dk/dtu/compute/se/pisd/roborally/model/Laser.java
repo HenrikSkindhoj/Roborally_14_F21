@@ -38,11 +38,10 @@ public class Laser extends FieldAction
      * @param id a int.
      */
 
-    public Laser(int id, int x, int y, Heading heading)
+    public Laser(int id, Space startSpace, Heading heading)
     {
         this.id = id;
-        this.x = x;
-        this.y = y;
+        this.startSpace = startSpace;
         this.heading = heading;
     }
 
@@ -56,11 +55,11 @@ public class Laser extends FieldAction
         {
             for (int y = startSpace.y-1; y > 0; y--)
             {
-                if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == NORTH) {
+                if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == NORTH) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
                     startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH)
+                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == SOUTH)
                 {
                     break;
                 } else {
@@ -72,11 +71,11 @@ public class Laser extends FieldAction
         {
             for (int x = startSpace.x+1; x < startSpace.board.width; x++)
             {
-                if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == EAST) {
+                if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
                     startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == WEST)
+                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST)
                 {
                     break;
                 } else {
@@ -88,11 +87,11 @@ public class Laser extends FieldAction
         {
             for (int y = startSpace.y+1; y < startSpace.board.height; y++)
             {
-                if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() == SOUTH) {
+                if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == SOUTH) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
                     startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(startSpace.board.getSpace(startSpace.x, y).getWall() != null && startSpace.board.getSpace(startSpace.x, y).getWall().getHeading() ==  NORTH)
+                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() ==  NORTH)
                 {
                     break;
                 } else {
@@ -104,11 +103,11 @@ public class Laser extends FieldAction
         {
             for (int x = startSpace.x-1; x > 0; x--)
             {
-                if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == WEST) {
+                if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
                     startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(startSpace.board.getSpace(x, startSpace.y).getWall() != null && startSpace.board.getSpace(x, startSpace.y).getWall().getHeading() == EAST)
+                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST)
                 {
                     break;
                 } else {

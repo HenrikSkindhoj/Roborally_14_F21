@@ -29,6 +29,7 @@ import dk.dtu.compute.se.pisd.roborally.fileaccess.model.BoardTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SpaceTemplate;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
+import dk.dtu.compute.se.pisd.roborally.model.Laser;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
 
 import java.io.*;
@@ -76,7 +77,7 @@ public class LoadBoard {
                 if (space != null) {
                     //space.getActions().addAll(spaceTemplate.actions);
                     space.setWalls(spaceTemplate.walls);
-                    space.setLaser(spaceTemplate.laser);
+                    space.setLaser(new Laser(spaceTemplate.laser.getId(),result.getSpace(spaceTemplate.x,spaceTemplate.y),spaceTemplate.laser.getHeading()));
                 }
             }
             reader.close();
