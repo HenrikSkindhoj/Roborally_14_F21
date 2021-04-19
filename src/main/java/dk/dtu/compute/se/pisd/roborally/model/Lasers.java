@@ -37,6 +37,5 @@ public class Lasers
     public Laser[] getLasers() {
         return lasers;
     }
-
     }
 

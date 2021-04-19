@@ -230,6 +230,9 @@ public class GameController {
                 } else {
                     for(int i = 0; i<board.getPlayersNumber(); i++){
                         board.getPlayer(i).controlForCheckpoints();
+                        if(board.getPlayer(i).isWinner()){
+                            board.setPhase(Phase.END);
+                        }
                     }
                     startProgrammingPhase();
                 }
