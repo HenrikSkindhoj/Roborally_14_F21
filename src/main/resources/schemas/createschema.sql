@@ -1,4 +1,6 @@
 /* Need to switch of FK check for MySQL since there are crosswise FK references */
+CREATE SCHEMA IF NOT EXISTS pisu; 
+USE pisu;
 SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS Game (
