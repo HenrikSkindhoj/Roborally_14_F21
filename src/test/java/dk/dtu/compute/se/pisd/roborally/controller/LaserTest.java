@@ -12,7 +12,7 @@ public class LaserTest {
 /*
     private final int TEST_WIDTH = 8;
     private final int TEST_HEIGHT = 8;
-    private Wall[] walls = new Wall[2];
+    private ArrayList<Wall> walls = new ArrayList<>();
 
     private GameController gameController;
     private Lasers lasers;
@@ -34,8 +34,8 @@ public class LaserTest {
         board.getSpace(2,2).setWall(new Wall(1,2,2,Heading.NORTH));
         board.getSpace(2,4).setWall(new Wall(1,2,4,Heading.SOUTH));
 
-        walls[0] = board.getSpace(2,2).getWall();
-        walls[1] = board.getSpace(2,4).getWall();
+        walls.add(board.getSpace(2,2).getWall());
+        walls.add(board.getSpace(2,4).getWall());
 
         lasers.setSpacesWithWalls(walls);
 
@@ -49,8 +49,8 @@ public class LaserTest {
         Board board = gameController.board;
         boolean laserSetOnWall = false;
 
-        if(board.getSpace(2,2) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
-        else if(board.getSpace(2,4) == lasers.getLasers()[0].getStartSpace()) laserSetOnWall = true;
+        if(board.getSpace(2,2) == lasers.getLasers().get(0).getStartSpace()) laserSetOnWall = true;
+        else if(board.getSpace(2,4) == lasers.getLasers().get(0).getStartSpace()) laserSetOnWall = true;
 
         Assertions.assertEquals(true,laserSetOnWall,"Should be true");
     }
@@ -60,7 +60,7 @@ public class LaserTest {
     {
         Board board = gameController.board;
         boolean stops = false;
-        ArrayList<Space> arrayList = lasers.getLasers()[0].getOccupiedSpaces();
+        ArrayList<Space> arrayList = lasers.getLasers().get(0).getOccupiedSpaces();
 
         for(int i = 0; i < arrayList.size(); i++)
         {

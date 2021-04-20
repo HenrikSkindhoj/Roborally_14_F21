@@ -107,32 +107,25 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
-            for (int i = 0; i < space.board.getCheckpoints().getCheckpoints().length; i++) {
-                if (this.space.x == space.board.getCheckpoints().getCheckpoints()[i].getX() && this.space.y == space.board.getCheckpoints().getCheckpoints()[i].getY()) {
-                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
-                    this.space.setCheckpoint(space.board.getCheckpoints().getCheckpoints()[i]);
+            for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().size(); i++)
+            {
+                if(this.space.x == space.board.getCheckpoints().getCheckpoints().get(i).getX() && this.space.y ==
+                        space.board.getCheckpoints().getCheckpoints().get(i).getY()) {
+                    updateCheckpoint(space.board.getCheckpoints().getCheckpoints().get(i));
                 }
             }
 
-            if (space.getWalls() != null) {
-                for (int i = 0; i < space.getWalls().size(); i++) {
-                    if (!this.space.getWalls().isEmpty()) {
-                        updateWall(space.getWalls().get(i));
-                    }
+            for(int i = 0; i < space.board.getWalls().getWalls().size(); i++){
+                if(this.space.x == space.board.getWalls().getWalls().get(i).getX() && this.space.y == space.board.getWalls().getWalls().get(i).getY()) {
+                    updateWall(space.board.getWalls().getWalls().get(i));
+                }
+            }
+            for(int i = 0; i < space.board.getLasers().getLasers().size(); i++)
+            {
+                if(space.board.getLasers().getLasers().get(i).checkIfOccupied(this.space)) {
+                    updateLasers(space.board.getLasers().getLasers().get(i));
                 }
 
-
-                if(space.getLaser() != null){
-                    updateLasers(space.getLaser());
-                }
-                //for (int i = 0; i < space.board.getLasers().getLasers().length; i++) {
-                   // if (this.space.getWalls() != null) {
-                        //if (space.board.getLasers().getLasers()[i].checkIfOccupied(this.space)) {
-                        //    updateLasers(space.board.getLasers().getLasers()[i]);
-                       // }
-                   // }
-
-               // }
             }
         }
     }
@@ -210,7 +203,5 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
         this.getChildren().add(can);
     }
-
-
 
 }

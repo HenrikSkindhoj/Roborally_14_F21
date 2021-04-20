@@ -103,7 +103,9 @@ class Repository implements IRepository {
                 // statement.close();
 
                 createPlayersInDB(game);
-                //createLasersInDB(game);
+                createLasersInDB(game);
+                createWallsInDB(game);
+                createCheckpointInDB(game);
 				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
 				 */
@@ -226,8 +228,20 @@ class Repository implements IRepository {
             }
             rs.close();
 
+
             game.setGameId(id);
             loadPlayersFromDB(game);
+            game.setWalls(new Walls(game));
+            game.setLasers(new Lasers(game));
+            game.setCheckpoints(new Checkpoints(game));
+            loadWallsFromDB(game);
+            game.getWalls().spawnWalls();
+            loadLasersFromDB(game);
+            for(Laser laser : game.getLasers().getLasers())
+            {
+                laser.setEndSpace();
+            }
+            loadCheckpointFromDB(game);
 
             if (playerNo >= 0 && playerNo < game.getPlayersNumber()) {
                 game.setCurrentPlayer(game.getPlayer(playerNo));
@@ -293,16 +307,16 @@ class Repository implements IRepository {
 
         rs.close();
     }
-/*
+
     private void createLasersInDB(Board game) throws SQLException
     {
         PreparedStatement ps = getSelectLaserStatement();
         ps.setInt(1, game.getGameId());
 
         ResultSet rs = ps.executeQuery();
-        for( int i = 0; i < game.getLasers().getLasers().length; i++)
+        for( int i = 0; i < game.getLasers().getLasers().size(); i++)
         {
-            Laser laser = game.getLasers().getLasers()[i];
+            Laser laser = game.getLasers().getLasers().get(i);
             rs.moveToInsertRow();
             rs.updateInt(GAME_GAMEID,game.getGameId());
             rs.updateInt("laserID",laser.getId());
@@ -314,7 +328,45 @@ class Repository implements IRepository {
         rs.close();
     }
 
- */
+    private void createWallsInDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectWallStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        for( int i = 0; i < game.getWalls().getWalls().size(); i++)
+        {
+            Wall wall = game.getWalls().getWalls().get(i);
+            rs.moveToInsertRow();
+            rs.updateInt(GAME_GAMEID,game.getGameId());
+            rs.updateInt("wallID",wall.getId());
+            rs.updateInt(PLAYER_POSITION_X, wall.getX());
+            rs.updateInt(PLAYER_POSITION_Y, wall.getY());
+            rs.updateInt(PLAYER_HEADING, wall.getOrdinal());
+            rs.insertRow();
+        }
+        rs.close();
+    }
+
+    private void createCheckpointInDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectCheckpointStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        for( int i = 0; i < game.getCheckpoints().getCheckpoints().size(); i++)
+        {
+            Checkpoint checkpoint = game.getCheckpoints().getCheckpoints().get(i);
+            rs.moveToInsertRow();
+            rs.updateInt(GAME_GAMEID,game.getGameId());
+            rs.updateInt("checkpointID",checkpoint.getId());
+            rs.updateInt(PLAYER_POSITION_X, checkpoint.getX());
+            rs.updateInt(PLAYER_POSITION_Y, checkpoint.getY());
+            rs.insertRow();
+        }
+        rs.close();
+    }
+
 
     private void loadPlayersFromDB(Board game) throws SQLException {
         PreparedStatement ps = getSelectPlayersASCStatement();
@@ -341,6 +393,77 @@ class Repository implements IRepository {
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a player with id " + i +"!");
+            }
+        }
+        rs.close();
+    }
+
+    private void loadLasersFromDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectLasersASCStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        int i = 1;
+        while (rs.next()) {
+            int laserId = rs.getInt("laserID");
+            if (i++ == laserId) {
+                // TODO this should be more defensive
+                int laserX = rs.getInt("positionX");
+                int laserY = rs.getInt("positionY");
+                int laserHeading = rs.getInt("heading");
+                Laser laser = new Laser(laserId,game.getSpace(laserX,laserY),Heading.values()[laserHeading]);
+                game.addLaser(laser);
+            } else {
+                // TODO error handling
+                System.err.println("Game in DB does not have a laser with id " + i +"!");
+            }
+        }
+        rs.close();
+    }
+
+    private void loadWallsFromDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectWallsASCStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        int i = 1;
+        while (rs.next()) {
+            int wallID = rs.getInt("wallID");
+            if (i++ == wallID) {
+                // TODO this should be more defensive
+                int wallX = rs.getInt("positionX");
+                int wallY = rs.getInt("positionY");
+                int wallHeading = rs.getInt("heading");
+                Wall wall = new Wall(wallID,wallX,wallY,Heading.values()[wallHeading]);
+                game.addWall(wall);
+            } else {
+                // TODO error handling
+                System.err.println("Game in DB does not have a wall with id " + i +"!");
+            }
+        }
+        rs.close();
+    }
+
+    private void loadCheckpointFromDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectCheckpointASCStatement();
+        ps.setInt(1, game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        int i = 1;
+        while (rs.next()) {
+            int checkpointID = rs.getInt("checkpointID");
+            if (i++ == checkpointID) {
+                // TODO this should be more defensive
+                int checkpointX = rs.getInt("positionX");
+                int checkpointY = rs.getInt("positionY");
+                Checkpoint checkpoint = new Checkpoint(checkpointX,checkpointY,checkpointID);
+                game.addCheckpoint(checkpoint);
+            } else {
+                // TODO error handling
+                System.err.println("Game in DB does not have a checkpoint with id " + i +"!");
             }
         }
         rs.close();
@@ -451,6 +574,48 @@ class Repository implements IRepository {
         return  select_lasers_stmt;
     }
 
+    private static final String SQL_SELECT_WALLS =
+            "SELECT * FROM Wall WHERE gameID = ?";
+
+    private PreparedStatement select_walls_stmt = null;
+
+    private PreparedStatement getSelectWallStatement()
+    {
+        Connection connection = connector.getConnection();
+        try
+        {
+            select_walls_stmt = connection.prepareStatement(
+                    SQL_SELECT_WALLS,
+                    ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_UPDATABLE);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return  select_walls_stmt;
+    }
+
+    private static final String SQL_SELECT_CHECKPOINT =
+            "SELECT * FROM Checkpoint WHERE gameID = ?";
+
+    private PreparedStatement select_checkpoints_stmt = null;
+
+    private PreparedStatement getSelectCheckpointStatement()
+    {
+        Connection connection = connector.getConnection();
+        try
+        {
+            select_checkpoints_stmt = connection.prepareStatement(
+                    SQL_SELECT_CHECKPOINT,
+                    ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_UPDATABLE);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return  select_checkpoints_stmt;
+    }
+
     private static final String SQL_SELECT_PLAYERS_ASC =
             "SELECT * FROM Player WHERE gameID = ? ORDER BY playerID ASC";
 
@@ -469,6 +634,69 @@ class Repository implements IRepository {
             }
         }
         return select_players_asc_stmt;
+    }
+
+    private static final String SQL_SELECT_LASERS_ASC =
+            "SELECT * FROM laser WHERE gameID = ? ORDER BY laserID ASC";
+
+    private PreparedStatement select_lasers_asc_stmt = null;
+
+    private PreparedStatement getSelectLasersASCStatement()
+    {
+        if (select_lasers_asc_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                // This statement does not need to be updatable
+                select_lasers_asc_stmt = connection.prepareStatement(
+                        SQL_SELECT_LASERS_ASC);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return select_lasers_asc_stmt;
+    }
+
+    private static final String SQL_SELECT_WALLS_ASC =
+            "SELECT * FROM wall WHERE gameID = ? ORDER BY wallID ASC";
+
+    private PreparedStatement select_walls_asc_stmt = null;
+
+    private PreparedStatement getSelectWallsASCStatement()
+    {
+        if (select_walls_asc_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                // This statement does not need to be updatable
+                select_walls_asc_stmt = connection.prepareStatement(
+                        SQL_SELECT_WALLS_ASC);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return select_walls_asc_stmt;
+    }
+
+    private static final String SQL_SELECT_CHECKPOINTS_ASC =
+            "SELECT * FROM checkpoint WHERE gameID = ? ORDER BY checkpointID ASC";
+
+    private PreparedStatement select_checkpoints_asc_stmt = null;
+
+    private PreparedStatement getSelectCheckpointASCStatement()
+    {
+        if (select_checkpoints_asc_stmt == null) {
+            Connection connection = connector.getConnection();
+            try {
+                // This statement does not need to be updatable
+                select_checkpoints_asc_stmt = connection.prepareStatement(
+                        SQL_SELECT_CHECKPOINTS_ASC);
+            } catch (SQLException e) {
+                // TODO error handling
+                e.printStackTrace();
+            }
+        }
+        return select_checkpoints_asc_stmt;
     }
 
     private static final String SQL_SELECT_GAMES =

@@ -3,6 +3,7 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Checkpoint;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -17,7 +18,9 @@ public class Checkpoints {
     /**
      * A array of all the checkpoints on a board.
      */
-    private Checkpoint[] checkpoints;
+    private ArrayList<Checkpoint> checkpoints;
+
+    private Board board;
 
     /**
      * <p>Constructor for CheckpointsView.</p>
@@ -40,11 +43,30 @@ public class Checkpoints {
         Collections.shuffle(Arrays.asList(arrX));
         Collections.shuffle(Arrays.asList(arrY));
 
-        checkpoints = new Checkpoint[numberOfCheckpoints];
+        checkpoints = new ArrayList<>();
 
         for(int i = 0; i < numberOfCheckpoints; i++)
         {
-            checkpoints[i] = new Checkpoint(arrX[i], arrY[i], i+1);
+            checkpoints.add(new Checkpoint(arrX[i], arrY[i], i+1));
+        }
+    }
+
+    public Checkpoints(Board board)
+    {
+        this.board = board;
+        checkpoints = new ArrayList<>();
+    }
+
+    public void add(Checkpoint checkpoint)
+    {
+        checkpoints.add(checkpoint);
+    }
+
+    public void spawnCheckpoints()
+    {
+        for (Checkpoint checkpoint : checkpoints)
+        {
+            board.getSpace(checkpoint.getX(),checkpoint.getY()).setCheckpoint(checkpoint);
         }
     }
 
@@ -52,7 +74,7 @@ public class Checkpoints {
      * <p>Getter for the checkpoints.<code>getCheckpoints</code>.</p>
      * @return all of the checkpoints in the Checkpoints array.
      */
-    public Checkpoint[] getCheckpoints() {
+    public ArrayList<Checkpoint> getCheckpoints() {
         return checkpoints;
     }
 }
