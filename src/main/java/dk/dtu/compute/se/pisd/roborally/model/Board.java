@@ -371,7 +371,8 @@ public class Board extends Subject {
         for (int x = 0; x < width; x++) {
             for(int y = 0; y < height; y++) {
                 if(getSpace(x,y).getLaser()!= null){
-                    lasers.add(getSpace(x,y).getLaser());
+                    if(!lasers.contains(getSpace(x,y).getLaser()))
+                        lasers.add(getSpace(x,y).getLaser());
                 }
             }
         }

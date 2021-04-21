@@ -1,4 +1,6 @@
 /* Need to switch of FK check for MySQL since there are crosswise FK references */
+CREATE SCHEMA IF NOT EXISTS pisu; 
+USE pisu;
 SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE TABLE IF NOT EXISTS Game (
@@ -31,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Player (
 
 CREATE TABLE IF NOT EXISTS Laser(
   gameID int NOT NULL,
-  laserID int,
+  laserID int NOT NULL,
 
   positionX int,
   positionY int,
@@ -43,7 +45,7 @@ CREATE TABLE IF NOT EXISTS Laser(
 
 CREATE TABLE IF NOT EXISTS Wall(
   gameID int NOT NULL,
-  wallID int,
+  wallID int NOT NULL,
 
   positionX int,
   positionY int,
@@ -55,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Wall(
 
 CREATE TABLE IF NOT EXISTS Checkpoint(
   gameID int NOT NULL,
-  checkpointID int,
+  checkpointID int NOT NULL,
 
   positionX int,
   positionY int,

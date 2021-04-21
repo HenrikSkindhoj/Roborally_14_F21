@@ -6,27 +6,23 @@
 
 "spaces":[
 
-{"x":3 , "y":6, "laser": {"id": 2, "x": 3, "y": 6, "heading": "EAST"}},
-{"x":4 , "y":6, "laser": {"id": 3, "x": 4, "y": 6, "heading": "EAST"}},
-{"x":3 , "y":3, "laser": {"id": 6, "x": 3, "y": 3, "heading": "EAST"}},
-{"x":4 , "y":3, "laser": {"id": 7, "x": 4, "y": 3, "heading": "EAST"}},
 {"walls":[{"id":1, "x": 2, "y": 0,"heading":"SOUTH"}], "x":2, "y":0},
 {"walls":[{"id":2, "x": 3, "y": 0,"heading":"SOUTH"}], "x":3, "y":0},
 {"walls":[{"id":3, "x": 4, "y": 0,"heading":"SOUTH"}], "x":4, "y":0},
 {"walls":[{"id":4, "x": 5, "y": 0,"heading":"SOUTH"}], "x":5, "y":0},
 {"walls":[{"id":5, "x": 2, "y": 1,"heading":"WEST"}], "x":2, "y":1},
 {"walls":[{"id":6, "x": 2, "y": 2,"heading":"WEST"}], "x":2, "y":2},
-{"walls":[{"id":7, "x": 2, "y": 3,"heading":"WEST"}], "x":2, "y":3, "laser": {"id": 5, "x": 2, "y": 3, "heading": "EAST"}},
+{"walls":[{"id":7, "x": 2, "y": 3,"heading":"WEST"}], "x":2, "y":3, "laser": {"id": 1, "x": 2, "y": 3, "heading": "EAST"}},
 {"walls":[{"id":8, "x": 2, "y": 4,"heading":"WEST"}], "x":2, "y":4},
 {"walls":[{"id":9, "x": 2, "y": 5,"heading":"WEST"}], "x":2, "y":5},
-{"walls":[{"id":10, "x": 2, "y": 6,"heading":"WEST"}], "x":2, "y":6, "laser": {"id": 1, "x": 2, "y": 6, "heading": "EAST"}},
-{"walls":[{"id":11, "x": 2, "y": 6,"heading":"SOUTH"}], "x":1, "y":6},
+{"walls":[{"id":10, "x": 2, "y": 6,"heading":"WEST"}], "x":2, "y":6, "laser": {"id": 2, "x": 2, "y": 6, "heading": "EAST"}},
+{"walls":[{"id":11, "x": 1, "y": 6,"heading":"SOUTH"}], "x":1, "y":6},
 {"walls":[{"id":12, "x": 5, "y": 1,"heading":"EAST"}], "x":5, "y":1},
 {"walls":[{"id":13, "x": 5, "y": 2,"heading":"EAST"}], "x":5, "y":2},
-{"walls":[{"id":14, "x": 5, "y": 3,"heading":"EAST"}], "x":5, "y":3, "laser": {"id": 8, "x": 4, "y": 3, "heading": "EAST"}},
+{"walls":[{"id":14, "x": 5, "y": 3,"heading":"EAST"}], "x":5, "y":3},
 {"walls":[{"id":15, "x": 5, "y": 4,"heading":"EAST"}], "x":5, "y":4},
 {"walls":[{"id":16, "x": 5, "y": 5,"heading":"EAST"}], "x":5, "y":5},
-{"walls":[{"id":17, "x": 5, "y": 6,"heading":"EAST"}], "x":5, "y":6, "laser": {"id": 4, "x": 5, "y": 6, "heading": "EAST"}},
+{"walls":[{"id":17, "x": 5, "y": 6,"heading":"EAST"}], "x":5, "y":6},
 {"walls":[{"id":18, "x": 6, "y": 6,"heading":"SOUTH"}], "x":6, "y":6}
 ]
 }
