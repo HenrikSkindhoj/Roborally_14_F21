@@ -87,6 +87,7 @@ class Repository implements IRepository {
                 ps.setNull(2, Types.TINYINT); // game.getPlayerNumber(game.getCurrentPlayer())); is inserted after players!
                 ps.setInt(3, game.getPhase().ordinal());
                 ps.setInt(4, game.getStep());
+                ps.setString(5,game.boardName);
 
                 // If you have a foreign key constraint for current players,
                 // the check would need to be temporarily disabled, since
@@ -218,7 +219,7 @@ class Repository implements IRepository {
                 // game = new Board(width,height);
                 // TODO and we should also store the used game board in the database
                 //      for now, we use the default game board
-                game = LoadBoard.loadBoard(null);
+                game = LoadBoard.loadBoard(rs.getString("boardName"));
                 if (game == null) {
                     return null;
                 }
@@ -416,8 +417,8 @@ class Repository implements IRepository {
                 int laserY = rs.getInt("positionY");
                 int laserHeading = rs.getInt("heading");
                 Laser laser = new Laser(laserId,laserX,laserY,Heading.values()[laserHeading]);
+                laser.setStartSpace(game.getSpace(laserX,laserY));
                 game.addLaser(laser);
-                lasers.add(laser);
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a laser with id " + i +"!");
@@ -442,7 +443,6 @@ class Repository implements IRepository {
                 int wallHeading = rs.getInt("heading");
                 Wall wall = new Wall(wallID,wallX,wallY,Heading.values()[wallHeading]);
                 game.addWall(wall);
-                walls.add(wall);
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a wall with id " + i +"!");
@@ -497,7 +497,7 @@ class Repository implements IRepository {
     }
 
     private static final String SQL_INSERT_GAME =
-            "INSERT INTO Game(name, currentPlayer, phase, step) VALUES (?, ?, ?, ?)";
+            "INSERT INTO Game(name, currentPlayer, phase, step, boardName) VALUES (?, ?, ?, ?, ?)";
 
     private PreparedStatement insert_game_stmt = null;
 
