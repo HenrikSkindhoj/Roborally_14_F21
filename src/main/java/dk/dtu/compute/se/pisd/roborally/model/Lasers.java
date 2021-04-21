@@ -37,6 +37,7 @@ public class Lasers
      * <p>getter for a array of the lasers<code>getLasers</code>.</p>
      * @return the lasers on the board
      */
+    /*
     public ArrayList<Laser> getLasers() {
         return lasers;
     }
@@ -45,5 +46,7 @@ public class Lasers
     {
         lasers.add(laser);
     }
+
+     */
 }
 

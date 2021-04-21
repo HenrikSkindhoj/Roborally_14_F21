@@ -64,6 +64,10 @@ class Repository implements IRepository {
 
     private Connector connector;
 
+    private ArrayList<Laser> lasers = new ArrayList<>();
+
+    private ArrayList<Wall> walls = new ArrayList<>();
+
     Repository(Connector connector){
         this.connector = connector;
     }
@@ -231,13 +235,10 @@ class Repository implements IRepository {
 
             game.setGameId(id);
             loadPlayersFromDB(game);
-            game.setWalls(new Walls(game));
-            game.setLasers(new Lasers(game));
             game.setCheckpoints(new Checkpoints(game));
             loadWallsFromDB(game);
-            game.getWalls().spawnWalls();
             loadLasersFromDB(game);
-            for(Laser laser : game.getLasers().getLasers())
+            for(Laser laser : lasers)
             {
                 laser.setEndSpace();
             }
@@ -313,10 +314,11 @@ class Repository implements IRepository {
         PreparedStatement ps = getSelectLaserStatement();
         ps.setInt(1, game.getGameId());
 
+        lasers = game.getLasers();
         ResultSet rs = ps.executeQuery();
-        for( int i = 0; i < game.getLasers().getLasers().size(); i++)
+        for( int i = 0; i < lasers.size(); i++)
         {
-            Laser laser = game.getLasers().getLasers().get(i);
+            Laser laser = lasers.get(i);
             rs.moveToInsertRow();
             rs.updateInt(GAME_GAMEID,game.getGameId());
             rs.updateInt("laserID",laser.getId());
@@ -333,10 +335,11 @@ class Repository implements IRepository {
         PreparedStatement ps = getSelectWallStatement();
         ps.setInt(1, game.getGameId());
 
+        walls = game.getWalls();
         ResultSet rs = ps.executeQuery();
-        for( int i = 0; i < game.getWalls().getWalls().size(); i++)
+        for( int i = 0; i < walls.size(); i++)
         {
-            Wall wall = game.getWalls().getWalls().get(i);
+            Wall wall = walls.get(i);
             rs.moveToInsertRow();
             rs.updateInt(GAME_GAMEID,game.getGameId());
             rs.updateInt("wallID",wall.getId());
@@ -412,8 +415,9 @@ class Repository implements IRepository {
                 int laserX = rs.getInt("positionX");
                 int laserY = rs.getInt("positionY");
                 int laserHeading = rs.getInt("heading");
-                Laser laser = new Laser(laserId,game.getSpace(laserX,laserY),Heading.values()[laserHeading]);
+                Laser laser = new Laser(laserId,laserX,laserY,Heading.values()[laserHeading]);
                 game.addLaser(laser);
+                lasers.add(laser);
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a laser with id " + i +"!");
@@ -438,6 +442,7 @@ class Repository implements IRepository {
                 int wallHeading = rs.getInt("heading");
                 Wall wall = new Wall(wallID,wallX,wallY,Heading.values()[wallHeading]);
                 game.addWall(wall);
+                walls.add(wall);
             } else {
                 // TODO error handling
                 System.err.println("Game in DB does not have a wall with id " + i +"!");

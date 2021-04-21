@@ -25,6 +25,10 @@ public class Laser extends FieldAction
      */
     private Heading heading;
 
+    public int x;
+
+    public int y;
+
     private Space startSpace;
 
     private Space endSpace;
@@ -38,8 +42,10 @@ public class Laser extends FieldAction
      * @param id a int.
      */
 
-    public Laser(int id, Space startSpace, Heading heading)
+    public Laser(int id, int x, int y, Heading heading)
     {
+        this.x = x;
+        this.y = y;
         this.id = id;
         this.startSpace = startSpace;
         this.heading = heading;
@@ -124,12 +130,13 @@ public class Laser extends FieldAction
     public boolean checkIfOccupied(Space space)
     {
         boolean occupied = false;
-        for (int i = 0; i < occupiedSpaces.size(); i++) {
+        if(occupiedSpaces != null) {
+            for (int i = 0; i < occupiedSpaces.size(); i++) {
 
-            if(occupiedSpaces.get(i) == space)
-            {
-                occupied = true;
-                break;
+                if (occupiedSpaces.get(i) == space) {
+                    occupied = true;
+                    break;
+                }
             }
         }
         return occupied;

@@ -77,8 +77,15 @@ public class LoadBoard {
                 if (space != null) {
                     //space.getActions().addAll(spaceTemplate.actions);
                     space.setWalls(spaceTemplate.walls);
-                    space.setLaser(new Laser(spaceTemplate.laser.getId(),result.getSpace(spaceTemplate.x,spaceTemplate.y),spaceTemplate.laser.getHeading()));
+                    space.setLaser(spaceTemplate.laser);
+                    if(spaceTemplate.laser != null) {
+                        spaceTemplate.laser.setStartSpace(result.getSpace(spaceTemplate.laser.x, spaceTemplate.laser.y));
+                    }
+
                 }
+            }
+            for (Laser laser : result.getLasers()) {
+                laser.setEndSpace();
             }
             reader.close();
             return result;

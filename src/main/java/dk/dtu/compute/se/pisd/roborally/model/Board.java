@@ -109,7 +109,6 @@ public class Board extends Subject {
             }
         }
         checkpoints = new Checkpoints(4,this);
-        lasers = new Lasers(2);
 
         this.stepMode = false;
     }
@@ -181,15 +180,13 @@ public class Board extends Subject {
 
     public void addLaser(@NotNull Laser laser)
     {
-        if (laser.getStartSpace().board == this) {
-            lasers.add(laser);
-            notifyChange();
-        }
+        getSpace(laser.getStartSpace().x,laser.getStartSpace().y).setLaser(laser);
+        notifyChange();
     }
 
     public void addWall(@NotNull Wall wall)
     {
-        walls.add(wall);
+        getSpace(wall.x, wall.y).setWall(wall);
         notifyChange();
     }
 
@@ -352,20 +349,33 @@ public class Board extends Subject {
                 ", Step: " + getStep() + ", Next Checkpoint: " + getCurrentPlayer().getNextChecpoint();
     }
 
+    public ArrayList<Wall> getWalls()
+    {
+        ArrayList<Wall> walls = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for(int y = 0; y < height; y++) {
+                if(!getSpace(x,y).getWalls().isEmpty()){
+                    walls.add(getSpace(x,y).getWalls().get(0));
+                }
+            }
+        }
+        return walls;
+    }
+
     public Checkpoints getCheckpoints() {
         return checkpoints;
     }
 
-    public Lasers getLasers() {
+    public ArrayList<Laser> getLasers() {
+        ArrayList<Laser> lasers = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for(int y = 0; y < height; y++) {
+                if(getSpace(x,y).getLaser()!= null){
+                    lasers.add(getSpace(x,y).getLaser());
+                }
+            }
+        }
         return lasers;
-    }
-
-    public Walls getWalls() {
-        return walls;
-    }
-
-    public void setWalls(Walls walls) {
-        this.walls = walls;
     }
 
     public void setLasers(Lasers lasers) {
