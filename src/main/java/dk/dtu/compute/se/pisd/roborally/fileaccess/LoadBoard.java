@@ -87,6 +87,7 @@ public class LoadBoard {
             for (Laser laser : result.getLasers()) {
                 laser.setEndSpace();
             }
+
             reader.close();
             return result;
         } catch (IOException e1) {

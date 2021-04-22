@@ -22,6 +22,10 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,6 +37,8 @@ import org.jetbrains.annotations.NotNull;
 public class GameController {
 
     final public Board board;
+
+    private boolean gameOver = false;
 
     /**
      * <p>Constructor for GameController.</p>
@@ -190,8 +196,19 @@ public class GameController {
                     } else {
                         for(int i = 0; i<board.getPlayersNumber(); i++){
                             board.getPlayer(i).controlForCheckpoints();
+                            if(board.getPlayer(i).isWinner()){
+                                this.gameOver = true;
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("WINNER WINNER CHICKEN DINNER!!!");
+                                alert.setHeaderText(null);
+                                alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
+                                alert.showAndWait();
+                                break;
+                            }
                         }
-                        startProgrammingPhase();
+                        if(!gameOver) {
+                            startProgrammingPhase();
+                        }
                     }
                 }
             } else {
@@ -231,10 +248,17 @@ public class GameController {
                     for(int i = 0; i<board.getPlayersNumber(); i++){
                         board.getPlayer(i).controlForCheckpoints();
                         if(board.getPlayer(i).isWinner()){
-                            board.setPhase(Phase.END);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("WINNER WINNER CHICKEN DINNER!!!");
+                            alert.setHeaderText(null);
+                            alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
+                            alert.showAndWait();
+                            break;
                         }
                     }
-                    startProgrammingPhase();
+                    if(!gameOver) {
+                        startProgrammingPhase();
+                    }
                 }
             }
         }
