@@ -149,6 +149,7 @@ public class Laser extends FieldAction
             for (Space space : arr)
             {
                 space.setLaser(null);
+
             }
         }
     }

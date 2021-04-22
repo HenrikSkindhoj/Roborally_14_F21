@@ -128,6 +128,15 @@ public class AppController implements Observer {
      */
     public void saveGame() {
         IRepository repo = RepositoryAccess.getRepository();
+        List<GameInDB> repoGames = repo.getGames();
+        if(this.gameController.board.getGameId() != null){
+            for (GameInDB game : repoGames) {
+                if (game.id == this.gameController.board.getGameId()) {
+                    repo.updateGameInDB(this.gameController.board);
+                    return;
+                }
+            }
+        }
         repo.createGameInDB(this.gameController.board);
     }
 
