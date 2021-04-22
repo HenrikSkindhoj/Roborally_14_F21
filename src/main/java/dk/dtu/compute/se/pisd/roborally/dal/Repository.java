@@ -111,9 +111,7 @@ class Repository implements IRepository {
                 createLasersInDB(game);
                 createWallsInDB(game);
                 createCheckpointInDB(game);
-				/* TODO this method needs to be implemented first
 				createCardFieldsInDB(game);
-				 */
 
                 // since current player is a foreign key, it can oly be
                 // inserted after the players are created, since MySQL does
@@ -252,9 +250,9 @@ class Repository implements IRepository {
                 return null;
             }
 
-			/* TODO this method needs to be implemented first
-			loadCardFieldsFromDB(game);
-			*/
+
+            loadCardsFromDB(game);
+
 
             return game;
         } catch (SQLException e) {
@@ -371,6 +369,37 @@ class Repository implements IRepository {
         rs.close();
     }
 
+    private void createCardFieldsInDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectCardsStatement();
+        ps.setInt(1,game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        for( int i = 0; i < game.getPlayers().size(); i++)
+        {
+
+            Player player = game.getPlayer(i);
+
+            rs.moveToInsertRow();
+            rs.updateInt(GAME_GAMEID,game.getGameId());
+            rs.updateInt("playerID",i);
+            for(int x = 0; x < 5; x++)
+            {
+                if(!valueNullChecker(player.getProgramField(x).getCard()))
+                    rs.updateString("pCard"+(x+1), String.valueOf(player.getProgramField(x).getCard().command));
+                else rs.updateNull("pCard"+(x+1));
+            }
+
+            for(int x = 0; x < 8; x++)
+            {
+                if(!valueNullChecker(player.getCardField(x).getCard()))
+                    rs.updateString("cCard"+(x+1), String.valueOf(player.getCardField(x).getCard().command));
+                else rs.updateNull("cCard"+(x+1));
+            }
+            rs.insertRow();
+        }
+        rs.close();
+    }
 
     private void loadPlayersFromDB(Board game) throws SQLException {
         PreparedStatement ps = getSelectPlayersASCStatement();
@@ -470,6 +499,36 @@ class Repository implements IRepository {
                 // TODO error handling
                 System.err.println("Game in DB does not have a checkpoint with id " + i +"!");
             }
+        }
+        rs.close();
+    }
+
+    private void loadCardsFromDB(Board game) throws SQLException
+    {
+        PreparedStatement ps = getSelectCardASCStatement();
+        ps.setInt(1,game.getGameId());
+
+        ResultSet rs = ps.executeQuery();
+        while(rs.next())
+        {
+            int playerID = rs.getInt("playerID");
+
+            for(int i = 0; i < 5; i++)
+            {
+                String cardName = rs.getString("pCard"+(i+1));
+                if(cardName != null)
+                game.getPlayer(playerID).getProgramField(i).setCard(
+                        new CommandCard(Command.valueOf(cardName)));
+            }
+
+            for(int i = 0; i < 8; i++)
+            {
+                String cardName = rs.getString("cCard"+(i+1));
+                if(cardName != null)
+                game.getPlayer(playerID).getCardField(i).setCard(
+                        new CommandCard(Command.valueOf(rs.getString("cCard"+(i+1)))));
+            }
+
         }
         rs.close();
     }
@@ -621,6 +680,27 @@ class Repository implements IRepository {
         return  select_checkpoints_stmt;
     }
 
+    private static final String SQL_SELECT_CARD =
+            "SELECT * FROM Register WHERE gameID = ?";
+
+    private PreparedStatement select_cards_stmt = null;
+
+    private PreparedStatement getSelectCardsStatement()
+    {
+        Connection connection = connector.getConnection();
+        try
+        {
+            select_cards_stmt = connection.prepareStatement(
+                    SQL_SELECT_CARD,
+                    ResultSet.TYPE_FORWARD_ONLY,
+                    ResultSet.CONCUR_UPDATABLE);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return select_cards_stmt;
+    }
+
     private static final String SQL_SELECT_PLAYERS_ASC =
             "SELECT * FROM Player WHERE gameID = ? ORDER BY playerID ASC";
 
@@ -704,6 +784,28 @@ class Repository implements IRepository {
         return select_checkpoints_asc_stmt;
     }
 
+    private static final String SQL_SELECT_CARDS_ASC =
+            "SELECT * FROM Register Where gameID = ? ORDER BY playerID ASC";
+
+    private PreparedStatement select_cards_asc_stmt = null;
+
+    private PreparedStatement getSelectCardASCStatement()
+    {
+        if(select_cards_asc_stmt == null)
+        {
+            Connection connection = connector.getConnection();
+            try
+            {
+                select_cards_asc_stmt = connection.prepareStatement(
+                        SQL_SELECT_CARDS_ASC);
+            } catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return select_cards_asc_stmt;
+    }
+
     private static final String SQL_SELECT_GAMES =
             "SELECT gameID, name FROM Game";
 
@@ -723,6 +825,9 @@ class Repository implements IRepository {
         return select_games_stmt;
     }
 
-
-
+    private boolean valueNullChecker(CommandCard card)
+    {
+        if(card == null) return true;
+        else return false;
+    }
 }

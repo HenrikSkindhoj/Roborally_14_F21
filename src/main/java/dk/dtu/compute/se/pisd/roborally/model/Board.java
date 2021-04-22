@@ -386,4 +386,8 @@ public class Board extends Subject {
     public void setCheckpoints(Checkpoints checkpoints) {
         this.checkpoints = checkpoints;
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
 }
