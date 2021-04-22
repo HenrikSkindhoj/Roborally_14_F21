@@ -47,7 +47,6 @@ public class Laser extends FieldAction
         this.x = x;
         this.y = y;
         this.id = id;
-        this.startSpace = startSpace;
         this.heading = heading;
     }
 
@@ -55,17 +54,20 @@ public class Laser extends FieldAction
     {
         ArrayList<Space> newOccupiedSpaces = new ArrayList<>();
 
+        if(occupiedSpaces != null) {
+            removeLasersFromSpaces();
+        }
         newOccupiedSpaces.add(startSpace);
-
         if(heading == NORTH)
         {
             for (int y = startSpace.y-1; y > 0; y--)
             {
-                if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == NORTH) {
+                if((!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == NORTH)
+                        || playerHit(startSpace.board.getSpace(startSpace.x, y))) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
                     startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == SOUTH)
+                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == NORTH.next().next())
                 {
                     break;
                 } else {
@@ -77,11 +79,12 @@ public class Laser extends FieldAction
         {
             for (int x = startSpace.x+1; x < startSpace.board.width; x++)
             {
-                if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST) {
+                if((!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST)
+                        || playerHit(startSpace.board.getSpace(x, startSpace.y))) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
                     startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST)
+                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST.next().next())
                 {
                     break;
                 } else {
@@ -93,11 +96,12 @@ public class Laser extends FieldAction
         {
             for (int y = startSpace.y+1; y < startSpace.board.height; y++)
             {
-                if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == SOUTH) {
+                if((!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() == SOUTH)
+                        || playerHit(startSpace.board.getSpace(startSpace.x, y))) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(startSpace.x, y));
                     startSpace.board.getSpace(startSpace.x, y).setLaser(this);
                     break;
-                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() ==  NORTH)
+                } else if(!startSpace.board.getSpace(startSpace.x, y).getWalls().isEmpty() && startSpace.board.getSpace(startSpace.x, y).getWalls().get(0).getHeading() ==  SOUTH.next().next())
                 {
                     break;
                 } else {
@@ -109,11 +113,12 @@ public class Laser extends FieldAction
         {
             for (int x = startSpace.x-1; x > 0; x--)
             {
-                if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST) {
+                if((!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST)
+                        || playerHit(startSpace.board.getSpace(x, startSpace.y))) {
                     newOccupiedSpaces.add(startSpace.board.getSpace(x, startSpace.y));
                     startSpace.board.getSpace(x, startSpace.y).setLaser(this);
                     break;
-                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == EAST)
+                } else if(!startSpace.board.getSpace(x, startSpace.y).getWalls().isEmpty() && startSpace.board.getSpace(x, startSpace.y).getWalls().get(0).getHeading() == WEST.next().next())
                 {
                     break;
                 } else {
@@ -125,6 +130,27 @@ public class Laser extends FieldAction
 
         endSpace = newOccupiedSpaces.get(newOccupiedSpaces.size()-1);
         occupiedSpaces = newOccupiedSpaces;
+    }
+
+    private boolean playerHit(Space space)
+    {
+        if(space.getPlayer() != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void removeLasersFromSpaces()
+    {
+        ArrayList<Space> arr = occupiedSpaces;
+        if(!arr.isEmpty())
+        {
+            for (Space space : arr)
+            {
+                space.setLaser(null);
+            }
+        }
     }
 
     public boolean checkIfOccupied(Space space)
