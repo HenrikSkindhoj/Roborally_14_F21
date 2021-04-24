@@ -274,7 +274,7 @@ public class GameController {
         }
     }
 
-    private void moveToSpace (
+    public void moveToSpace (
             @NotNull Player player,
             @NotNull Space space,
             @NotNull Heading heading) throws ImpossibleMoveException{
