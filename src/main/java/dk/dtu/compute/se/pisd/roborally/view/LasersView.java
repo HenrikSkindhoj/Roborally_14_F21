@@ -8,12 +8,22 @@ import dk.dtu.compute.se.pisd.roborally.model.Player;
 
 import java.util.ArrayList;
 
+/**
+ * ...
+ *
+ * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
+ *
+ */
 public class LasersView implements ViewObserver{
 
     private Board board;
 
     private ArrayList<Laser> laserViews;
 
+    /**
+     * <p>Construct for LasersView</p>
+     * @param gameController a {@link dk.dtu.compute.se.pisd.roborally.controller.GameController} object
+     */
     public LasersView(GameController gameController)
     {
         board = gameController.board;

@@ -338,6 +338,14 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>moveToSpace</p>
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
+     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @throws ImpossibleMoveException
+     * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
+     */
     public void moveToSpace (
             @NotNull Player player,
             @NotNull Space space,
@@ -504,6 +512,12 @@ public class GameController {
         }
     }
 
+    /**
+     * <p>spam</p>
+     * A method which contains the function of the spam command card.
+     * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
+     * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
+     */
     public void spam(@NotNull Player player)
     {
         Command[] commands = Command.values();

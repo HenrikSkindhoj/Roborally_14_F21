@@ -152,6 +152,9 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * A method for when a player takes damage and receives a spam card.
+     */
     public void damage()
     {
         hit++;
@@ -159,13 +162,16 @@ public class Player extends Subject {
 
     /**
      * Returns amount of hits player has taken.
-     * @return
+     * @return hit a int.
      */
     public int numHits()
     {
         return hit;
     }
 
+    /**
+     * When a player plays a spam card, they get one less hit.
+     */
     public void rejuvenate()
     {
         hit--;

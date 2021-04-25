@@ -398,7 +398,7 @@ public class Board extends Subject {
     }
 
     /**
-     *
+     * <p>Getter for the checkpoints<code>getCheckpoints</code></p>
      * @return a checkpoints object
      */
     public Checkpoints getCheckpoints() {

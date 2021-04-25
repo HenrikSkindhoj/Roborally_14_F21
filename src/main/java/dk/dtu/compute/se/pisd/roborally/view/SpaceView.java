@@ -59,14 +59,12 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public final Space space;
     public Checkpoints checkpointsView;
-
     public Lasers laserView;
 
 
 
     /**
      * <p>Constructor for SpaceView.</p>
-     *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
     public SpaceView(@NotNull Space space) {
@@ -83,9 +81,6 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setPrefHeight(SPACE_HEIGHT);
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
-
-
-
 
         // updatePlayer();
         // This space view should listen to changes of the space
@@ -160,6 +155,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * <p>updateCheckpoints.</p>
      * Draws the checkpoints, and decides how they should look.
      * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
      */
     public void updateCheckpoint(Checkpoint checkpoint)
     {
@@ -179,6 +175,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * <p>updateWall.</p>
      * Draws the walls, and decides how they should look.
      * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
@@ -230,6 +227,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      * <p>updateLasers</p>
      * Draws the laser, and decides how they should look.
      * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
+     * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
      */
     public void updateLasers(Laser laser)
     {
@@ -292,6 +290,12 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(can);
     }
 
+    /**
+     * <p>updateConveyorBelt.</p>
+     * Draws the conveyor belts, and decides how they should look.
+     * @param conveyorBelt a {@link dk.dtu.compute.se.pisd.roborally.model.ConveyorBelt} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     */
     public void updateConveyorBelt(ConveyorBelt conveyorBelt){
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
         final Image conveyor = new Image ("Visuals/Conveyorbelt.PNG");
@@ -332,6 +336,12 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(can);
     }
 
+    /**
+     * <p>updateGear.</p>
+     * Draws the gears, and decides how they should look.
+     * @param gear a {@link dk.dtu.compute.se.pisd.roborally.model.Gear} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     */
     public void updateGear(Gear gear){
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
         final Image gearR = new Image ("Visuals/GearRight.PNG");

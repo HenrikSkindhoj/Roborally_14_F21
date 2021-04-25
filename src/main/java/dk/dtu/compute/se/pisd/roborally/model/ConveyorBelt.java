@@ -71,6 +71,7 @@ public class ConveyorBelt extends FieldAction {
     /**
      * <p>Getter for location of the conveyor belt on the x axis <code>getX</code>.</p>
      * @return a int x.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public int getX() {
         return x;
@@ -79,6 +80,7 @@ public class ConveyorBelt extends FieldAction {
     /**
      * <p>Getter for location of the conveyor belt on the y axis <code>getX</code>.</p>
      * @return a int y.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public int getY() {
         return y;
@@ -87,6 +89,7 @@ public class ConveyorBelt extends FieldAction {
     /**
      * <p>Getter for the heading og the conveyor belt<code>getHeading</code>.</p>
      * @return the heading of the conveyor belt.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
 
     public Heading getHeading() {
@@ -96,6 +99,7 @@ public class ConveyorBelt extends FieldAction {
     /**
      * <p>Setter for the heading of the conveyor belt <code>setHeading</code>.</p>
      * @param heading the heading of the conveyor belt.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void setHeading(Heading heading) {
         this.heading = heading;

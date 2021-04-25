@@ -4,6 +4,12 @@ import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * ...
+ *
+ * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+ *
+ */
 public class Gear extends FieldAction {
     /**
      * The id of a gear
@@ -22,7 +28,7 @@ public class Gear extends FieldAction {
 
     /**
      * <p>Constructor for Gear.</p>
-     * @param heading {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @param command {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
      * @param x a int.
      * @param y a int.
      * @param id a int.
@@ -55,14 +61,29 @@ public class Gear extends FieldAction {
     }
 
 
+    /**
+     *  <p>Getter for the direction the gear turns <code>getCommand</code>.</p>
+     * @return command a {@link dk.dtu.compute.se.pisd.roborally.model.Command} object.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     */
     public Command getCommand() {
         return command;
     }
 
+    /**
+     *  <p>Getter for location of a gear on the x axis <code>getX</code>.</p>
+     * @return x int.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *  <p>Getter for location of a gear on the y axis <code>getY</code>.</p>
+     * @return y int.
+     * @author Henrik Lynggard Skindhøj, s205464@student.dtu.dk
+     */
     public int getY() {
         return y;
     }

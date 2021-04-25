@@ -162,18 +162,35 @@ public class Space extends Subject {
         this.checkpoint = checkpoint;
     }
 
+    /**
+     * <p>Getter for the conveyor belts <code>getConveyorBelt</code>.</p>
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.ConveyorBelt} object.
+     *
+     */
     public ConveyorBelt getConveyorBelt() {
         return conveyorBelt;
     }
 
+    /**
+     * <p>Setter for the conveyor belts <code>setConveyorBelt</code>.</p>
+     * @param conveyorBelt a {@link dk.dtu.compute.se.pisd.roborally.model.ConveyorBelt} object.
+     */
     public void setConveyorBelt(ConveyorBelt conveyorBelt) {
         this.conveyorBelt = conveyorBelt;
     }
 
+    /**
+     * <p>Getter for the gears <code>getGear</code>.</p>
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Gear} object.
+     */
     public Gear getGear() {
         return gear;
     }
 
+    /**
+     * <p>Setter for the gears <code>setGear</code>.</p>
+     * @param gear a {@link dk.dtu.compute.se.pisd.roborally.model.Gear} object.
+     */
     public void setGear(Gear gear) {
         this.gear = gear;
     }
