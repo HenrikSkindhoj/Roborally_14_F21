@@ -14,14 +14,14 @@ public class Gear extends FieldAction {
      * The location of a wall on the y-axis
      */
     int y;
-    Heading heading;
+    String direction;
     Command command;
 
-    public Gear (int id, int x, int y, Heading heading){
+    public Gear (int id, int x, int y, String direction){
         this.id = id;
         this.x = x;
         this.y = y;
-        this.heading = heading;
+        this.direction = direction;
     }
 
     @Override
@@ -42,5 +42,13 @@ public class Gear extends FieldAction {
 
         }
         return false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

@@ -22,10 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.fileaccess.model;
 
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
-import dk.dtu.compute.se.pisd.roborally.model.ConveyorBelt;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Laser;
-import dk.dtu.compute.se.pisd.roborally.model.Wall;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +44,10 @@ public class SpaceTemplate {
     public  Laser laser;
 
     public Heading heading;
+
     public ConveyorBelt conveyorBelt;
+
+    public Gear gear;
 
     /** The location of a space on the x axis. */
     public int x;

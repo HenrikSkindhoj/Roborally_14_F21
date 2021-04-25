@@ -135,6 +135,13 @@ public class SpaceView extends StackPane implements ViewObserver {
                     }
                 }
             }
+            for(int i = 0; i < space.board.getGears().size(); i++) {
+                if (space.getGear() != null) {
+                    if (this.space.x == space.getGear().getX() && this.space.y == space.getGear().getY()) {
+                        updateGear(space.getGear());
+                    }
+                }
+            }
         }
     }
 
@@ -242,6 +249,10 @@ public class SpaceView extends StackPane implements ViewObserver {
         }
 
         this.getChildren().add(can);
+    }
+
+    public void updateGear(Gear gear){
+
     }
 
 }
