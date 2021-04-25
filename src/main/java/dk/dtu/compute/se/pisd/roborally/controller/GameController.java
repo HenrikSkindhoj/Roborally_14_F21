@@ -226,6 +226,9 @@ public class GameController {
                                 alert.setHeaderText(null);
                                 alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
                                 alert.showAndWait();
+                                if(!alert.isShowing()){
+                                    System.exit(1);
+                                }
 
                             }
                         }
@@ -290,6 +293,9 @@ public class GameController {
                             alert.setHeaderText(null);
                             alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
                             alert.showAndWait();
+                            if(!alert.isShowing()){
+                                System.exit(1);
+                            }
 
                         }
                     }
