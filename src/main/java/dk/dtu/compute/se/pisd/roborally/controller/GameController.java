@@ -187,8 +187,16 @@ public class GameController {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
                         board.setCurrentPlayer(board.getPlayer(0));
+                        for (int i = 0; i < board.getPlayersNumber(); i++) {
+                            if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
+                                board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                            }
+                        }
                     } else {
                         for(int i = 0; i<board.getPlayersNumber(); i++){
+                            if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
+                                board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                            }
                             board.getPlayer(i).controlForCheckpoints();
                         }
                         startProgrammingPhase();
@@ -226,9 +234,17 @@ public class GameController {
                     makeProgramFieldsVisible(step);
                     board.setStep(step);
                     board.setCurrentPlayer(board.getPlayer(0));
+                    for (int i = 0; i < board.getPlayersNumber(); i++) {
+                        if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
+                            board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                        }
+                    }
                     continuePrograms();
                 } else {
                     for(int i = 0; i<board.getPlayersNumber(); i++){
+                        if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
+                            board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                        }
                         board.getPlayer(i).controlForCheckpoints();
                         if(board.getPlayer(i).isWinner()){
                             board.setPhase(Phase.END);
@@ -299,10 +315,12 @@ public class GameController {
             }
         }
         player.setSpace(space);
+
         if(space.getLaser() != null)
         {
             System.out.println("hit!");
         }
+
     }
 
 
