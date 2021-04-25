@@ -23,13 +23,20 @@ package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.FileInputStream;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
 
@@ -70,11 +77,21 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
 
+        Image image = new Image("Visuals/Basicfloor.PNG");
+
+        Group root = new Group();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root, 75, 75);
+        stage.setScene(scene);
+        stage.show();
+
+        /*
         if ((space.x + space.y) % 2 == 0) {
             this.setStyle("-fx-background-color: white;");
         } else {
             this.setStyle("-fx-background-color: black;");
         }
+         */
 
         // updatePlayer();
         // This space view should listen to changes of the space
