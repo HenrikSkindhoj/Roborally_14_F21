@@ -127,12 +127,6 @@ public class SpaceView extends StackPane implements ViewObserver {
                     updateWall(space.board.getWalls().get(i));
                 }
             }
-            for(int i = 0; i < space.board.getLasers().size(); i++)
-            {
-                if(space.board.getLasers().get(i).checkIfOccupied(this.space)) {
-                    updateLasers(space.board.getLasers().get(i));
-                }
-            }
             for(int i = 0; i < space.board.getConveyorBelts().size(); i++) {
                 if (space.getConveyorBelt() != null) {
                     if (this.space.x == space.getConveyorBelt().getX() && this.space.y == space.getConveyorBelt().getY()) {
@@ -145,6 +139,12 @@ public class SpaceView extends StackPane implements ViewObserver {
                     if (this.space.x == space.getGear().getX() && this.space.y == space.getGear().getY()) {
                         updateGear(space.getGear());
                     }
+                }
+            }
+            for(int i = 0; i < space.board.getLasers().size(); i++)
+            {
+                if(space.board.getLasers().get(i).checkIfOccupied(this.space)) {
+                    updateLasers(space.board.getLasers().get(i));
                 }
             }
             updatePlayer();
