@@ -19,8 +19,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
-package dk.dtu.compute.se.pisd.roborally.controller;
+package dk.dtu.compute.se.pisd.roborally.model;
 
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
@@ -34,8 +36,33 @@ import org.jetbrains.annotations.NotNull;
  *
  */
 public class ConveyorBelt extends FieldAction {
+    int id;
+    /**
+     * The location of a wall on the x-axis
+     */
+    int x;
+    /**
+     * The location of a wall on the y-axis
+     */
+    int y;
 
     private Heading heading;
+
+    public ConveyorBelt(int id, int x, int y, Heading heading){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.heading = heading;
+
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public Heading getHeading() {
         return heading;
@@ -47,7 +74,20 @@ public class ConveyorBelt extends FieldAction {
 
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
-        // TODO needs to be implemented
+        if(space.getPlayer() != null){
+            Space conveyor = space;
+            Heading heading = getHeading();
+
+            Space conveyorTarget = gameController.board.getNeighbour(conveyor, heading);
+            if (conveyorTarget != null) {
+                try {
+                    gameController.moveToSpace(space.getPlayer(), conveyorTarget, heading);
+                } catch (ImpossibleMoveException e) {
+
+                }
+            }
+
+        }
         return false;
     }
 

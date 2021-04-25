@@ -107,6 +107,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         if (subject == this.space) {
             updatePlayer();
 
+
             for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().size(); i++)
             {
                 if(this.space.x == space.board.getCheckpoints().getCheckpoints().get(i).getX() && this.space.y ==
@@ -126,7 +127,13 @@ public class SpaceView extends StackPane implements ViewObserver {
                 if(space.board.getLasers().get(i).checkIfOccupied(this.space)) {
                     updateLasers(space.board.getLasers().get(i));
                 }
-
+            }
+            for(int i = 0; i < space.board.getConveyorBelts().size(); i++) {
+                if (space.getConveyorBelt() != null) {
+                    if (this.space.x == space.getConveyorBelt().getX() && this.space.y == space.getConveyorBelt().getY()) {
+                        updateConveyorBelt(space.getConveyorBelt());
+                    }
+                }
             }
         }
     }
@@ -151,7 +158,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * <p>updateWall.</p>
      * Draws the walls, and decides how they should look.
-     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
@@ -202,6 +208,38 @@ public class SpaceView extends StackPane implements ViewObserver {
             {
                 gc.strokeLine(0,35,75,35);
             }
+        this.getChildren().add(can);
+    }
+
+    public void updateConveyorBelt(ConveyorBelt conveyorBelt){
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.LIME);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(conveyorBelt.getHeading() == Heading.NORTH) {
+            gc.strokeLine(35, 0, 75, 75);
+            gc.strokeLine(35, 0, 0, 75);
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+        }
+        else if(conveyorBelt.getHeading() == Heading.SOUTH) {
+            gc.strokeLine(0, 0, 35, 75);
+            gc.strokeLine(75, 0, 35, 75);
+            gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+        }
+        else if(conveyorBelt.getHeading() == Heading.EAST) {
+            gc.strokeLine(75, 35, 0, 0);
+            gc.strokeLine(75, 35, 0, 75);
+            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
+        }
+        else if(conveyorBelt.getHeading() == Heading.WEST) {
+            gc.strokeLine(75, 0, 0, 35);
+            gc.strokeLine(75, 75, 0, 35);
+            gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);;
+        }
+
         this.getChildren().add(can);
     }
 

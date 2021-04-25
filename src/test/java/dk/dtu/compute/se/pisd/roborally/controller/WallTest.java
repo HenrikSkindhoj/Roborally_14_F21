@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WallTest {
-    /*
+
     private final int TEST_WIDTH = 8;
     private final int TEST_HEIGHT = 8;
 
@@ -45,6 +45,5 @@ public class WallTest {
             Assertions.assertEquals(Heading.SOUTH, current.getHeading(), "Player 0 should be heading SOUTH!");
         }
 
-     */
 
 }

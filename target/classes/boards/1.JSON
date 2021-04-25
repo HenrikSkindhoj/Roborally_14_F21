@@ -6,6 +6,11 @@
 
 "spaces":[
 
+  {"x":0, "y":7, "conveyorBelt": {"id": 1, "x": 0, "y": 7, "heading": "NORTH"}},
+  {"x":0, "y":6, "conveyorBelt": {"id": 2, "x": 0, "y": 6, "heading": "NORTH"}},
+  {"x":0, "y":5, "conveyorBelt": {"id": 3, "x": 0, "y": 5, "heading": "NORTH"}},
+  {"x":0, "y":4, "conveyorBelt": {"id": 4, "x": 0, "y": 4, "heading": "NORTH"}},
+  
   {"walls":[{"id":1, "x": 0, "y": 0,"heading":"WEST"}], "x":0, "y":0},
   {"walls":[{"id":2, "x": 0, "y": 1,"heading":"WEST"}], "x":0, "y":1},
   {"walls":[{"id":3, "x": 0, "y": 2,"heading":"NORTH"}], "x":0, "y":2},
