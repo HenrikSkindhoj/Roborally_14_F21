@@ -441,4 +441,9 @@ public class Board extends Subject {
     public List<Player> getPlayers() {
         return players;
     }
+
+    public void changeInView()
+    {
+        notifyChange();
+    }
 }

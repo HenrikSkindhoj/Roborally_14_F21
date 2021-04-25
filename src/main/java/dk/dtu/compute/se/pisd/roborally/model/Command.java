@@ -45,7 +45,8 @@ public enum Command {
     OPTION_FORWARD_FAST_FORWARD("Forward or Fast Fwd", FORWARD, FAST_FORWARD),
     SPRINT_FORWARD("Sprint Fwd"),
     BACK_UP("Back Up"),
-    U_TURN("U-Turn");
+    U_TURN("U-Turn"),
+    SPAM("SPAM");
 
     /** Constant the name of a command */
     final public String displayName;
