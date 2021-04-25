@@ -158,14 +158,17 @@ public class Player extends Subject {
     }
 
     /**
-     * Returns amount of hits player has taken and resets it to 0.
+     * Returns amount of hits player has taken.
      * @return
      */
-    public int rejuvenate()
+    public int numHits()
     {
-        int hits = hit;
-        hit = 0;
-        return hits;
+        return hit;
+    }
+
+    public void rejuvenate()
+    {
+        hit--;
     }
 
     /**

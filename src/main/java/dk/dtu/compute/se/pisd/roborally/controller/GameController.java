@@ -23,9 +23,6 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogEvent;
 import org.jetbrains.annotations.NotNull;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Command.SPAM;
@@ -97,7 +94,7 @@ public class GameController {
                     field.setCard(null);
                     field.setVisible(true);
                 }
-                int hits = player.rejuvenate();
+                int hits = player.numHits();
                 for (int j = 0; j < Player.NO_CARDS; j++) {
                     CommandCardField field = player.getCardField(j);
                     if(j >= (player.NO_CARDS - hits))
@@ -516,6 +513,7 @@ public class GameController {
             Command command = commands[ran];
             executeCommand(player,command);
             executeCommand(player, command);
+            player.rejuvenate();
         }
     }
 
