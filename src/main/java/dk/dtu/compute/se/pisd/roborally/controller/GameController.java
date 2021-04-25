@@ -23,10 +23,9 @@ package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogEvent;
 import org.jetbrains.annotations.NotNull;
+
+import static dk.dtu.compute.se.pisd.roborally.model.Command.SPAM;
 
 /**
  * ...
@@ -95,9 +94,15 @@ public class GameController {
                     field.setCard(null);
                     field.setVisible(true);
                 }
+                int hits = player.numHits();
                 for (int j = 0; j < Player.NO_CARDS; j++) {
                     CommandCardField field = player.getCardField(j);
-                    field.setCard(generateRandomCommandCard());
+                    if(j >= (player.NO_CARDS - hits))
+                    {
+                        field.setCard(new CommandCard(SPAM));
+                    } else {
+                        field.setCard(generateRandomCommandCard());
+                    }
                     field.setVisible(true);
                 }
             }
@@ -107,7 +112,7 @@ public class GameController {
 
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
-        int random = (int) (Math.random() * commands.length);
+        int random = (int) (Math.random() * commands.length-1);
         return new CommandCard(commands[random]);
     }
 
@@ -168,6 +173,9 @@ public class GameController {
     private void continuePrograms() {
         do {
             executeNextStep();
+            for (Laser laser: board.getLasers()) {
+                laser.setEndSpace();
+            }
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
@@ -301,25 +309,28 @@ public class GameController {
 
             switch (command) {
                 case FORWARD:
-                    this.moveForward(player);
+                    moveForward(player);
                     break;
                 case RIGHT:
-                    this.turnRight(player);
+                    turnRight(player);
                     break;
                 case LEFT:
-                    this.turnLeft(player);
+                    turnLeft(player);
                     break;
                 case FAST_FORWARD:
-                    this.fastForward(player);
+                    fastForward(player);
                     break;
                 case SPRINT_FORWARD:
-                    this.sprintForward(player);
+                    sprintForward(player);
                     break;
                 case U_TURN:
-                    this.uTurn(player);
+                    uTurn(player);
                     break;
                 case BACK_UP:
-                    this.backUp(player);
+                    backUp(player);
+                    break;
+                case SPAM:
+                    spam(player);
                     break;
                 default:
                     // DO NOTHING (for now)
@@ -353,9 +364,11 @@ public class GameController {
         }
         player.setSpace(space);
 
+
         if(space.getLaser() != null)
         {
-            System.out.println("hit!");
+            System.out.println("Hit!");
+            player.damage();
             space.getLaser().setEndSpace();
         }
 
@@ -488,6 +501,19 @@ public class GameController {
 
         if (currentSpace != null && player.board == currentSpace.board) {
             player.setHeading(heading);
+        }
+    }
+
+    public void spam(@NotNull Player player)
+    {
+        Command[] commands = Command.values();
+        if (player.board == board)
+        {
+            int ran = (int) (Math.random() * commands.length-1);
+            Command command = commands[ran];
+            executeCommand(player,command);
+            executeCommand(player, command);
+            player.rejuvenate();
         }
     }
 

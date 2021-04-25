@@ -56,8 +56,6 @@ public class BoardView extends VBox implements ViewObserver {
      * The current status of the game.
      */
     private Label statusLabel;
-    private Checkpoints checkpointsView;
-    private Lasers laserView;
     private SpaceEventHandler spaceEventHandler;
 
     /**
@@ -71,7 +69,6 @@ public class BoardView extends VBox implements ViewObserver {
         mainBoardPane = new GridPane();
         playersView = new PlayersView(gameController);
         statusLabel = new Label("<no status>");
-        checkpointsView = new Checkpoints(4,board);
 
         this.getChildren().add(mainBoardPane);
         this.getChildren().add(playersView);
