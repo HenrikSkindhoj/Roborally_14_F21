@@ -397,6 +397,10 @@ public class Board extends Subject {
         return conveyorBelts;
     }
 
+    /**
+     *
+     * @return a checkpoints object
+     */
     public Checkpoints getCheckpoints() {
         return checkpoints;
     }

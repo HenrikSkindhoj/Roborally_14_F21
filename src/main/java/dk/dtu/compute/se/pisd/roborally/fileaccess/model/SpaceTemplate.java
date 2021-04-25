@@ -47,6 +47,7 @@ public class SpaceTemplate {
     public  Laser laser;
 
     public Heading heading;
+
     public ConveyorBelt conveyorBelt;
 
     /** The location of a space on the x axis. */

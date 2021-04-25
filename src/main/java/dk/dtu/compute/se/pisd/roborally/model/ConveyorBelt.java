@@ -36,24 +36,29 @@ import org.jetbrains.annotations.NotNull;
  *
  */
 public class ConveyorBelt extends FieldAction {
+    /**
+     * The id of a conveyor belt.
+     */
     int id;
     /**
-     * The location of a wall on the x-axis
+     * The location of a conveyor on the x-axis
      */
     int x;
     /**
-     * The location of a wall on the y-axis
+     * The location of a conveyor on the y-axis
      */
     int y;
-
     /**
      * The direction a conveyor belt points.
      */
     private Heading heading;
 
     /**
-     * <p>Getter for the heading og the conveyor belt<code>getHeading</code>.</p>
-     * @return the heading of the conveyor belt.
+     * <p>Constructor for ConveyorBelt. </p>
+     * @param heading {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @param x a int.
+     * @param y a int.
+     * @param id a int.
      */
     public ConveyorBelt(int id, int x, int y, Heading heading){
         this.id = id;
@@ -63,13 +68,26 @@ public class ConveyorBelt extends FieldAction {
 
     }
 
+    /**
+     * <p>Getter for location of the conveyor belt on the x axis <code>getX</code>.</p>
+     * @return a int x.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * <p>Getter for location of the conveyor belt on the y axis <code>getX</code>.</p>
+     * @return a int y.
+     */
     public int getY() {
         return y;
     }
+
+    /**
+     * <p>Getter for the heading og the conveyor belt<code>getHeading</code>.</p>
+     * @return the heading of the conveyor belt.
+     */
 
     public Heading getHeading() {
         return heading;

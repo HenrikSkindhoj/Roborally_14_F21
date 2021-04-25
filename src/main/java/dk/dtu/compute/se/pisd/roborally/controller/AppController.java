@@ -147,7 +147,6 @@ public class AppController implements Observer {
      * This method makes it possible to load previously saved games, from the database.
      * When a user presses load game, the user will receive a list of saved games, that they can load.
      * If there are no games saved in the database, the method will tell the player so.
-     * If the user tries to load a game, and something goes wrong, the method will also say so.
      *
      */
     public void loadGame() {

@@ -5,6 +5,9 @@ import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 import org.jetbrains.annotations.NotNull;
 
 public class Gear extends FieldAction {
+    /**
+     * The id of a gear
+     */
     int id;
     /**
      * The location of a wall on the x-axis
@@ -17,6 +20,13 @@ public class Gear extends FieldAction {
     Heading heading;
     Command command;
 
+    /**
+     * <p>Constructor for Gear.</p>
+     * @param heading {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @param x a int.
+     * @param y a int.
+     * @param id a int.
+     */
     public Gear (int id, int x, int y, Heading heading){
         this.id = id;
         this.x = x;
