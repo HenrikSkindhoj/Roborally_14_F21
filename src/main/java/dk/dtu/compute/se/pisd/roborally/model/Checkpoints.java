@@ -47,7 +47,9 @@ public class Checkpoints {
 
         for(int i = 0; i < numberOfCheckpoints; i++)
         {
-            if(board.getSpace(arrX[i], arrY[i]).getCheckpoint() == null && board.getSpace(arrX[i], arrY[i]).getGear() == null)
+            Space space = board.getSpace(arrX[i],arrY[i]);
+            if(space.getCheckpoint() == null && space.getGear() == null
+            && (space.getLaser() == null || space.getLaser().getStartSpace() != space))
                 checkpoints.add(new Checkpoint(arrX[i], arrY[i], i+1));
         }
     }
