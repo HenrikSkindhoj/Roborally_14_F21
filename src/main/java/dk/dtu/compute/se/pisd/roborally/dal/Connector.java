@@ -47,6 +47,9 @@ class Connector {
 
     private Connection connection;
 
+    /**
+     * <p>Constructor for Connector.</p>
+     */
     Connector() {
         try {
             // String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
@@ -88,7 +91,10 @@ class Connector {
             } catch (SQLException e) {}
         }
     }
-
+    /**
+     * <p>Getter for the connection. <code>getConnection</code>.</p>
+     * @return a connection.
+     */
     Connection getConnection() {
         return connection;
     }

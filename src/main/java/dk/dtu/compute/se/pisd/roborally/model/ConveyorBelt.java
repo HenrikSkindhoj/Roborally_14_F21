@@ -46,8 +46,15 @@ public class ConveyorBelt extends FieldAction {
      */
     int y;
 
+    /**
+     * The direction a conveyor belt points.
+     */
     private Heading heading;
 
+    /**
+     * <p>Getter for the heading og the conveyor belt<code>getHeading</code>.</p>
+     * @return the heading of the conveyor belt.
+     */
     public ConveyorBelt(int id, int x, int y, Heading heading){
         this.id = id;
         this.x = x;
@@ -68,10 +75,15 @@ public class ConveyorBelt extends FieldAction {
         return heading;
     }
 
+    /**
+     * <p>Setter for the heading of the conveyor belt <code>setHeading</code>.</p>
+     * @param heading the heading of the conveyor belt.
+     */
     public void setHeading(Heading heading) {
         this.heading = heading;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         if(space.getPlayer() != null){

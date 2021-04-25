@@ -57,8 +57,10 @@ public class AppController implements Observer {
     /** Constant <code>PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta")</code> */
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
+    /** Constant <code>MAP_OPTIONS = Arrays.asList("1", "2")</code> */
     final private List<String> MAP_OPTIONS = Arrays.asList("1", "2");
 
+    /** Constant */
     final private RoboRally roboRally;
 
     private GameController gameController;
@@ -124,7 +126,7 @@ public class AppController implements Observer {
 
     /**
      * <p>saveGame.</p>
-     * Currently not implemented
+     * This method saves the current game in the database, if there is a game currently being played.
      */
     public void saveGame() {
         IRepository repo = RepositoryAccess.getRepository();
@@ -142,6 +144,11 @@ public class AppController implements Observer {
 
     /**
      * <p>loadGame.</p>
+     * This method makes it possible to load previously saved games, from the database.
+     * When a user presses load game, the user will receive a list of saved games, that they can load.
+     * If there are no games saved in the database, the method will tell the player so.
+     * If the user tries to load a game, and something goes wrong, the method will also say so.
+     *
      */
     public void loadGame() {
         if (gameController == null) {

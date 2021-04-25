@@ -47,6 +47,7 @@ public enum Command {
     BACK_UP("Back Up"),
     U_TURN("U-Turn");
 
+    /** Constant the name of a command */
     final public String displayName;
 
     // XXX Assignment V3

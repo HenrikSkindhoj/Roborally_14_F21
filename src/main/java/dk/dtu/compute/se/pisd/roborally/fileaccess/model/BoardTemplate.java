@@ -35,8 +35,13 @@ import java.util.List;
  */
 public class BoardTemplate {
 
+    /** The width of the board. */
     public int width;
+
+    /** The height of the board. */
     public int height;
+
+    /**<code>spaces = new ArrayList<>()</code> */
     public List<SpaceTemplate> spaces = new ArrayList<>();
 
 }
