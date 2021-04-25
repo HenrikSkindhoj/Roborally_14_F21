@@ -38,7 +38,7 @@ public class GameController {
 
     final public Board board;
 
-    private boolean gameOver = false;
+    public boolean gameOver = false;
 
     /**
      * <p>Constructor for GameController.</p>
@@ -203,7 +203,7 @@ public class GameController {
                                 alert.setHeaderText(null);
                                 alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
                                 alert.showAndWait();
-                                break;
+
                             }
                         }
                         if(!gameOver) {
@@ -253,7 +253,7 @@ public class GameController {
                             alert.setHeaderText(null);
                             alert.setContentText(board.getPlayer(i).getName() + " has won the game! The game will now close");
                             alert.showAndWait();
-                            break;
+
                         }
                     }
                     if(!gameOver) {
