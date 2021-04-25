@@ -56,6 +56,13 @@ public class ConveyorBelt extends FieldAction {
 
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     public Heading getHeading() {
         return heading;

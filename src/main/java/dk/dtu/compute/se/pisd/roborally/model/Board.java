@@ -362,6 +362,19 @@ public class Board extends Subject {
         return walls;
     }
 
+    public ArrayList<ConveyorBelt> getConveyorBelts()
+    {
+        ArrayList<ConveyorBelt> conveyorBelts = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for(int y = 0; y < height; y++) {
+                if(getSpace(x,y).getConveyorBelt() != null){
+                    conveyorBelts.add(getSpace(x,y).getConveyorBelt());
+                }
+            }
+        }
+        return conveyorBelts;
+    }
+
     public Checkpoints getCheckpoints() {
         return checkpoints;
     }
