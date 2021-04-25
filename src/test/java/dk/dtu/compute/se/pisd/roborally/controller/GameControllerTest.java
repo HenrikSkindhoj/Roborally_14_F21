@@ -1,9 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Heading;
-import dk.dtu.compute.se.pisd.roborally.model.Player;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -127,5 +124,35 @@ class GameControllerTest {
         Assertions.assertEquals(current, board.getSpace(0, 3).getPlayer(), "Player " + current.getName() + " should beSpace (0,3)!");
         Assertions.assertEquals(Heading.SOUTH, current.getHeading(), "Player 0 should be heading SOUTH!");
         Assertions.assertNull(board.getSpace(0, 0).getPlayer(), "Space (0,0) should be empty!");
+    }
+
+    @Test
+    void creatingSpamCards()
+    {
+        Player player = gameController.board.getPlayers().get(0);
+        player.damage();
+        player.damage();
+        gameController.startProgrammingPhase();
+
+        boolean contains2SpamCards = false;
+        int counter = 0;
+        int numOfSpam = 0;
+
+
+        while(counter != 8)
+        {
+            if(player.getCardField(counter).getCard().command == Command.SPAM)
+            {
+                numOfSpam++;
+            }
+            counter++;
+        }
+
+        if(numOfSpam == 2)
+        {
+            contains2SpamCards = true;
+        }
+
+        Assertions.assertTrue(contains2SpamCards);
     }
 }
