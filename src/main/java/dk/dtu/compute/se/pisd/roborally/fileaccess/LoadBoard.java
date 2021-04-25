@@ -79,6 +79,7 @@ public class LoadBoard {
                     space.setWalls(spaceTemplate.walls);
                     space.setConveyorBelt(spaceTemplate.conveyorBelt);
                     space.setLaser(spaceTemplate.laser);
+                    space.setGear(spaceTemplate.gear);
                     if(spaceTemplate.laser != null) {
                         spaceTemplate.laser.setStartSpace(result.getSpace(spaceTemplate.laser.x, spaceTemplate.laser.y));
                     }

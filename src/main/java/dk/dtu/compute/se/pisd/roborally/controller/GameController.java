@@ -198,11 +198,17 @@ public class GameController {
                             if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
                                 board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
                             }
+                            if(board.getPlayer(i).getSpace().getGear() != null){
+                                board.getPlayer(i).getSpace().getGear().doAction(this, board.getPlayer(i).getSpace());
+                            }
                         }
                     } else {
                         for(int i = 0; i<board.getPlayersNumber(); i++){
                             if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
                                 board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                            }
+                            if(board.getPlayer(i).getSpace().getGear() != null){
+                                board.getPlayer(i).getSpace().getGear().doAction(this, board.getPlayer(i).getSpace());
                             }
                             board.getPlayer(i).controlForCheckpoints();
                             if(board.getPlayer(i).isWinner()){
@@ -256,12 +262,18 @@ public class GameController {
                         if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
                             board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
                         }
+                        if(board.getPlayer(i).getSpace().getGear() != null){
+                            board.getPlayer(i).getSpace().getGear().doAction(this, board.getPlayer(i).getSpace());
+                        }
                     }
                     continuePrograms();
                 } else {
                     for(int i = 0; i<board.getPlayersNumber(); i++){
                         if (board.getPlayer(i).getSpace().getConveyorBelt() != null) {
                             board.getPlayer(i).getSpace().getConveyorBelt().doAction(this, board.getPlayer(i).getSpace());
+                        }
+                        if(board.getPlayer(i).getSpace().getGear() != null){
+                            board.getPlayer(i).getSpace().getGear().doAction(this, board.getPlayer(i).getSpace());
                         }
                         board.getPlayer(i).controlForCheckpoints();
                         if(board.getPlayer(i).isWinner()){

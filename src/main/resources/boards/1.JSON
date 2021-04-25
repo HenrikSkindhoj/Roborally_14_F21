@@ -5,7 +5,7 @@
 
 
 "spaces":[
-
+  {"x":1, "y":7, "gear": {"id": 1, "x":  1, "y": 7, "command": "LEFT"}},
   {"x":0, "y":7, "conveyorBelt": {"id": 1, "x": 0, "y": 7, "heading": "NORTH"}},
   {"x":0, "y":6, "conveyorBelt": {"id": 2, "x": 0, "y": 6, "heading": "NORTH"}},
   {"x":0, "y":5, "conveyorBelt": {"id": 3, "x": 0, "y": 5, "heading": "NORTH"}},

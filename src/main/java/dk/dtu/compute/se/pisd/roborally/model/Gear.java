@@ -17,7 +17,7 @@ public class Gear extends FieldAction {
      * The location of a wall on the y-axis
      */
     int y;
-    Heading heading;
+
     Command command;
 
     /**
@@ -27,11 +27,11 @@ public class Gear extends FieldAction {
      * @param y a int.
      * @param id a int.
      */
-    public Gear (int id, int x, int y, Heading heading){
+    public Gear (int id, int x, int y, Command command){
         this.id = id;
         this.x = x;
         this.y = y;
-        this.heading = heading;
+        this.command = command;
     }
 
     @Override
