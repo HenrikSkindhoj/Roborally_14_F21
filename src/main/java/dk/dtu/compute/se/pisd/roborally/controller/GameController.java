@@ -381,7 +381,6 @@ public class GameController {
 
         if(space.getLaser() != null)
         {
-            System.out.println("Hit!");
             player.damage();
             space.getLaser().setEndSpace();
         }
