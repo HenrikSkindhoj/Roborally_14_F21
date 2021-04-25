@@ -49,7 +49,7 @@ public class Checkpoints {
         {
             Space space = board.getSpace(arrX[i],arrY[i]);
             if(space.getCheckpoint() == null && space.getGear() == null
-            && (space.getLaser() == null || space.getLaser().getStartSpace() != space))
+            && space.getConveyorBelt() == null && (space.getLaser() == null || space.getLaser().getStartSpace() != space))
                 checkpoints.add(new Checkpoint(arrX[i], arrY[i], i+1));
         }
     }

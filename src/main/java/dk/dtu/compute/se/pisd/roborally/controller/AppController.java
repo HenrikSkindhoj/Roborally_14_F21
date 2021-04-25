@@ -58,7 +58,7 @@ public class AppController implements Observer {
     final private List<String> PLAYER_COLORS = Arrays.asList("red", "green", "blue", "orange", "grey", "magenta");
 
     /** Constant <code>MAP_OPTIONS = Arrays.asList("1", "2")</code> */
-    final private List<String> MAP_OPTIONS = Arrays.asList("1", "2", "High_Octane");
+    final private List<String> MAP_OPTIONS = Arrays.asList("High_Octane", "1", "2");
 
     /** Constant */
     final private RoboRally roboRally;
