@@ -234,19 +234,61 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateLasers(Laser laser)
     {
        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+       final Image laserStart = new Image ("Visuals/LaserStart.PNG");
+       final Image Laser = new Image ("Visuals/Laser.png");
 
         GraphicsContext gc = can.getGraphicsContext2D();
         gc.setStroke(Color.RED);
         gc.setLineWidth(5);
         gc.setLineCap(StrokeLineCap.ROUND);
 
-        if(laser.getHeading() == Heading.NORTH || laser.getHeading() == Heading.SOUTH)
-        {
-            gc.strokeLine(35,0,35,75);
-        } else
-            {
-                gc.strokeLine(0,35,75,35);
-            }
+        if(laser.getHeading() == NORTH || laser.getHeading() == SOUTH && this.space != laser.getStartSpace()) {
+            ImageView iv1 = new ImageView(Laser);
+            iv1.setRotate(270);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,0,0,75,75);
+        }
+        if(laser.getHeading() == EAST || laser.getHeading() == WEST && this.space != laser.getStartSpace()) {
+            ImageView iv1 = new ImageView(Laser);
+            iv1.setRotate(180);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,0,0,75,75);
+        }
+
+        if(laser.getHeading() == NORTH && this.space == laser.getStartSpace()) {
+            ImageView iv1 = new ImageView(laserStart);
+            iv1.setRotate(270);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,0,0,75,75);
+        }
+
+        if(laser.getHeading() == SOUTH && this.space == laser.getStartSpace()) {
+            ImageView iv1 = new ImageView(laserStart);
+            iv1.setRotate(90);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,0,0,75,75);
+        }
+
+        if(laser.getHeading() == EAST && this.space == laser.getStartSpace()) {
+            gc.drawImage(laserStart,0,0,75,75);
+        }
+
+        if(laser.getHeading() == WEST && this.space == laser.getStartSpace()) {
+            ImageView iv1 = new ImageView(laserStart);
+            iv1.setRotate(180);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,0,0,75,75);
+        }
         this.getChildren().add(can);
     }
 
