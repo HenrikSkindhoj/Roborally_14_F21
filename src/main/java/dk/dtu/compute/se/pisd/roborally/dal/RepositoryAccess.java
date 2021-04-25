@@ -31,6 +31,10 @@ public class RepositoryAccess {
 
     private static Repository repository;
 
+    /**
+     * <p>Getter repository <code>getRepository</code> .</p>
+     * @return a repository object.
+     */
     public static IRepository getRepository() {
         if(repository == null) {
             repository = new Repository(new Connector());

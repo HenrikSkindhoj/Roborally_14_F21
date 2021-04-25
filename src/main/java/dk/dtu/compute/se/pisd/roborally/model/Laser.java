@@ -25,14 +25,19 @@ public class Laser extends FieldAction
      */
     private Heading heading;
 
+    /** The location of the laser on the x axis */
     public int x;
 
+    /** The location of the laser on the y axis  */
     public int y;
 
+    /** The space where the laser should start on the board  */
     private Space startSpace;
 
+    /** The space where the laser should end on the board  */
     private Space endSpace;
 
+    /** A arraylist of all the spaces a laser is on.  */
     private ArrayList<Space> occupiedSpaces;
 
 
@@ -141,6 +146,10 @@ public class Laser extends FieldAction
         return false;
     }
 
+    /**
+     * <p> removeLasersFromSpaces.</p>
+     * Sets all the spaces where there is a laser to null, so it is removed.
+     */
     public void removeLasersFromSpaces()
     {
         ArrayList<Space> arr = occupiedSpaces;
@@ -154,6 +163,11 @@ public class Laser extends FieldAction
         }
     }
 
+    /**
+     * <p> checkIfOccupied.</p>
+     * Checks if a space is occupied by a laser.
+     * @return a boolean object.
+     */
     public boolean checkIfOccupied(Space space)
     {
         boolean occupied = false;
@@ -171,29 +185,47 @@ public class Laser extends FieldAction
 
     /**
      * <p>Getter for the Id <code>getId</code>.</p>
-     *
      * @return the id of the laser.
      */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the space where a laser starts <code>setStartSpace</code>.</p>
+     * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
+     */
     public void setStartSpace(Space space) {
         this.startSpace = space;
     }
 
+    /**
+     * <p>Getter for the space where a laser starts <code>getStartSpace</code>.</p>
+     * @return the space where a laser starts.
+     */
     public Space getStartSpace() {
         return startSpace;
     }
 
+    /**
+     * <p>Setter for the space where a laser ends <code>setEndSpace</code>.</p>
+     */
     public void setEndSpace() {
         occupiedSpaces();
     }
 
+    /**
+     * <p>Getter for the space where a laser ends <code>getEndSpace</code>.</p>
+     * @return the space where a laser ends.
+     */
     public Space getEndSpace() {
         return endSpace;
     }
 
+    /**
+     * <p>Getter for the spaces where there is a laser <code>getOccupiedSpaces</code>.</p>
+     * @return the spaces which are occupied by lasers.
+     */
     public ArrayList<Space> getOccupiedSpaces() {
         return occupiedSpaces;
     }
@@ -206,6 +238,10 @@ public class Laser extends FieldAction
         return heading;
     }
 
+    /**
+     * <p>Getter for ordinal <code>getOrdinal</code>.</p>
+     * @return a int from 0 to 3
+     */
     public int getOrdinal()
     {
         if(heading == SOUTH)
@@ -223,6 +259,7 @@ public class Laser extends FieldAction
             }
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean doAction(GameController gameController, Space space) {
         return false;

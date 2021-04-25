@@ -36,16 +36,34 @@ public class RoboRallyMenuBar extends MenuBar {
 
     private AppController appController;
 
+    /**
+     * The pulldown menu that makes it possible for a user to select what the user wants to do
+     */
     private Menu controlMenu;
 
+    /**
+     * The menu option save game
+     */
     private MenuItem saveGame;
 
+    /**
+     * The menu option new game
+     */
     private MenuItem newGame;
 
+    /**
+     * The menu option load game
+     */
     private MenuItem loadGame;
 
+    /**
+     * The menu option stop game
+     */
     private MenuItem stopGame;
 
+    /**
+     * The menu option exit app
+     */
     private MenuItem exitApp;
 
     /**

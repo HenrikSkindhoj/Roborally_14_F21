@@ -35,16 +35,28 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ConveyorBelt extends FieldAction {
 
+    /**
+     * The direction a conveyor belt points.
+     */
     private Heading heading;
 
+    /**
+     * <p>Getter for the heading og the conveyor belt<code>getHeading</code>.</p>
+     * @return the heading of the conveyor belt.
+     */
     public Heading getHeading() {
         return heading;
     }
 
+    /**
+     * <p>Setter for the heading of the conveyor belt <code>setHeading</code>.</p>
+     * @param heading the heading of the conveyor belt.
+     */
     public void setHeading(Heading heading) {
         this.heading = heading;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         // TODO needs to be implemented

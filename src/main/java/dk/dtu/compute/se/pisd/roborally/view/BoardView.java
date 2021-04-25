@@ -41,11 +41,20 @@ public class BoardView extends VBox implements ViewObserver {
 
     private Board board;
 
+    /**
+     * The id of a wall, which is used as the primary key of the wall
+     */
     private GridPane mainBoardPane;
+    /**
+     * A 2D array of the spaces on the boar4d
+     */
     private SpaceView[][] spaces;
 
     private PlayersView playersView;
 
+    /**
+     * The current status of the game.
+     */
     private Label statusLabel;
     private Checkpoints checkpointsView;
     private Lasers laserView;

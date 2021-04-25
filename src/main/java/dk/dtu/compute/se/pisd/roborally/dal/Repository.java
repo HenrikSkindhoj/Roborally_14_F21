@@ -72,6 +72,7 @@ class Repository implements IRepository {
         this.connector = connector;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean createGameInDB(Board game) {
         if (game.getGameId() == null) {
@@ -151,6 +152,7 @@ class Repository implements IRepository {
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean updateGameInDB(Board game) {
         assert game.getGameId() != null;
@@ -198,6 +200,7 @@ class Repository implements IRepository {
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Board loadGameFromDB(int id) {
         Board game;
@@ -263,6 +266,7 @@ class Repository implements IRepository {
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<GameInDB> getGames() {
         // TODO when there many games in the DB, fetching all available games

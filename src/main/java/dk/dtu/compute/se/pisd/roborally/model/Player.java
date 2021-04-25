@@ -56,7 +56,13 @@ public class Player extends Subject {
     private Space space;
     private Heading heading = SOUTH;
     private boolean[] checkpoints = new boolean[4];
+    /**
+     * A integer of which checkpoint the player need to get next
+     */
     private int nextChecpoint = 1;
+    /**
+     * A boolean which when true, means a player has won
+     */
     private boolean winner;
 
     /**
@@ -121,7 +127,6 @@ public class Player extends Subject {
 
     /**
      * <p>Getter for the color of a player <code>getColor</code>.</p>
-     *
      * @return a {@link java.lang.String} object.
      */
     public String getColor() {
@@ -130,7 +135,6 @@ public class Player extends Subject {
 
     /**
      * <p>Setter for the color of a player <code>color</code>.</p>
-     *
      * @param color a {@link java.lang.String} object.
      */
     public void setColor(String color) {
@@ -143,7 +147,6 @@ public class Player extends Subject {
 
     /**
      * <p>Getter for the spaces on the board <code>getSpace</code>.</p>
-     *
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
     public Space getSpace() {
@@ -152,7 +155,6 @@ public class Player extends Subject {
 
     /**
      * <p>Setter for the spaces on the board <code>setSpace</code>.</p>
-     *
      * @param space a {@link dk.dtu.compute.se.pisd.roborally.model.Space} object.
      */
     public void setSpace(Space space) {
@@ -172,7 +174,6 @@ public class Player extends Subject {
 
     /**
      * <p>Getter for the way the player is heading <code>getHeading</code>.</p>
-     *
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public Heading getHeading() {
@@ -181,7 +182,6 @@ public class Player extends Subject {
 
     /**
      * <p>Setter for the way the player is heading <code>setHeading</code>.</p>
-     *
      * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
      */
     public void setHeading(@NotNull Heading heading) {
@@ -195,8 +195,7 @@ public class Player extends Subject {
     }
 
     /**
-     * <p>getProgramField.</p>
-     *
+     * <p> getProgramField.</p>
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      */
@@ -206,7 +205,6 @@ public class Player extends Subject {
 
     /**
      * <p>getCardField.</p>
-     *
      * @param i a int.
      * @return a {@link dk.dtu.compute.se.pisd.roborally.model.CommandCardField} object.
      */
@@ -214,10 +212,18 @@ public class Player extends Subject {
         return cards[i];
     }
 
+    /**
+     * <p>getCheckpoints.</p>
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoints} object.
+     */
     public boolean[] getCheckpoints() {
         return checkpoints;
     }
 
+    /**
+     * <p>controlForCheckpoints </p>
+     * A method that decides which checkpoints the player has gotten, and which one the player has to get next.
+     */
     public void controlForCheckpoints() {
         if (space.getCheckpoint() != null) {
             if (!checkpoints[0]) {
@@ -245,10 +251,18 @@ public class Player extends Subject {
         }
     }
 
+    /**
+     * <p>getNextChecpoint.</p>
+     * @return a int.
+     */
     public int getNextChecpoint() {
         return nextChecpoint;
     }
 
+    /**
+     * <p>isWinner.</p>
+     * @return a boolean.
+     */
     public boolean isWinner() {
         return winner;
     }

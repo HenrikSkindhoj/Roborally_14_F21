@@ -37,11 +37,20 @@ import java.util.List;
  */
 public class SpaceTemplate {
 
+    /**<code>walls = new ArrayList<>()</code> */
     public List<Wall> walls = new ArrayList<>();
+
+    /**<code>actions = new ArrayList<>()</code> */
     public List<FieldAction> actions = new ArrayList<>();
+
     public  Laser laser;
+
     public Heading heading;
+
+    /** The location of a space on the x axis. */
     public int x;
+
+    /** The location of a space on the y axis. */
     public int y;
 
 }

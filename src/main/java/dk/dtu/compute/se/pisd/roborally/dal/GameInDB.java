@@ -29,14 +29,20 @@ package dk.dtu.compute.se.pisd.roborally.dal;
  */
 public class GameInDB {
 
+    /** Constant. The id, which is the primary key of a game. */
     public final int id;
+    /** Constant. The name of a game. */
     public final String name;
 
+    /**
+     * <p>Constructor for GameInDB.</p>
+     */
     public GameInDB(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return id + ": " + name;

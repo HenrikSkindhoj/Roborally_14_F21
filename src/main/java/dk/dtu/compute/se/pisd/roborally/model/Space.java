@@ -117,7 +117,7 @@ public class Space extends Subject {
 
     /**
      * <p>Setter for wall<code>setWall</code>.</p>
-     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public void setWall(Wall wall){
@@ -126,21 +126,36 @@ public class Space extends Subject {
 
     /**
      * <p>Getter for wall<code>getWall</code>.</p>
-     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
      * @author Kasper Falch Skov, s205429@student.dtu.dk
      */
     public ArrayList<Wall> getWalls() {
         return walls;
     }
 
+    /**
+     * <p>Setter a array list of walls <code>setWalls</code>.</p>
+     * @param walls a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
     public void setWalls(List<Wall> walls){
         this.walls.addAll(walls);
     }
 
+    /**
+     * <p>Getter for the checkpoints <code>getCheckpoint</code>.</p>
+     * @return a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
     public Checkpoint getCheckpoint() {
         return checkpoint;
     }
 
+    /**
+     * <p>Setter for checkpoint <code>setCheckpoint</code>.</p>
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     * @author Kasper Falch Skov, s205429@student.dtu.dk
+     */
     public void setCheckpoint(Checkpoint checkpoint) {
         this.checkpoint = checkpoint;
     }

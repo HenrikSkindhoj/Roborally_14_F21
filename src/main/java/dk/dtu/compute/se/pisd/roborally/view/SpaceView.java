@@ -151,7 +151,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     /**
      * <p>updateWall.</p>
      * Draws the walls, and decides how they should look.
-     * @param heading a {@link dk.dtu.compute.se.pisd.roborally.model.Heading} object.
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
      */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);

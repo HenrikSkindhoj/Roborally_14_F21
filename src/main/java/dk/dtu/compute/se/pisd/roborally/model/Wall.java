@@ -10,6 +10,9 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  */
 public class Wall {
 
+    /**
+     * The id of a wall, which is used as the primary key of the wall
+     */
     int id;
     /**
      * The location of a wall on the x-axis
@@ -58,10 +61,19 @@ public class Wall {
         return heading;
     }
 
+    /**
+     * <p>Getter for the id of a wall <code>getId</code>.</p>
+     * @return the id of a wall.
+     */
     public int getId() {
         return id;
     }
 
+
+    /**
+     * <p>Getter for ordinal <code>getOrdinal</code>.</p>
+     * @return a int from 0 to 3
+     */
     public int getOrdinal()
     {
         if(heading == SOUTH)

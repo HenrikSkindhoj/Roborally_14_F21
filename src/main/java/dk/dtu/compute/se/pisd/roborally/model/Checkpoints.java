@@ -23,7 +23,7 @@ public class Checkpoints {
     private Board board;
 
     /**
-     * <p>Constructor for CheckpointsView.</p>
+     * <p>Constructor for Checkpoints.</p>
      * The constructor of all the checkpoints on the board,
      * it does this by creating 2 arrays, of all the x and y values of the board.
      * It then creates one checkpoint at a time, using one value of each array.
@@ -51,17 +51,29 @@ public class Checkpoints {
         }
     }
 
+    /**
+     * <p>Constructor for Checkpoints.</p>
+     * @param board a {@link dk.dtu.compute.se.pisd.roborally.model.Board} object.
+     */
     public Checkpoints(Board board)
     {
         this.board = board;
         checkpoints = new ArrayList<>();
     }
 
+    /**
+     * <p>add.</p>
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     */
     public void add(Checkpoint checkpoint)
     {
         checkpoints.add(checkpoint);
     }
 
+    /**
+     * <p>spawnCheckpoints.</p>
+     * Creates checkpoints on the board.
+     */
     public void spawnCheckpoints()
     {
         for (Checkpoint checkpoint : checkpoints)

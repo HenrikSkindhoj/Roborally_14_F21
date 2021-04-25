@@ -38,6 +38,7 @@ public class GameController {
 
     final public Board board;
 
+    /**A boolean which determines if the game should continue, or if it has ended. */
     public boolean gameOver = false;
 
     /**

@@ -89,7 +89,6 @@ public class Board extends Subject {
 
     private Lasers lasers;
 
-
     private Checkpoints checkpoints;
     /**
      * <p>Constructor for Board.</p>
@@ -168,7 +167,7 @@ public class Board extends Subject {
 
     /**
      * <p>addPlayer.</p>
-     *
+     * Places the players on the board.
      * @param player a {@link dk.dtu.compute.se.pisd.roborally.model.Player} object.
      */
     public void addPlayer(@NotNull Player player) {
@@ -178,18 +177,33 @@ public class Board extends Subject {
         }
     }
 
+    /**
+     * <p>addLaser.</p>
+     * Places the lasers on the board
+     * @param laser a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
+     */
     public void addLaser(@NotNull Laser laser)
     {
         getSpace(laser.getStartSpace().x,laser.getStartSpace().y).setLaser(laser);
         notifyChange();
     }
 
+    /**
+     * <p>addWall.</p>
+     * Places the walls on the åboard
+     * @param wall a {@link dk.dtu.compute.se.pisd.roborally.model.Wall} object.
+     */
     public void addWall(@NotNull Wall wall)
     {
         getSpace(wall.x, wall.y).setWall(wall);
         notifyChange();
     }
 
+    /**
+     * <p>addCheckpoint.</p>
+     * Places the checkpoints on the board
+     * @param checkpoint a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoint} object.
+     */
     public void addCheckpoint(@NotNull Checkpoint checkpoint)
     {
         checkpoints.add(checkpoint);
@@ -349,6 +363,10 @@ public class Board extends Subject {
                 ", Step: " + getStep() + ", Next Checkpoint: " + getCurrentPlayer().getNextChecpoint();
     }
 
+    /**
+     * <p>Getter for the status of the walls on the board <code>getWalls</code> .</p>
+     * @return a walls object.
+     */
     public ArrayList<Wall> getWalls()
     {
         ArrayList<Wall> walls = new ArrayList<>();
@@ -362,10 +380,18 @@ public class Board extends Subject {
         return walls;
     }
 
+    /**
+     * <p>Getter for the checkpoints on the board <code>getCheckpoints</code> .</p>
+     * @return a checkpoints object.
+     */
     public Checkpoints getCheckpoints() {
         return checkpoints;
     }
 
+    /**
+     * <p>Getter for lasers on the board <code>getLasers</code> .</p>
+     * @return a lasers object.
+     */
     public ArrayList<Laser> getLasers() {
         ArrayList<Laser> lasers = new ArrayList<>();
         for (int x = 0; x < width; x++) {
@@ -379,14 +405,26 @@ public class Board extends Subject {
         return lasers;
     }
 
+    /**
+     * <p>Setter for the lasers <code>setLasers</code> .</p>
+     * @param lasers a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.
+     */
     public void setLasers(Lasers lasers) {
         this.lasers = lasers;
     }
 
+    /**
+     * <p>Setter for the checkpoints <code>setCheckpoints</code> .</p>
+     * @param checkpoints a {@link dk.dtu.compute.se.pisd.roborally.model.Checkpoints} object.
+     */
     public void setCheckpoints(Checkpoints checkpoints) {
         this.checkpoints = checkpoints;
     }
 
+    /**
+     * <p>Getter for the players in a game <code>getPlayers</code> .</p>
+     * @return a Player arraylist.
+     */
     public List<Player> getPlayers() {
         return players;
     }
