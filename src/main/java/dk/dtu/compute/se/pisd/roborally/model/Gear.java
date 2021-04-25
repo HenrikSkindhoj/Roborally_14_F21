@@ -54,6 +54,11 @@ public class Gear extends FieldAction {
         return false;
     }
 
+
+    public Command getCommand() {
+        return command;
+    }
+
     public int getX() {
         return x;
     }

@@ -291,7 +291,22 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     public void updateGear(Gear gear){
+        Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+        final Image gearR = new Image ("Visuals/GearRight.PNG");
+        final Image gearL = new Image ("Visuals/GearLeft.PNG");
 
+        GraphicsContext gc = can.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(gear.getCommand() == Command.LEFT){
+            gc.drawImage(gearL,0,0,75,75);
+        }
+
+        else if(gear.getCommand() == Command.RIGHT){
+            gc.drawImage(gearR,0,0,75,75);
+        }
+        this.getChildren().add(can);
     }
-
 }
