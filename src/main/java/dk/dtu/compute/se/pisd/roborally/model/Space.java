@@ -50,6 +50,7 @@ public class Space extends Subject {
     private ArrayList<Wall> walls = new ArrayList<>();
     private Checkpoint checkpoint;
     private ConveyorBelt conveyorBelt;
+    private Gear gear;
 
     /**
      * <p>Constructor for Space.</p>
@@ -167,5 +168,13 @@ public class Space extends Subject {
 
     public void setConveyorBelt(ConveyorBelt conveyorBelt) {
         this.conveyorBelt = conveyorBelt;
+    }
+
+    public Gear getGear() {
+        return gear;
+    }
+
+    public void setGear(Gear gear) {
+        this.gear = gear;
     }
 }

@@ -422,6 +422,19 @@ public class Board extends Subject {
         return lasers;
     }
 
+    public ArrayList<Gear> getGears() {
+        ArrayList<Gear> gears = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (getSpace(x, y).getGear() != null) {
+                    gears.add(getSpace(x, y).getGear());
+
+                }
+            }
+        }
+        return gears;
+    }
+
     /**
      * <p>Setter for the lasers <code>setLasers</code> .</p>
      * @param lasers a {@link dk.dtu.compute.se.pisd.roborally.model.Laser} object.

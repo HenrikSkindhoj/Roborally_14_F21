@@ -53,4 +53,12 @@ public class Gear extends FieldAction {
         }
         return false;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
