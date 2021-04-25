@@ -25,10 +25,13 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -36,6 +39,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
@@ -68,6 +72,9 @@ public class SpaceView extends StackPane implements ViewObserver {
     public SpaceView(@NotNull Space space) {
         this.space = space;
 
+        this.setStyle("-fx-background-image: url('Visuals/Basicfloor.PNG'); " +
+                "-fx-background-size: cover;");
+
         // XXX the following styling should better be done with styles
         this.setPrefWidth(SPACE_WIDTH);
         this.setMinWidth(SPACE_WIDTH);
@@ -77,21 +84,8 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.setMinHeight(SPACE_HEIGHT);
         this.setMaxHeight(SPACE_HEIGHT);
 
-        Image image = new Image("Visuals/Basicfloor.PNG");
 
-        Group root = new Group();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root, 75, 75);
-        stage.setScene(scene);
-        stage.show();
 
-        /*
-        if ((space.x + space.y) % 2 == 0) {
-            this.setStyle("-fx-background-color: white;");
-        } else {
-            this.setStyle("-fx-background-color: black;");
-        }
-         */
 
         // updatePlayer();
         // This space view should listen to changes of the space
@@ -100,7 +94,6 @@ public class SpaceView extends StackPane implements ViewObserver {
     }
 
     private void updatePlayer() {
-        this.getChildren().clear();
 
         Player player = space.getPlayer();
         if (player != null) {
@@ -122,7 +115,7 @@ public class SpaceView extends StackPane implements ViewObserver {
     @Override
     public void updateView(Subject subject) {
         if (subject == this.space) {
-            updatePlayer();
+            this.getChildren().clear();
 
 
             for(int i = 0; i < space.board.getCheckpoints().getCheckpoints().size(); i++)
@@ -152,6 +145,7 @@ public class SpaceView extends StackPane implements ViewObserver {
                     }
                 }
             }
+            updatePlayer();
         }
     }
 
@@ -163,8 +157,10 @@ public class SpaceView extends StackPane implements ViewObserver {
     public void updateCheckpoint(Checkpoint checkpoint)
     {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+        final Image point = new Image ("Visuals/Checkpoints.PNG");
 
         GraphicsContext gc = can.getGraphicsContext2D();
+        gc.drawImage(point,0,0,75,75);
         gc.setStroke(Color.RED);
         gc.strokeText(Integer.toString(checkpoint.getId()),SPACE_HEIGHT/2,SPACE_WIDTH/2);
         gc.rect(2,2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
@@ -179,6 +175,7 @@ public class SpaceView extends StackPane implements ViewObserver {
      */
     public void updateWall(Wall wall){
         Canvas canvas = new Canvas(SPACE_WIDTH,SPACE_HEIGHT);
+        final Image northWall = new Image ("Visuals/nWall.PNG");
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.ROYALBLUE);
@@ -186,23 +183,40 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.setLineCap(StrokeLineCap.ROUND);
 
         if(wall.getHeading() == NORTH){
-           gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+           //gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+            gc.drawImage(northWall,0,0,75,20);
            this.getChildren().add(canvas);
         }
         else if(wall.getHeading() == SOUTH){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+            ImageView ivS = new ImageView(northWall);
+            ivS.setRotate(180);
+            SnapshotParameters params1 = new SnapshotParameters();
+            params1.setFill(Color.TRANSPARENT);
+            Image rotatedImageS = ivS.snapshot(params1, null);
+            gc.drawImage(rotatedImageS, 0,55,75,20);
             this.getChildren().add(canvas);
         }
         else if(wall.getHeading() == EAST){
             gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+            ImageView ivE = new ImageView(northWall);
+            ivE.setRotate(90);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImageE = ivE.snapshot(params, null);
+            gc.drawImage(rotatedImageE, 55,0, 20, 75);
             this.getChildren().add(canvas);
         }
         else if(wall.getHeading() == WEST){
             gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
+            ImageView iv = new ImageView(northWall);
+            iv.setRotate(270);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImageW = iv.snapshot(params, null);
+            gc.drawImage(rotatedImageW, 0,0,20,75);
             this.getChildren().add(canvas);
         }
-
-
     }
 
     /**
@@ -231,6 +245,7 @@ public class SpaceView extends StackPane implements ViewObserver {
 
     public void updateConveyorBelt(ConveyorBelt conveyorBelt){
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+        final Image conveyor = new Image ("Visuals/Conveyorbelt.PNG");
 
         GraphicsContext gc = can.getGraphicsContext2D();
         gc.setStroke(Color.GREY);
@@ -238,24 +253,31 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.setLineCap(StrokeLineCap.ROUND);
 
         if(conveyorBelt.getHeading() == Heading.NORTH) {
-            gc.strokeLine(35, 0, 75, 75);
-            gc.strokeLine(35, 0, 0, 75);
-            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-2);
+            ImageView iv1 = new ImageView(conveyor);
+            iv1.setRotate(90);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage1 = iv1.snapshot(params,null);
+            gc.drawImage(rotatedImage1,7,0,57,75);
         }
         else if(conveyorBelt.getHeading() == Heading.SOUTH) {
-            gc.strokeLine(0, 0, 35, 75);
-            gc.strokeLine(75, 0, 35, 75);
-            gc.strokeLine(2, SPACE_HEIGHT-73,SPACE_WIDTH-2,SPACE_HEIGHT-73);
+            ImageView iv2 = new ImageView(conveyor);
+            iv2.setRotate(270);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage2 = iv2.snapshot(params,null);
+            gc.drawImage(rotatedImage2,7,0,57,75);
         }
         else if(conveyorBelt.getHeading() == Heading.EAST) {
-            gc.strokeLine(75, 35, 0, 0);
-            gc.strokeLine(75, 35, 0, 75);
-            gc.strokeLine(2, SPACE_HEIGHT-2,SPACE_WIDTH-73,SPACE_HEIGHT-73);
+            ImageView iv3 = new ImageView(conveyor);
+            iv3.setRotate(180);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage3 = iv3.snapshot(params,null);
+            gc.drawImage(rotatedImage3,0,7,75,55);
         }
         else if(conveyorBelt.getHeading() == Heading.WEST) {
-            gc.strokeLine(75, 0, 0, 35);
-            gc.strokeLine(75, 75, 0, 35);
-            gc.strokeLine(73, SPACE_HEIGHT-2,SPACE_WIDTH-2,SPACE_HEIGHT-73);;
+            gc.drawImage(conveyor,0,7,75,55);
         }
 
         this.getChildren().add(can);
