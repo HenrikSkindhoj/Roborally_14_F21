@@ -216,7 +216,7 @@ public class SpaceView extends StackPane implements ViewObserver {
         Canvas can = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
 
         GraphicsContext gc = can.getGraphicsContext2D();
-        gc.setStroke(Color.LIME);
+        gc.setStroke(Color.GREY);
         gc.setLineWidth(5);
         gc.setLineCap(StrokeLineCap.ROUND);
 
