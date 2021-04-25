@@ -1,5 +1,6 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
+import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.GameController;
 
@@ -13,7 +14,7 @@ import static dk.dtu.compute.se.pisd.roborally.model.Heading.*;
  * @author Hans Christian Leth-Nissen, s205435@student.dtu.dk
  * @version $Id: $Id
  */
-public class Laser extends FieldAction
+public class Laser extends Subject
 {
     /**
      * The id of a specific laser
@@ -257,11 +258,5 @@ public class Laser extends FieldAction
             {
                 return 3;
             }
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean doAction(GameController gameController, Space space) {
-        return false;
     }
 }

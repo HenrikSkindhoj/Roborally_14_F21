@@ -46,6 +46,13 @@ public class Player extends Subject {
     final public Board board;
 
     /**
+     * Counts how many times the player was hit by a DANGEROUS object.
+     * Used to assert number of spamcards.
+     * Example: If player was hit by 1 laser. Then player gets 1 spam card.
+     */
+    private int hit = 0;
+
+    /**
      * Currently not used
      */
     private String name;
@@ -143,6 +150,22 @@ public class Player extends Subject {
         if (space != null) {
             space.playerChanged();
         }
+    }
+
+    public void damage()
+    {
+        hit++;
+    }
+
+    /**
+     * Returns amount of hits player has taken and resets it to 0.
+     * @return
+     */
+    public int rejuvenate()
+    {
+        int hits = hit;
+        hit = 0;
+        return hits;
     }
 
     /**
