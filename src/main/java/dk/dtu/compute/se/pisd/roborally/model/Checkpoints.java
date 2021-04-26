@@ -34,6 +34,8 @@ public class Checkpoints {
      */
     public Checkpoints(int numberOfCheckpoints, Board board)
     {
+        this.board = board;
+
         Integer[] arrX = new Integer[board.width-1];
         Integer[] arrY = new Integer[board.height-1];
 
@@ -45,12 +47,15 @@ public class Checkpoints {
 
         checkpoints = new ArrayList<>();
 
+        int counter = 0;
         for(int i = 0; i < numberOfCheckpoints; i++)
         {
-            Space space = board.getSpace(arrX[i],arrY[i]);
+            Space space = board.getSpace(arrX[counter],arrY[counter]);
             if(space.getCheckpoint() == null && space.getGear() == null
             && space.getConveyorBelt() == null && (space.getLaser() == null || space.getLaser().getStartSpace() != space))
-                checkpoints.add(new Checkpoint(arrX[i], arrY[i], i+1));
+                checkpoints.add(new Checkpoint(arrX[counter], arrY[counter], i+1));
+            else i--;
+            counter++;
         }
     }
 

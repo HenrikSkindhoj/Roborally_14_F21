@@ -107,7 +107,6 @@ public class Board extends Subject {
                 spaces[x][y] = space;
             }
         }
-        checkpoints = new Checkpoints(4,this);
 
         this.stepMode = false;
     }

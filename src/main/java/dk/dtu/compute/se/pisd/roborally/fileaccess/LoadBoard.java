@@ -28,11 +28,10 @@ import com.google.gson.stream.JsonWriter;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.BoardTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SpaceTemplate;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
-import dk.dtu.compute.se.pisd.roborally.model.Board;
-import dk.dtu.compute.se.pisd.roborally.model.Laser;
-import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.*;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * ...
@@ -89,7 +88,13 @@ public class LoadBoard {
             for (Laser laser : result.getLasers()) {
                 laser.setEndSpace();
             }
-
+            Checkpoints checkpoints = new Checkpoints(4,result);
+            result.setCheckpoints(checkpoints);
+            ArrayList<Checkpoint> checkpointsArray = result.getCheckpoints().getCheckpoints();
+            for(Checkpoint checkpoint : checkpointsArray)
+            {
+                result.getSpace(checkpoint.getX(),checkpoint.getY()).setCheckpoint(checkpoint);
+            }
             reader.close();
             return result;
         } catch (IOException e1) {
